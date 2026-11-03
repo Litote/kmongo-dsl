@@ -1,0 +1,28 @@
+public final class org/litote/kmongo/util/KMongoConfiguration {
+	public static final field INSTANCE Lorg/litote/kmongo/util/KMongoConfiguration;
+	public final fun getBsonMapper ()Ltools/jackson/databind/json/JsonMapper;
+	public final fun getBsonMapperCopy ()Ltools/jackson/databind/json/JsonMapper;
+	public final fun getExtendedJsonMapper ()Ltools/jackson/databind/json/JsonMapper;
+	public final fun registerBsonModule (Ltools/jackson/databind/JacksonModule;)V
+	public final fun resetConfiguration ()V
+	public final fun setBsonMapper (Ltools/jackson/databind/json/JsonMapper;)V
+	public final fun setBsonMapperCopy (Ltools/jackson/databind/json/JsonMapper;)V
+	public final fun setExtendedJsonMapper (Ltools/jackson/databind/json/JsonMapper;)V
+}
+
+public final class org/litote/kmongo/util/KMongoJacksonFeature {
+	public static final field INSTANCE Lorg/litote/kmongo/util/KMongoJacksonFeature;
+	public final fun setUUIDRepresentation (Lorg/bson/UuidRepresentation;)V
+}
+
+public final class org/litote/kmongo/util/KotlinModuleConfiguration {
+	public static final field INSTANCE Lorg/litote/kmongo/util/KotlinModuleConfiguration;
+	public final fun getKotlinModuleInitializer ()Lkotlin/jvm/functions/Function1;
+	public final fun setKotlinModuleInitializer (Lkotlin/jvm/functions/Function1;)V
+}
+
+public final class org/litote/kmongo/util/MongoIdUtilKt {
+	public static final fun getIdProperty (Lkotlin/reflect/KClass;)Lkotlin/reflect/KProperty1;
+	public static final fun getIdValue (Ljava/lang/Object;)Ljava/lang/Object;
+}
+

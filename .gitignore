@@ -1,0 +1,10 @@
+.gradle/
+build/
+.idea/
+*.iml
+.kotlin/
+local.properties
+maven-sample/target/
+
+# Dokka API documentation copied by tools/build-docs.sh
+docs/api/

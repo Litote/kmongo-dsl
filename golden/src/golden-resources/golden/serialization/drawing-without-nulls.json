@@ -1,0 +1,26 @@
+{
+  "_id": "drawing",
+  "shapes": [
+    {
+      "___type": "circle",
+      "name": "c",
+      "radius": {
+        "$numberInt": "2"
+      }
+    },
+    {
+      "___type": "org.litote.kmongo.golden.GoldenSquare",
+      "name": "s",
+      "side": {
+        "$numberDouble": "1.5"
+      }
+    }
+  ],
+  "main": {
+    "___type": "circle",
+    "name": "main",
+    "radius": {
+      "$numberInt": "3"
+    }
+  }
+}

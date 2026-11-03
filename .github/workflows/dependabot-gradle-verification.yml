@@ -1,0 +1,23 @@
+name: Update Gradle verification metadata
+
+on:
+  pull_request_target:
+    branches: [ main ]
+    paths:
+      - 'gradle/libs.versions.toml'
+      - 'gradle/wrapper/gradle-wrapper.properties'
+
+jobs:
+  update-verification-metadata:
+    # the author of the pull request, not github.actor (the last user who triggered the event: forgeable)
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository
+    permissions:
+      contents: write
+    uses: Litote/ci/.github/workflows/gradle-verification.yml@731f25b65744afb6ed50783472a6746193353272 # v0.6.0
+    with:
+      java-version: '17'
+      # the tasks run by the CI (the same as the ones used to generate the file)
+      gradle-tasks: build dokkaGenerate jacocoAggregatedReport publishToMavenLocal
+    secrets:
+      RELEASE_PLEASE_APP_ID: ${{ secrets.RELEASE_PLEASE_APP_ID }}
+      RELEASE_PLEASE_APP_PRIVATE_KEY: ${{ secrets.RELEASE_PLEASE_APP_PRIVATE_KEY }}

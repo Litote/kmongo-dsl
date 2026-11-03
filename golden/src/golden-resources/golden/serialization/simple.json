@@ -1,0 +1,33 @@
+{
+  "_id": "simple",
+  "string": "a",
+  "int": {
+    "$numberInt": "1"
+  },
+  "long": {
+    "$numberLong": "2"
+  },
+  "double": {
+    "$numberDouble": "3.5"
+  },
+  "float": {
+    "$numberDouble": "4.25"
+  },
+  "boolean": true,
+  "nullableString": null,
+  "color": "GREEN",
+  "list": [
+    "x",
+    "y"
+  ],
+  "set": [
+    {
+      "$numberInt": "1"
+    },
+    {
+      "$numberInt": "2"
+    }
+  ],
+  "defaultValue": "default",
+  "renamed": "x"
+}

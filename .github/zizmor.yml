@@ -1,0 +1,13 @@
+rules:
+  dangerous-triggers:
+    ignore:
+      # pull_request_target is intentional: the reusable verification workflow checks out the
+      # base branch and only takes the version files from the PR branch.
+      # dependabot-auto-merge.yml checks out nothing.
+      - dependabot-auto-merge.yml:3
+      - dependabot-gradle-verification.yml:3
+
+  bot-conditions:
+    ignore:
+      # Restricting to dependabot[bot] is the intended guard here.
+      - dependabot-gradle-verification.yml:13

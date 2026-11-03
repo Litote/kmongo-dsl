@@ -1,0 +1,21 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "release-type": "java",
+  "versioning": "always-bump-patch",
+  "release-as": "5.14.0",
+  "packages": {
+    ".": {
+      "changelog-path": "CHANGELOG.md",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "gradle.properties"
+        },
+        {
+          "type": "generic",
+          "path": "maven-sample/pom.xml"
+        }
+      ]
+    }
+  }
+}

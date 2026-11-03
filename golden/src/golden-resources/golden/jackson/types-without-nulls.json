@@ -1,0 +1,55 @@
+{
+  "_id": {
+    "$oid": "5f1e9d6c8a1b2c3d4e5f6a7e"
+  },
+  "date": {
+    "$date": {
+      "$numberLong": "1600000000000"
+    }
+  },
+  "instant": {
+    "$date": {
+      "$numberLong": "1600000000123"
+    }
+  },
+  "localDate": {
+    "$date": {
+      "$numberLong": "1599955200000"
+    }
+  },
+  "localDateTime": {
+    "$date": {
+      "$numberLong": "1600000000000"
+    }
+  },
+  "localTime": {
+    "$date": {
+      "$numberLong": "44800000"
+    }
+  },
+  "bigDecimal": {
+    "$numberDecimal": "12.50"
+  },
+  "locale": "fr_FR",
+  "bytes": {
+    "$binary": {
+      "base64": "AQID",
+      "subType": "00"
+    }
+  },
+  "ktxInstant": {
+    "$date": {
+      "$numberLong": "1600000000456"
+    }
+  },
+  "ktxLocalDate": {
+    "$date": {
+      "$numberLong": "1600041600000"
+    }
+  },
+  "ktxLocalDateTime": {
+    "$date": {
+      "$numberLong": "1600045323000"
+    }
+  }
+}

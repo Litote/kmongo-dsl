@@ -1,0 +1,186 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  pr-title:
+    if: github.event_name == 'pull_request'
+    permissions:
+      pull-requests: read
+    uses: Litote/ci/.github/workflows/pr-title.yml@731f25b65744afb6ed50783472a6746193353272 # v0.6.0
+
+  # Full check (build, Spotless, ABI, Dokka, Maven sample, migration tooling, SonarCloud, snapshot)
+  # with the latest MongoDB server on JDK 17
+  check:
+    name: Check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      MONGODB_IMAGE: mongo:8.2
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          # full history for the SonarCloud analysis (new code detection, blame)
+          fetch-depth: 0
+
+      # the Gradle toolchain is JDK 17: no toolchain download
+      - uses: Litote/ci/.github/actions/setup-gradle@731f25b65744afb6ed50783472a6746193353272 # v0.6.0
+        with:
+          java-version: '17'
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+
+      - uses: Litote/ci/.github/actions/detect-changes@731f25b65744afb6ed50783472a6746193353272 # v0.6.0
+        id: detect-changes
+        with:
+          pattern: '\.(kt|kts|gradle|yml|yaml|toml|xml|sh|properties|api)$'
+
+      # MongoDB test image cache (Testcontainers)
+      - name: Cache MongoDB image
+        id: mongodb-image-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/docker-images
+          key: docker-${{ env.MONGODB_IMAGE }}
+
+      - name: Load MongoDB image
+        if: steps.mongodb-image-cache.outputs.cache-hit == 'true'
+        run: docker load -i ~/docker-images/mongodb.tar
+
+      - name: Pull and save MongoDB image
+        if: steps.mongodb-image-cache.outputs.cache-hit != 'true'
+        run: |
+          docker pull "$MONGODB_IMAGE"
+          mkdir -p ~/docker-images
+          docker save "$MONGODB_IMAGE" -o ~/docker-images/mongodb.tar
+
+      - name: Build & test
+        run: ./gradlew build dokkaGenerate "-Dkmongo.test.mongodb.image=$MONGODB_IMAGE"
+
+      # Maven + KAPT (kmongo-dsl-annotation-processor + kmongo-dsl-annotation-generator) setup
+      - name: Maven sample
+        run: |
+          ./gradlew publishToMavenLocal
+          mvn -B -f maven-sample/pom.xml verify
+
+      - name: Migration check script
+        run: |
+          tools/update-migration-symbols.sh --check
+          tools/test/kmongo-dsl-migration-check-test.sh
+
+      # SonarCloud (https://sonarcloud.io/organizations/litote/projects): skipped without the SONAR_TOKEN secret
+      - uses: Litote/ci/.github/actions/sonar-gradle@731f25b65744afb6ed50783472a6746193353272 # v0.6.0
+        if: steps.detect-changes.outputs.has-code-changes == 'true'
+        with:
+          sonar-token: ${{ secrets.SONAR_TOKEN }}
+
+      # after a release-please release PR, main holds the release version (not a snapshot) until the
+      # snapshot PR is merged: the release itself is published by the release-please workflow
+      - name: Read the project version
+        id: version
+        run: echo "snapshot=$(grep -q '^version=.*-SNAPSHOT$' gradle.properties && echo true || echo false)" >> "$GITHUB_OUTPUT"
+
+      - name: Publish SNAPSHOT to Maven Central
+        if: github.event_name == 'push' && steps.version.outputs.snapshot == 'true' && steps.detect-changes.outputs.has-code-changes == 'true'
+        uses: Litote/ci/.github/actions/maven-central-publish@731f25b65744afb6ed50783472a6746193353272 # v0.6.0
+        with:
+          gradle-args: publishToMavenCentral
+          maven-central-username: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          signing-key: ${{ secrets.SIGNING_IN_MEMORY_KEY }}
+          signing-key-id: ${{ secrets.SIGNING_IN_MEMORY_KEY_ID }}
+          signing-key-password: ${{ secrets.SIGNING_IN_MEMORY_KEY_PASSWORD }}
+
+      - name: Test reports
+        if: failure()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: test-reports-check
+          path: '**/build/reports/tests/'
+
+  # Tests only, with the other supported MongoDB servers (JDK 17) and the other LTS JDKs (MongoDB 8.2)
+  compatibility:
+    name: Tests (${{ matrix.mongodb }}, JDK ${{ matrix.java }})
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { mongodb: "mongo:5.0", java: "17" }
+          - { mongodb: "mongo:6.0", java: "17" }
+          - { mongodb: "mongo:7.0", java: "17" }
+          - { mongodb: "mongo:8.2", java: "21" }
+          - { mongodb: "mongo:8.2", java: "25" }
+    env:
+      MONGODB_IMAGE: ${{ matrix.mongodb }}
+      TEST_JAVA_VERSION: ${{ matrix.java }}
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # not the shared setup-gradle action: two JDKs, and a read-only Gradle cache on main too
+      # the test JDK, then JDK 17 (the last one is the JAVA_HOME running Gradle)
+      - name: Set up JDK ${{ matrix.java }} and 17
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          java-version: |
+            ${{ matrix.java }}
+            17
+          distribution: 'temurin'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6.4.0
+        with:
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+          dependency-graph: disabled
+          build-scan-publish: false
+          # the check job writes the cache
+          cache-read-only: true
+
+      - name: Cache MongoDB image
+        id: mongodb-image-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/docker-images
+          key: docker-${{ matrix.mongodb }}
+
+      - name: Load MongoDB image
+        if: steps.mongodb-image-cache.outputs.cache-hit == 'true'
+        run: docker load -i ~/docker-images/mongodb.tar
+
+      - name: Pull and save MongoDB image
+        if: steps.mongodb-image-cache.outputs.cache-hit != 'true'
+        run: |
+          docker pull "$MONGODB_IMAGE"
+          mkdir -p ~/docker-images
+          docker save "$MONGODB_IMAGE" -o ~/docker-images/mongodb.tar
+
+      # the test JDK is the one installed by setup-java (JAVA_HOME_<version>_X64)
+      - name: Test
+        run: >
+          ./gradlew test testSerialization
+          "-Dkmongo.test.mongodb.image=$MONGODB_IMAGE"
+          "-Pkmongo.test.java.version=$TEST_JAVA_VERSION"
+          "-Porg.gradle.java.installations.fromEnv=JAVA_HOME_${TEST_JAVA_VERSION}_X64"
+          -Porg.gradle.java.installations.auto-download=false
+
+      - name: Test reports
+        if: failure()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: test-reports-${{ strategy.job-index }}
+          path: '**/build/reports/tests/'

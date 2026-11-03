@@ -1,0 +1,29 @@
+{
+  "_id": {
+    "$oid": "5f1e9d6c8a1b2c3d4e5f6a7c"
+  },
+  "byColor": {
+    "RED": {
+      "$numberInt": "1"
+    },
+    "GREEN": {
+      "$numberInt": "2"
+    }
+  },
+  "byString": {
+    "home": {
+      "city": "Nantes",
+      "zip": null
+    }
+  },
+  "byId": {
+    "5f1e9d6c8a1b2c3d4e5f6a7d": "office"
+  },
+  "nested": {
+    "a": {
+      "b": {
+        "$numberLong": "3"
+      }
+    }
+  }
+}

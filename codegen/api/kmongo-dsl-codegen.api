@@ -1,0 +1,57 @@
+public final class org/litote/kmongo/codegen/DataClassModel {
+	public fun <init> (Lcom/squareup/kotlinpoet/ClassName;IZZLcom/squareup/kotlinpoet/ClassName;Ljava/util/List;)V
+	public final fun getClassName ()Lcom/squareup/kotlinpoet/ClassName;
+	public final fun getDataSuperclass ()Lcom/squareup/kotlinpoet/ClassName;
+	public final fun getInternal ()Z
+	public final fun getOpen ()Z
+	public final fun getProperties ()Ljava/util/List;
+	public final fun getTypeParameterCount ()I
+}
+
+public final class org/litote/kmongo/codegen/DataPropertyModel {
+	public fun <init> (Ljava/lang/String;Lcom/squareup/kotlinpoet/TypeName;ZLorg/litote/kmongo/codegen/PropertyKind;Lcom/squareup/kotlinpoet/ClassName;)V
+	public final fun getDataClass ()Lcom/squareup/kotlinpoet/ClassName;
+	public final fun getKind ()Lorg/litote/kmongo/codegen/PropertyKind;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getPrivate ()Z
+	public final fun getType ()Lcom/squareup/kotlinpoet/TypeName;
+}
+
+public final class org/litote/kmongo/codegen/PropertyKind : java/lang/Enum {
+	public static final field COLLECTION Lorg/litote/kmongo/codegen/PropertyKind;
+	public static final field MAP Lorg/litote/kmongo/codegen/PropertyKind;
+	public static final field SIMPLE Lorg/litote/kmongo/codegen/PropertyKind;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lorg/litote/kmongo/codegen/PropertyKind;
+	public static fun values ()[Lorg/litote/kmongo/codegen/PropertyKind;
+}
+
+public final class org/litote/kmongo/codegen/PropertyPathGenerator {
+	public static final field INSTANCE Lorg/litote/kmongo/codegen/PropertyPathGenerator;
+	public final fun generate (Lorg/litote/kmongo/codegen/DataClassModel;)Lcom/squareup/kotlinpoet/FileSpec;
+	public final fun generatedName (Lcom/squareup/kotlinpoet/ClassName;Ljava/lang/String;)Lcom/squareup/kotlinpoet/ClassName;
+	public static synthetic fun generatedName$default (Lorg/litote/kmongo/codegen/PropertyPathGenerator;Lcom/squareup/kotlinpoet/ClassName;Ljava/lang/String;ILjava/lang/Object;)Lcom/squareup/kotlinpoet/ClassName;
+}
+
+public final class org/litote/kmongo/codegen/kapt/KaptSupportKt {
+	public static final field KAPT_KOTLIN_GENERATED_OPTION Ljava/lang/String;
+	public static final fun argument (Ljavax/lang/model/element/AnnotationMirror;Ljava/lang/String;)Ljavax/lang/model/element/AnnotationValue;
+	public static final fun asTypeElement (Ljavax/lang/model/type/TypeMirror;)Ljavax/lang/model/element/TypeElement;
+	public static final fun booleanArgument (Ljavax/lang/model/element/AnnotationMirror;Ljava/lang/String;)Z
+	public static final fun classesArgument (Ljavax/lang/model/element/AnnotationMirror;Ljava/lang/String;)Ljava/util/List;
+	public static final fun findAnnotation (Ljavax/lang/model/element/Element;Ljava/lang/String;)Ljavax/lang/model/element/AnnotationMirror;
+	public static final fun isSubtypeOf (Ljavax/annotation/processing/ProcessingEnvironment;Ljava/lang/String;Ljava/lang/String;)Z
+	public static final fun kmClass (Ljavax/lang/model/element/TypeElement;)Lkotlin/metadata/KmClass;
+	public static final fun kotlinClassName (Ljavax/lang/model/element/TypeElement;)Lcom/squareup/kotlinpoet/ClassName;
+	public static final fun stringArgument (Ljavax/lang/model/element/AnnotationMirror;Ljava/lang/String;)Ljava/lang/String;
+	public static final fun superclassElement (Ljavax/lang/model/element/TypeElement;)Ljavax/lang/model/element/TypeElement;
+	public static final fun typeElement (Ljavax/annotation/processing/ProcessingEnvironment;Ljava/lang/String;)Ljavax/lang/model/element/TypeElement;
+	public static final fun writeKotlin (Ljavax/annotation/processing/ProcessingEnvironment;Lcom/squareup/kotlinpoet/FileSpec;)V
+}
+
+public final class org/litote/kmongo/codegen/kapt/KmTypesKt {
+	public static final fun qualifiedClassName (Lkotlin/metadata/KmType;)Ljava/lang/String;
+	public static final fun toClassName (Ljava/lang/String;)Lcom/squareup/kotlinpoet/ClassName;
+	public static final fun toTypeName (Lkotlin/metadata/KmType;)Lcom/squareup/kotlinpoet/TypeName;
+}
+

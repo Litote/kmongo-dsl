@@ -1,0 +1,166 @@
+// Conventions live in build-logic (kmongo-dsl.kotlin-library plugin).
+
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
+
+plugins {
+    id("kmongo-dsl.dokka-aggregation")
+    alias(libs.plugins.sonarqube)
+    alias(libs.plugins.spotless)
+    jacoco
+    // check / build tasks of the root project (spotlessCheck)
+    base
+}
+
+// aggregated API documentation: ./gradlew :dokkaGenerate (build/dokka/html)
+dependencies {
+    listOf(
+        ":kmongo-dsl-id",
+        ":kmongo-dsl-data",
+        ":kmongo-dsl-jackson-data",
+        ":kmongo-dsl-jackson-module-loader",
+        ":kmongo-dsl-id-jackson",
+        ":kmongo-dsl-id-serialization",
+        ":kmongo-dsl-core",
+        ":kmongo-dsl-sync",
+        ":kmongo-dsl-coroutine",
+        ":kmongo-dsl-serialization-mapping",
+        ":kmongo-dsl-jackson-mapping",
+        ":kmongo-dsl-codegen",
+        ":kmongo-dsl-ksp",
+        ":kmongo-dsl-annotation-processor",
+        ":kmongo-dsl-annotation-generator",
+        ":kmongo-dsl-testcontainers",
+    ).forEach { dokka(project(it)) }
+}
+
+dokka {
+    moduleName.set("KMongo DSL")
+}
+
+// --- License headers and formatting (Spotless): spotlessCheck is run by `./gradlew build`
+//   ./gradlew spotlessApply                        adds the missing headers
+//   ./gradlew spotlessApply -PupdateLicenseYear    updates the year ranges ("2016/2025" -> "2016/2026") of all the files
+val generatedCoroutineSources = listOf(
+    "CoroutineProperties", "DistinctFlows", "FindFlows", "MongoCollections", "MongoCollectionsWithClientSession",
+    "MongoDatabases", "MongoDatabasesWithClientSession",
+).map { "coroutine/src/main/kotlin/org/litote/kmongo/coroutine/$it.kt" }.toTypedArray()
+
+spotless {
+    kotlin {
+        target("**/src/**/*.kt", "build-logic/src/**/*.kt")
+        targetExclude("**/build/**", "**/target/**")
+        // the header ends at the package (or at the "// Generated from..." comment of the generated coroutine sources)
+        licenseHeaderFile(rootProject.file("config/license-header.kt"), "(package |@file|import |// Generated from )")
+            .yearSeparator("/")
+            .updateYearWithLatest(providers.gradleProperty("updateLicenseYear").isPresent)
+    }
+    // ktlint (rules: .editorconfig). Enabled with -Pktlint until the code is reformatted, see CONTRIBUTING.md
+    if (providers.gradleProperty("ktlint").isPresent) {
+        format("ktlint", com.diffplug.gradle.spotless.KotlinExtension::class.java) {
+            target("**/src/**/*.kt", "build-logic/src/**/*.kt")
+            targetExclude(
+                "**/build/**",
+                "**/target/**",
+                // generated from the sync sources
+                *generatedCoroutineSources,
+            )
+            ktlint()
+        }
+    }
+}
+
+// --- SonarCloud (https://sonarcloud.io/organizations/litote/projects)
+//   ./gradlew build jacocoAggregatedReport sonar (waits for the quality gate, fails if it is not OK)
+// Token: SONAR_TOKEN environment variable, or systemProp.sonar.token=<token> in ~/.gradle/gradle.properties
+
+// the benchmark (KMongo 5.12 vs kmongo-dsl) is neither analyzed nor in the coverage
+fun Project.isBenchmark(): Boolean = path.startsWith(":kmongo-dsl-benchmark")
+val coveredProjects = subprojects.filterNot { it.isBenchmark() }
+
+// the integration tests of a module are in other modules (kmongo-dsl-sync-tests...): the coverage is aggregated
+val jacocoAggregatedReport = tasks.register<JacocoReport>("jacocoAggregatedReport") {
+    description = "Aggregates the test coverage of all the modules."
+    group = "verification"
+    dependsOn(coveredProjects.flatMap { sub -> sub.tasks.withType<Test>() })
+
+    executionData.setFrom(
+        coveredProjects.map { sub -> sub.fileTree(sub.layout.buildDirectory.dir("jacoco")) { include("*.exec") } },
+    )
+    sourceDirectories.setFrom(
+        coveredProjects.map { sub ->
+            sub.provider {
+                sub.extensions.findByType(KotlinJvmProjectExtension::class)
+                    ?.sourceSets?.findByName("main")?.kotlin?.srcDirs
+                    .orEmpty()
+            }
+        },
+    )
+    classDirectories.setFrom(
+        coveredProjects.map { sub ->
+            sub.fileTree(sub.layout.buildDirectory.dir("classes/kotlin/main")) {
+                exclude("**/*\$\$serializer.class")
+            }
+        },
+    )
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
+}
+
+val aggregatedReportPath: String = layout.buildDirectory
+    .file("reports/jacoco/jacocoAggregatedReport/jacocoAggregatedReport.xml")
+    .get().asFile.absolutePath
+
+sonar {
+    properties {
+        property("sonar.projectKey", "Litote_kmongo-dsl")
+        property("sonar.organization", "litote")
+        property("sonar.host.url", "https://sonarcloud.io")
+        property("sonar.qualitygate.wait", true)
+        property("sonar.coverage.jacoco.xmlReportPaths", aggregatedReportPath)
+        // the code generated by KSP / KAPT (test models) is not analyzed
+        property("sonar.exclusions", "**/build/generated/**")
+        // the KSP and KAPT generators run during the compilation of the tests: JaCoCo does not see them
+        property("sonar.coverage.exclusions", "**/kmongo/kapt/**,**/kmongo/ksp/**,**/kmongo/codegen/**")
+        // the deprecated KMongo API is kept on purpose (KMongo source compatibility, see CONTRIBUTING.md)
+        property("sonar.issue.ignore.multicriteria", "deprecatedCode,deprecatedUsage")
+        property("sonar.issue.ignore.multicriteria.deprecatedCode.ruleKey", "kotlin:S1133")
+        property("sonar.issue.ignore.multicriteria.deprecatedCode.resourceKey", "**/*.kt")
+        property("sonar.issue.ignore.multicriteria.deprecatedUsage.ruleKey", "kotlin:S1874")
+        property("sonar.issue.ignore.multicriteria.deprecatedUsage.resourceKey", "**/*.kt")
+    }
+}
+
+subprojects {
+    afterEvaluate {
+        extensions.findByType(org.sonarqube.gradle.SonarExtension::class)?.apply {
+            isSkipProject = isBenchmark()
+            properties {
+                property("sonar.coverage.jacoco.xmlReportPaths", aggregatedReportPath)
+            }
+        }
+    }
+}
+
+/**
+ * Regenerates gradle/verification-metadata.xml after a dependency change, with the tasks run by the CI:
+ *   ./gradlew updateVerificationMetadata
+ */
+tasks.register("updateVerificationMetadata") {
+    group = "verification"
+    description = "Regenerates gradle/verification-metadata.xml after a dependency change."
+    notCompatibleWithConfigurationCache("Spawns a Gradle subprocess that writes verification-metadata.xml")
+    doLast {
+        val result = ProcessBuilder(
+            "$rootDir/gradlew",
+            "--write-verification-metadata", "sha256", "--no-configuration-cache",
+            "build", "dokkaGenerate", "jacocoAggregatedReport", "publishToMavenLocal",
+        )
+            .directory(rootDir)
+            .inheritIO()
+            .start()
+            .waitFor()
+        check(result == 0) { "updateVerificationMetadata failed with exit code $result" }
+    }
+}

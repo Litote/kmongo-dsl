@@ -1,0 +1,9 @@
+public abstract interface annotation class org/litote/jackson/data/JacksonData : java/lang/annotation/Annotation {
+	public abstract fun internal ()Z
+}
+
+public abstract interface annotation class org/litote/jackson/data/JacksonDataRegistry : java/lang/annotation/Annotation {
+	public abstract fun internal ()Z
+	public abstract fun value ()[Ljava/lang/Class;
+}
+

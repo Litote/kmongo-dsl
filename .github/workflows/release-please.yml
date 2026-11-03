@@ -1,0 +1,80 @@
+name: Release Please
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to release manually (e.g. v5.14.0)'
+        required: true
+        type: string
+
+concurrency:
+  group: release-please
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  release-please:
+    name: Release Please
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    outputs:
+      release_created: ${{ steps.release-please.outputs.release_created }}
+      tag_name: ${{ steps.release-please.outputs.tag_name }}
+    steps:
+      - uses: Litote/ci/.github/actions/release-please@731f25b65744afb6ed50783472a6746193353272 # v0.6.0
+        id: release-please
+        if: github.event_name == 'push'
+        with:
+          app-id: ${{ secrets.RELEASE_PLEASE_APP_ID }}
+          private-key: ${{ secrets.RELEASE_PLEASE_APP_PRIVATE_KEY }}
+
+  publish:
+    name: Publish ${{ needs.release-please.outputs.tag_name || inputs.tag }}
+    runs-on: ubuntu-latest
+    needs: release-please
+    if: needs.release-please.outputs.release_created == 'true' || github.event_name == 'workflow_dispatch'
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+          ref: ${{ needs.release-please.outputs.tag_name || inputs.tag }}
+
+      - uses: Litote/ci/.github/actions/setup-gradle@731f25b65744afb6ed50783472a6746193353272 # v0.6.0
+        with:
+          java-version: '17'
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+
+      # not the shared set-release-version action: it writes VERSION_NAME, the version property here is `version`
+      - name: Extract release version
+        env:
+          TAG: ${{ needs.release-please.outputs.tag_name || inputs.tag }}
+        run: |
+          VERSION="${TAG#v}"
+          sed -i "s/^version=.*/version=${VERSION}/" gradle.properties
+
+      - name: Build & test
+        run: ./gradlew build dokkaGenerate
+
+      # Fails if the quality gate is not OK, so nothing is published
+      - uses: Litote/ci/.github/actions/sonar-gradle@731f25b65744afb6ed50783472a6746193353272 # v0.6.0
+        with:
+          sonar-token: ${{ secrets.SONAR_TOKEN }}
+
+      - uses: Litote/ci/.github/actions/maven-central-publish@731f25b65744afb6ed50783472a6746193353272 # v0.6.0
+        with:
+          maven-central-username: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          signing-key: ${{ secrets.SIGNING_IN_MEMORY_KEY }}
+          signing-key-id: ${{ secrets.SIGNING_IN_MEMORY_KEY_ID }}
+          signing-key-password: ${{ secrets.SIGNING_IN_MEMORY_KEY_PASSWORD }}

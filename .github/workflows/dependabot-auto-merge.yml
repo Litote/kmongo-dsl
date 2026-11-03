@@ -1,0 +1,26 @@
+name: Dependabot auto-merge
+
+on:
+  # pull_request_target gives access to the GitHub App secrets, which pull_request
+  # events from Dependabot do not. No PR code is checked out or executed here.
+  pull_request_target:
+    branches: [ main ]
+    types: [ opened, reopened ]
+
+jobs:
+  auto-merge:
+    # Stay manual: the MongoDB driver (its minor version sets the kmongo-dsl version, see CONTRIBUTING.md) and
+    # Kotlin and kotlinx (a minor update can raise the Kotlin version required by the published libraries)
+    if: >-
+      github.event.pull_request.user.login == 'dependabot[bot]' &&
+      !contains(github.event.pull_request.title, 'mongodb') &&
+      !contains(github.event.pull_request.title, 'kotlin')
+    permissions:
+      contents: read
+      pull-requests: read
+    uses: Litote/ci/.github/workflows/dependabot-auto-merge.yml@731f25b65744afb6ed50783472a6746193353272 # v0.6.0
+    with:
+      ecosystems: gradle
+    secrets:
+      RELEASE_PLEASE_APP_ID: ${{ secrets.RELEASE_PLEASE_APP_ID }}
+      RELEASE_PLEASE_APP_PRIVATE_KEY: ${{ secrets.RELEASE_PLEASE_APP_PRIVATE_KEY }}

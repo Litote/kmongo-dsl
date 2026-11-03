@@ -1,0 +1,248 @@
+public final class org/litote/kmongo/serialization/BigDecimalSerializer : kotlinx/serialization/KSerializer {
+	public static final field INSTANCE Lorg/litote/kmongo/serialization/BigDecimalSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/math/BigDecimal;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/math/BigDecimal;)V
+}
+
+public final class org/litote/kmongo/serialization/BinarySerializer : kotlinx/serialization/KSerializer {
+	public static final field INSTANCE Lorg/litote/kmongo/serialization/BinarySerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/bson/types/Binary;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/bson/types/Binary;)V
+}
+
+public final class org/litote/kmongo/serialization/BsonTimestampSerializer : org/litote/kmongo/serialization/TemporalExtendedJsonSerializer {
+	public static final field INSTANCE Lorg/litote/kmongo/serialization/BsonTimestampSerializer;
+	public synthetic fun epochMillis (Ljava/lang/Object;)J
+	public fun epochMillis (Lorg/bson/BsonTimestamp;)J
+	public synthetic fun instantiate (J)Ljava/lang/Object;
+	public fun instantiate (J)Lorg/bson/BsonTimestamp;
+}
+
+public final class org/litote/kmongo/serialization/CalendarSerializer : org/litote/kmongo/serialization/TemporalExtendedJsonSerializer {
+	public static final field INSTANCE Lorg/litote/kmongo/serialization/CalendarSerializer;
+	public synthetic fun epochMillis (Ljava/lang/Object;)J
+	public fun epochMillis (Ljava/util/Calendar;)J
+	public synthetic fun instantiate (J)Ljava/lang/Object;
+	public fun instantiate (J)Ljava/util/Calendar;
+}
+
+public final class org/litote/kmongo/serialization/DateSerializer : org/litote/kmongo/serialization/TemporalExtendedJsonSerializer {
+	public static final field INSTANCE Lorg/litote/kmongo/serialization/DateSerializer;
+	public synthetic fun epochMillis (Ljava/lang/Object;)J
+	public fun epochMillis (Ljava/util/Date;)J
+	public synthetic fun instantiate (J)Ljava/lang/Object;
+	public fun instantiate (J)Ljava/util/Date;
+}
+
+public final class org/litote/kmongo/serialization/IdBsonSerializer : kotlinx/serialization/KSerializer {
+	public fun <init> ()V
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/litote/kmongo/Id;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/litote/kmongo/Id;)V
+}
+
+public abstract interface class org/litote/kmongo/serialization/IdController {
+	public fun findIdProperty (Lkotlin/reflect/KClass;)Lkotlin/reflect/KProperty1;
+	public fun getIdValue (Lkotlin/reflect/KProperty1;Ljava/lang/Object;)Ljava/lang/Object;
+	public fun setIdValue (Lkotlin/reflect/KProperty1;Ljava/lang/Object;)V
+}
+
+public final class org/litote/kmongo/serialization/IdController$DefaultImpls {
+	public static fun findIdProperty (Lorg/litote/kmongo/serialization/IdController;Lkotlin/reflect/KClass;)Lkotlin/reflect/KProperty1;
+	public static fun getIdValue (Lorg/litote/kmongo/serialization/IdController;Lkotlin/reflect/KProperty1;Ljava/lang/Object;)Ljava/lang/Object;
+	public static fun setIdValue (Lorg/litote/kmongo/serialization/IdController;Lkotlin/reflect/KProperty1;Ljava/lang/Object;)V
+}
+
+public final class org/litote/kmongo/serialization/IdControllerKt {
+	public static final fun changeIdController (Lorg/litote/kmongo/serialization/IdController;)V
+}
+
+public final class org/litote/kmongo/serialization/InstantSerializer : org/litote/kmongo/serialization/TemporalExtendedJsonSerializer {
+	public static final field INSTANCE Lorg/litote/kmongo/serialization/InstantSerializer;
+	public synthetic fun epochMillis (Ljava/lang/Object;)J
+	public fun epochMillis (Ljava/time/Instant;)J
+	public synthetic fun instantiate (J)Ljava/lang/Object;
+	public fun instantiate (J)Ljava/time/Instant;
+}
+
+public final class org/litote/kmongo/serialization/KMongoSerializationRepositoryKt {
+	public static final fun getCheckBaseModule ()Z
+	public static final fun getConfiguration ()Lorg/bson/codecs/kotlinx/BsonConfiguration;
+	public static final fun getCustomSerializersMap ()Ljava/util/Map;
+	public static final fun getKmongoSerializationModule ()Lkotlinx/serialization/modules/SerializersModule;
+	public static final fun registerModule (Lkotlinx/serialization/modules/SerializersModule;)V
+	public static final fun setCheckBaseModule (Z)V
+	public static final fun setConfiguration (Lorg/bson/codecs/kotlinx/BsonConfiguration;)V
+}
+
+public final class org/litote/kmongo/serialization/KPropertySerializer : kotlinx/serialization/KSerializer {
+	public static final field INSTANCE Lorg/litote/kmongo/serialization/KPropertySerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lkotlin/reflect/KProperty;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lkotlin/reflect/KProperty;)V
+}
+
+public final class org/litote/kmongo/serialization/KTXInstantSerializer : org/litote/kmongo/serialization/TemporalExtendedJsonSerializer {
+	public static final field INSTANCE Lorg/litote/kmongo/serialization/KTXInstantSerializer;
+	public synthetic fun epochMillis (Ljava/lang/Object;)J
+	public fun epochMillis (Lkotlinx/datetime/Instant;)J
+	public synthetic fun instantiate (J)Ljava/lang/Object;
+	public fun instantiate (J)Lkotlinx/datetime/Instant;
+}
+
+public final class org/litote/kmongo/serialization/KTXInstantSerializer2 : org/litote/kmongo/serialization/TemporalExtendedJsonSerializer {
+	public static final field INSTANCE Lorg/litote/kmongo/serialization/KTXInstantSerializer2;
+	public synthetic fun epochMillis (Ljava/lang/Object;)J
+	public fun epochMillis (Lkotlin/time/Instant;)J
+	public synthetic fun instantiate (J)Ljava/lang/Object;
+	public fun instantiate (J)Lkotlin/time/Instant;
+}
+
+public final class org/litote/kmongo/serialization/KTXLocalDateSerializer : org/litote/kmongo/serialization/TemporalExtendedJsonSerializer {
+	public static final field INSTANCE Lorg/litote/kmongo/serialization/KTXLocalDateSerializer;
+	public synthetic fun epochMillis (Ljava/lang/Object;)J
+	public fun epochMillis (Lkotlinx/datetime/LocalDate;)J
+	public synthetic fun instantiate (J)Ljava/lang/Object;
+	public fun instantiate (J)Lkotlinx/datetime/LocalDate;
+}
+
+public final class org/litote/kmongo/serialization/KTXLocalDateTimeSerializer : org/litote/kmongo/serialization/TemporalExtendedJsonSerializer {
+	public static final field INSTANCE Lorg/litote/kmongo/serialization/KTXLocalDateTimeSerializer;
+	public synthetic fun epochMillis (Ljava/lang/Object;)J
+	public fun epochMillis (Lkotlinx/datetime/LocalDateTime;)J
+	public synthetic fun instantiate (J)Ljava/lang/Object;
+	public fun instantiate (J)Lkotlinx/datetime/LocalDateTime;
+}
+
+public final class org/litote/kmongo/serialization/KTXLocalTimeSerializer : org/litote/kmongo/serialization/TemporalExtendedJsonSerializer {
+	public static final field INSTANCE Lorg/litote/kmongo/serialization/KTXLocalTimeSerializer;
+	public synthetic fun epochMillis (Ljava/lang/Object;)J
+	public fun epochMillis (Lkotlinx/datetime/LocalTime;)J
+	public synthetic fun instantiate (J)Ljava/lang/Object;
+	public fun instantiate (J)Lkotlinx/datetime/LocalTime;
+}
+
+public final class org/litote/kmongo/serialization/LocalDateSerializer : org/litote/kmongo/serialization/TemporalExtendedJsonSerializer {
+	public static final field INSTANCE Lorg/litote/kmongo/serialization/LocalDateSerializer;
+	public synthetic fun epochMillis (Ljava/lang/Object;)J
+	public fun epochMillis (Ljava/time/LocalDate;)J
+	public synthetic fun instantiate (J)Ljava/lang/Object;
+	public fun instantiate (J)Ljava/time/LocalDate;
+}
+
+public final class org/litote/kmongo/serialization/LocalDateTimeSerializer : org/litote/kmongo/serialization/TemporalExtendedJsonSerializer {
+	public static final field INSTANCE Lorg/litote/kmongo/serialization/LocalDateTimeSerializer;
+	public synthetic fun epochMillis (Ljava/lang/Object;)J
+	public fun epochMillis (Ljava/time/LocalDateTime;)J
+	public synthetic fun instantiate (J)Ljava/lang/Object;
+	public fun instantiate (J)Ljava/time/LocalDateTime;
+}
+
+public final class org/litote/kmongo/serialization/LocalTimeSerializer : org/litote/kmongo/serialization/TemporalExtendedJsonSerializer {
+	public static final field INSTANCE Lorg/litote/kmongo/serialization/LocalTimeSerializer;
+	public synthetic fun epochMillis (Ljava/lang/Object;)J
+	public fun epochMillis (Ljava/time/LocalTime;)J
+	public synthetic fun instantiate (J)Ljava/lang/Object;
+	public fun instantiate (J)Ljava/time/LocalTime;
+}
+
+public final class org/litote/kmongo/serialization/LocaleSerializer : kotlinx/serialization/KSerializer {
+	public static final field INSTANCE Lorg/litote/kmongo/serialization/LocaleSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/Locale;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/util/Locale;)V
+}
+
+public final class org/litote/kmongo/serialization/ObjectIdSerializer : kotlinx/serialization/KSerializer {
+	public static final field INSTANCE Lorg/litote/kmongo/serialization/ObjectIdSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/bson/types/ObjectId;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/bson/types/ObjectId;)V
+}
+
+public final class org/litote/kmongo/serialization/OffsetDateTimeSerializer : org/litote/kmongo/serialization/TemporalExtendedJsonSerializer {
+	public static final field INSTANCE Lorg/litote/kmongo/serialization/OffsetDateTimeSerializer;
+	public synthetic fun epochMillis (Ljava/lang/Object;)J
+	public fun epochMillis (Ljava/time/OffsetDateTime;)J
+	public synthetic fun instantiate (J)Ljava/lang/Object;
+	public fun instantiate (J)Ljava/time/OffsetDateTime;
+}
+
+public final class org/litote/kmongo/serialization/OffsetTimeSerializer : org/litote/kmongo/serialization/TemporalExtendedJsonSerializer {
+	public static final field INSTANCE Lorg/litote/kmongo/serialization/OffsetTimeSerializer;
+	public synthetic fun epochMillis (Ljava/lang/Object;)J
+	public fun epochMillis (Ljava/time/OffsetTime;)J
+	public synthetic fun instantiate (J)Ljava/lang/Object;
+	public fun instantiate (J)Ljava/time/OffsetTime;
+}
+
+public final class org/litote/kmongo/serialization/PropertiesKt {
+	public static final fun getSubtypePath ()Ljava/lang/String;
+	public static final fun getSubtypePath (Lkotlin/reflect/KProperty;)Ljava/lang/String;
+	public static final fun getSubtypeQualifier (Lkotlin/reflect/KClass;)Ljava/lang/String;
+}
+
+public final class org/litote/kmongo/serialization/ReflectionIdController : org/litote/kmongo/serialization/IdController {
+	public static final field INSTANCE Lorg/litote/kmongo/serialization/ReflectionIdController;
+	public fun findIdProperty (Lkotlin/reflect/KClass;)Lkotlin/reflect/KProperty1;
+	public fun getIdValue (Lkotlin/reflect/KProperty1;Ljava/lang/Object;)Ljava/lang/Object;
+	public fun setIdValue (Lkotlin/reflect/KProperty1;Ljava/lang/Object;)V
+}
+
+public final class org/litote/kmongo/serialization/SerializationClassMappingTypeService : org/litote/kmongo/service/ClassMappingTypeService {
+	public fun <init> ()V
+	public fun calculatePath (Lkotlin/reflect/KProperty;)Ljava/lang/String;
+	public fun codecRegistry (Lorg/bson/codecs/configuration/CodecRegistry;)Lorg/bson/codecs/configuration/CodecRegistry;
+	public fun codecRegistryWithCustomCodecs (Lorg/bson/codecs/configuration/CodecRegistry;Lorg/bson/codecs/configuration/CodecRegistry;)Lorg/bson/codecs/configuration/CodecRegistry;
+	public fun coreCodecRegistry (Lorg/bson/codecs/configuration/CodecRegistry;)Lorg/bson/codecs/configuration/CodecRegistry;
+	public fun filterBaseCodecRegistry (Lorg/bson/codecs/configuration/CodecRegistry;)Lorg/bson/codecs/configuration/CodecRegistry;
+	public fun filterIdToBson (Ljava/lang/Object;Z)Lorg/bson/BsonDocument;
+	public fun findIdProperty (Lkotlin/reflect/KClass;)Lkotlin/reflect/KProperty1;
+	public fun getDefaultNullSerialization ()Z
+	public fun getIdValue (Lkotlin/reflect/KProperty1;Ljava/lang/Object;)Ljava/lang/Object;
+	public fun getPath (Lkotlin/reflect/KProperty;)Ljava/lang/String;
+	public fun priority ()I
+	public fun resetConfiguration ()V
+	public fun toExtendedJson (Ljava/lang/Object;)Ljava/lang/String;
+}
+
+public final class org/litote/kmongo/serialization/StringIdBsonSerializer : kotlinx/serialization/KSerializer {
+	public fun <init> ()V
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lorg/litote/kmongo/Id;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lorg/litote/kmongo/Id;)V
+}
+
+public abstract class org/litote/kmongo/serialization/TemporalExtendedJsonSerializer : kotlinx/serialization/KSerializer {
+	public fun <init> ()V
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public abstract fun epochMillis (Ljava/lang/Object;)J
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public abstract fun instantiate (J)Ljava/lang/Object;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+}
+
+public final class org/litote/kmongo/serialization/ZonedDateTimeSerializer : org/litote/kmongo/serialization/TemporalExtendedJsonSerializer {
+	public static final field INSTANCE Lorg/litote/kmongo/serialization/ZonedDateTimeSerializer;
+	public synthetic fun epochMillis (Ljava/lang/Object;)J
+	public fun epochMillis (Ljava/time/ZonedDateTime;)J
+	public synthetic fun instantiate (J)Ljava/lang/Object;
+	public fun instantiate (J)Ljava/time/ZonedDateTime;
+}
+

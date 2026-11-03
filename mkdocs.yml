@@ -1,0 +1,60 @@
+site_name: 'KMongo DSL'
+site_description: 'KMongo DSL: the Kotlin toolkit for the official MongoDB drivers'
+site_author: 'litote.org'
+site_url: 'https://litote.github.io/kmongo-dsl/'
+repo_name: 'Litote/kmongo-dsl'
+repo_url: 'https://github.com/Litote/kmongo-dsl'
+edit_uri: 'edit/main/docs/'
+copyright: 'Copyright &copy; 2016/2026 Litote'
+
+# the sources are in docs/ (docs/api is the Dokka API documentation copied by tools/build-docs.sh)
+docs_dir: docs
+site_dir: build/site
+
+nav:
+  - Introduction: index.md
+  - Quick Start: quick-start.md
+  - Extensions Overview: extensions-overview.md
+  - Object Mapping: object-mapping.md
+  - Typed Queries: typed-queries.md
+  - Mongo shell support: mongo-shell-support.md
+  - Testing: testing.md
+  - Performance: performance.md
+  - Migrating from KMongo: migration-kmongo-to-kmongo-dsl.md
+  - API (KDoc): api/index.html
+  - About: about.md
+
+theme:
+  name: material
+  favicon: assets/images/favicon.png
+  logo: assets/images/favicon.png
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.tracking
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - toc.follow
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences

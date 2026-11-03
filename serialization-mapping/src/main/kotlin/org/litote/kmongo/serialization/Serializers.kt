@@ -1,0 +1,465 @@
+/*
+ * Copyright (C) 2016/2026 Litote
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@file:OptIn(ExperimentalTime::class)
+
+package org.litote.kmongo.serialization
+
+import kotlinx.datetime.atDate
+import kotlinx.datetime.atStartOfDayIn
+import kotlinx.datetime.toInstant
+import kotlinx.datetime.toLocalDateTime
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerializationException
+import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.descriptors.buildClassSerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
+import org.bson.BsonBinary
+import org.bson.BsonDateTime
+import org.bson.BsonDecimal128
+import org.bson.BsonDouble
+import org.bson.BsonInt32
+import org.bson.BsonInt64
+import org.bson.BsonString
+import org.bson.BsonValue
+import org.bson.codecs.kotlinx.BsonDecoder
+import org.bson.codecs.kotlinx.BsonEncoder
+import org.bson.types.Decimal128
+import java.math.BigDecimal
+import org.bson.BsonTimestamp
+import org.bson.BsonType
+import org.bson.types.Binary
+import org.bson.types.ObjectId
+import org.litote.kmongo.Id
+import org.litote.kmongo.id.IdGenerator
+import org.litote.kmongo.id.IdTransformer
+import org.litote.kmongo.id.ObjectIdGenerator
+import org.litote.kmongo.projection
+import org.litote.kmongo.util.PatternUtil
+import java.time.Instant
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.OffsetDateTime
+import java.time.OffsetTime
+import java.time.ZoneOffset
+import java.time.ZonedDateTime
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
+import java.util.UUID
+import java.util.concurrent.TimeUnit
+import java.util.regex.Pattern
+import kotlin.reflect.KProperty
+import kotlin.time.ExperimentalTime
+import kotlinx.datetime.Instant as KTXInstant
+import kotlinx.datetime.LocalDate as KTXLocalDate
+import kotlinx.datetime.LocalDateTime as KTXLocalDateTime
+import kotlinx.datetime.LocalTime as KTXLocalTime
+import kotlinx.datetime.TimeZone as KTXTimeZone
+
+/**
+ *
+ */
+public abstract class TemporalExtendedJsonSerializer<T> : KSerializer<T> {
+
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(javaClass.simpleName, PrimitiveKind.STRING)
+
+    /**
+     * Returns the number of milliseconds since January 1, 1970, 00:00:00 GMT
+     * represented by this <tt>Temporal</tt> object.
+     *
+     * @return  the number of milliseconds since January 1, 1970, 00:00:00 GMT
+     *          represented by this date.
+     */
+    public abstract fun epochMillis(temporal: T): Long
+
+    public abstract fun instantiate(date: Long): T
+
+    override fun serialize(encoder: Encoder, value: T) {
+        when (encoder) {
+            is BsonEncoder -> encoder.encodeBsonValue(BsonDateTime(epochMillis(value)))
+            else -> encoder.encodeLong(epochMillis(value))
+        }
+    }
+
+    override fun deserialize(decoder: Decoder): T {
+        return when (decoder) {
+            is BsonDecoder -> {
+                val value = decoder.decodeBsonValue()
+                instantiate(
+                    when (value.bsonType) {
+                        BsonType.STRING -> value.asString().value.toLong()
+                        BsonType.DATE_TIME -> value.asDateTime().value
+                        BsonType.INT32 -> value.asInt32().value.toLong()
+                        BsonType.INT64 -> value.asInt64().value
+                        BsonType.DOUBLE -> value.asDouble().value.toLong()
+                        BsonType.DECIMAL128 -> value.asDecimal128().value.toLong()
+                        BsonType.TIMESTAMP -> TimeUnit.SECONDS.toMillis(value.asTimestamp().time.toLong())
+                        else -> throw SerializationException("Unsupported ${value.bsonType} reading date")
+                    }
+                )
+            }
+            else -> instantiate(decoder.decodeLong())
+        }
+    }
+}
+
+//@Serializer(forClass = Calendar::class)
+public object CalendarSerializer : TemporalExtendedJsonSerializer<Calendar>() {
+
+    override fun epochMillis(temporal: Calendar): Long = temporal.timeInMillis
+
+    override fun instantiate(date: Long): Calendar =
+        Calendar.getInstance(TimeZone.getTimeZone("UTC")).apply {
+            time = Date(date)
+        }
+}
+
+//@Serializer(forClass = Instant::class)
+public object InstantSerializer : TemporalExtendedJsonSerializer<Instant>() {
+
+    override fun epochMillis(temporal: Instant): Long = temporal.toEpochMilli()
+
+    override fun instantiate(date: Long): Instant = Instant.ofEpochMilli(date)
+}
+
+//@Serializer(forClass = ZonedDateTime::class)
+public object ZonedDateTimeSerializer : TemporalExtendedJsonSerializer<ZonedDateTime>() {
+
+    override fun epochMillis(temporal: ZonedDateTime): Long =
+        InstantSerializer.epochMillis(temporal.toInstant())
+
+    override fun instantiate(date: Long): ZonedDateTime =
+        ZonedDateTime.ofInstant(InstantSerializer.instantiate(date), ZoneOffset.UTC)
+}
+
+//@Serializer(forClass = OffsetDateTime::class)
+public object OffsetDateTimeSerializer : TemporalExtendedJsonSerializer<OffsetDateTime>() {
+
+    override fun epochMillis(temporal: OffsetDateTime): Long =
+        InstantSerializer.epochMillis(temporal.toInstant())
+
+    override fun instantiate(date: Long): OffsetDateTime =
+        OffsetDateTime.ofInstant(InstantSerializer.instantiate(date), ZoneOffset.UTC)
+}
+
+//@Serializer(forClass = LocalDate::class)
+public object LocalDateSerializer : TemporalExtendedJsonSerializer<LocalDate>() {
+
+    override fun epochMillis(temporal: LocalDate): Long =
+        ZonedDateTimeSerializer.epochMillis(temporal.atStartOfDay(ZoneOffset.UTC))
+
+    override fun instantiate(date: Long): LocalDate =
+        LocalDateTimeSerializer.instantiate(date).toLocalDate()
+}
+
+//@Serializer(forClass = LocalDateTime::class)
+public object LocalDateTimeSerializer : TemporalExtendedJsonSerializer<LocalDateTime>() {
+
+    override fun epochMillis(temporal: LocalDateTime): Long =
+        ZonedDateTimeSerializer.epochMillis(temporal.atZone(ZoneOffset.UTC))
+
+    override fun instantiate(date: Long): LocalDateTime =
+        LocalDateTime.ofInstant(InstantSerializer.instantiate(date), ZoneOffset.UTC)
+}
+
+//@Serializer(forClass = LocalTime::class)
+public object LocalTimeSerializer : TemporalExtendedJsonSerializer<LocalTime>() {
+
+    override fun epochMillis(temporal: LocalTime): Long =
+        LocalDateTimeSerializer.epochMillis(temporal.atDate(LocalDate.ofEpochDay(0)))
+
+    override fun instantiate(date: Long): LocalTime =
+        LocalDateTimeSerializer.instantiate(date).toLocalTime()
+}
+
+//@Serializer(forClass = OffsetTime::class)
+public object OffsetTimeSerializer : TemporalExtendedJsonSerializer<OffsetTime>() {
+
+    override fun epochMillis(temporal: OffsetTime): Long =
+        OffsetDateTimeSerializer.epochMillis(temporal.atDate(LocalDate.ofEpochDay(0)))
+
+    override fun instantiate(date: Long): OffsetTime =
+        OffsetDateTimeSerializer.instantiate(date).toOffsetTime()
+}
+
+//@Serializer(forClass = BsonTimestamp::class)
+public object BsonTimestampSerializer : TemporalExtendedJsonSerializer<BsonTimestamp>() {
+
+    override fun epochMillis(temporal: BsonTimestamp): Long =
+        temporal.value
+
+    override fun instantiate(date: Long): BsonTimestamp = BsonTimestamp(date)
+}
+
+//@Serializer(forClass = Binary::class)
+public object BinarySerializer : KSerializer<Binary> {
+
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("BinarySerializer", PrimitiveKind.STRING)
+    override fun deserialize(decoder: Decoder): Binary =
+        (decoder as BsonDecoder).decodeBsonValue().asBinary().let { Binary(it.type, it.data) }
+
+    override fun serialize(encoder: Encoder, value: Binary) {
+        (encoder as BsonEncoder).encodeBsonValue(BsonBinary(value.type, value.data))
+    }
+}
+
+//@Serializer(forClass = Locale::class)
+public object LocaleSerializer : KSerializer<Locale> {
+
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("LocaleSerializer", PrimitiveKind.STRING)
+    override fun deserialize(decoder: Decoder): Locale = Locale.forLanguageTag(decoder.decodeString())
+
+    override fun serialize(encoder: Encoder, value: Locale) {
+        encoder.encodeString(value.toLanguageTag())
+    }
+}
+
+//@Serializer(forClass = KTXInstant::class)
+public object KTXInstantSerializer : TemporalExtendedJsonSerializer<KTXInstant>() {
+
+    override fun epochMillis(temporal: KTXInstant): Long = temporal.toEpochMilliseconds()
+
+    override fun instantiate(date: Long): KTXInstant = KTXInstant.fromEpochMilliseconds(date)
+}
+
+public object KTXInstantSerializer2 : TemporalExtendedJsonSerializer<kotlin.time.Instant>() {
+
+    override fun epochMillis(temporal: kotlin.time.Instant): Long = temporal.toEpochMilliseconds()
+
+    override fun instantiate(date: Long): kotlin.time.Instant = kotlin.time.Instant.fromEpochMilliseconds(date)
+}
+
+
+//@Serializer(forClass = KTXLocalDate::class)
+public object KTXLocalDateSerializer : TemporalExtendedJsonSerializer<KTXLocalDate>() {
+
+    override fun epochMillis(temporal: KTXLocalDate): Long =
+        KTXInstantSerializer2.epochMillis(temporal.atStartOfDayIn(KTXTimeZone.UTC))
+
+    override fun instantiate(date: Long): KTXLocalDate =
+        KTXInstantSerializer.instantiate(date).toLocalDateTime(KTXTimeZone.UTC).date
+}
+
+//@Serializer(forClass = KTXLocalDateTime::class)
+public object KTXLocalDateTimeSerializer : TemporalExtendedJsonSerializer<KTXLocalDateTime>() {
+
+    override fun epochMillis(temporal: KTXLocalDateTime): Long =
+        KTXInstantSerializer2.epochMillis(temporal.toInstant(KTXTimeZone.UTC))
+
+    override fun instantiate(date: Long): KTXLocalDateTime =
+        KTXInstantSerializer.instantiate(date).toLocalDateTime(KTXTimeZone.UTC)
+}
+
+//@Serializer(forClass = KTXLocalTime::class)
+public object KTXLocalTimeSerializer : TemporalExtendedJsonSerializer<KTXLocalTime>() {
+
+    override fun epochMillis(temporal: KTXLocalTime): Long =
+        KTXInstantSerializer2.epochMillis(temporal.atDate(KTXLocalDate.fromEpochDays(0)).toInstant(KTXTimeZone.UTC))
+
+    override fun instantiate(date: Long): KTXLocalTime =
+        KTXInstantSerializer.instantiate(date).toLocalDateTime(KTXTimeZone.UTC).time
+}
+
+//@Serializer(forClass = KProperty::class)
+public object KPropertySerializer : KSerializer<KProperty<*>> {
+
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("KPropertySerializer", PrimitiveKind.STRING)
+    override fun deserialize(decoder: Decoder): KProperty<*> = error("KProperty deserialization is unsupported")
+
+    override fun serialize(encoder: Encoder, value: KProperty<*>) {
+        encoder.encodeString(value.projection)
+    }
+}
+
+//@Serializer(forClass = Id::class)
+internal class IdSerializer<T : Id<*>>(private val shouldBeStringId: Boolean) : KSerializer<T> {
+
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("IdSerializer", PrimitiveKind.STRING)
+
+    @Suppress("UNCHECKED_CAST")
+    override fun deserialize(decoder: Decoder): T =
+        IdTransformer.wrapId(deserializeObjectId(decoder)) as T
+
+    private fun deserializeObjectId(decoder: Decoder): Any {
+        return if (decoder !is BsonDecoder) {
+            decoder.decodeString()
+        } else if (BsonKotlinxBridge.isReadingName(decoder)) {
+            // map key
+            val keyId = decoder.decodeString()
+            if (shouldBeStringId || IdGenerator.defaultGenerator != ObjectIdGenerator) keyId else ObjectId(keyId)
+        } else {
+            val value = decoder.decodeBsonValue()
+            when (value.bsonType) {
+                BsonType.STRING -> value.asString().value
+                BsonType.OBJECT_ID -> value.asObjectId().value
+                else -> throw SerializationException("Unsupported ${value.bsonType} when reading _id")
+            }
+        }
+    }
+
+    override fun serialize(encoder: Encoder, value: T) {
+        IdTransformer.unwrapId(value).also {
+            when (it) {
+                is String -> encoder.encodeString(it)
+                is ObjectId ->
+                    if (encoder is BsonEncoder && !BsonKotlinxBridge.isWritingName(encoder)) {
+                        encoder.encodeObjectId(it)
+                    } else {
+                        encoder.encodeString(it.toHexString())
+                    }
+                else -> error("unsupported id type $value")
+            }
+        }
+    }
+
+}
+
+internal object PatternSerializer : KSerializer<Pattern> {
+
+    override val descriptor: SerialDescriptor = buildClassSerialDescriptor("PatternSerializer") {
+        element("\$regex", String.serializer().descriptor)
+        element("\$options", String.serializer().descriptor)
+    }
+
+    override fun deserialize(decoder: Decoder): Pattern = error("Pattern deserialization is unsupported")
+
+    override fun serialize(encoder: Encoder, value: Pattern) {
+        val e = encoder.beginStructure(descriptor)
+        e.encodeStringElement(descriptor, 0, value.pattern())
+        e.encodeStringElement(descriptor, 1, PatternUtil.getOptionsAsString(value))
+        e.endStructure(descriptor)
+    }
+}
+
+internal object RegexSerializer : KSerializer<Regex> {
+
+    override val descriptor: SerialDescriptor = buildClassSerialDescriptor("RegexSerializer") {
+        element("\$regex", String.serializer().descriptor)
+        element("\$options", String.serializer().descriptor)
+    }
+
+    override fun deserialize(decoder: Decoder): Regex = error("Regex deserialization is unsupported")
+
+    override fun serialize(encoder: Encoder, value: Regex) {
+        val e = encoder.beginStructure(descriptor)
+        e.encodeStringElement(descriptor, 0, value.toPattern().pattern())
+        e.encodeStringElement(descriptor, 1, PatternUtil.getOptionsAsString(value.toPattern()))
+        e.endStructure(descriptor)
+    }
+}
+
+internal object UUIDSerializer : KSerializer<UUID> {
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("UuidSerializer", PrimitiveKind.STRING)
+
+    override fun deserialize(decoder: Decoder): UUID =
+        when (decoder) {
+            is BsonDecoder -> decoder.decodeBsonValue().let {
+                if (it.isString) UUID.fromString(it.asString().value) else it.asBinary().asUuid()
+            }
+            else -> UUID.fromString(decoder.decodeString())
+        }
+
+    override fun serialize(encoder: Encoder, value: UUID) {
+        when (encoder) {
+            is BsonEncoder -> encoder.encodeBsonValue(BsonBinary(value))
+            else -> encoder.encodeString(value.toString())
+        }
+    }
+}
+
+/**
+ * [ObjectId] serializer (ObjectId in BSON, hex string elsewhere or as map key).
+ */
+public object ObjectIdSerializer : KSerializer<ObjectId> {
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("ObjectIdSerializer", PrimitiveKind.STRING)
+
+    override fun deserialize(decoder: Decoder): ObjectId =
+        when {
+            decoder is BsonDecoder && !BsonKotlinxBridge.isReadingName(decoder) ->
+                decoder.decodeBsonValue().let { if (it.isString) ObjectId(it.asString().value) else it.asObjectId().value }
+            else -> ObjectId(decoder.decodeString())
+        }
+
+    override fun serialize(encoder: Encoder, value: ObjectId) {
+        if (encoder is BsonEncoder && !BsonKotlinxBridge.isWritingName(encoder)) {
+            encoder.encodeObjectId(value)
+        } else {
+            encoder.encodeString(value.toHexString())
+        }
+    }
+}
+
+/**
+ * [BigDecimal] serializer (Decimal128 in BSON).
+ */
+public object BigDecimalSerializer : KSerializer<BigDecimal> {
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("BigDecimalSerializer", PrimitiveKind.STRING)
+
+    override fun deserialize(decoder: Decoder): BigDecimal =
+        when (decoder) {
+            is BsonDecoder -> decoder.decodeBsonValue().toBigDecimal()
+            else -> BigDecimal(decoder.decodeString())
+        }
+
+    private fun BsonValue.toBigDecimal(): BigDecimal =
+        when (this) {
+            is BsonDecimal128 -> value.bigDecimalValue()
+            is BsonDouble -> BigDecimal.valueOf(value)
+            is BsonInt32 -> BigDecimal(value)
+            is BsonInt64 -> BigDecimal(value)
+            is BsonString -> BigDecimal(value)
+            else -> throw SerializationException("Unsupported $bsonType reading BigDecimal")
+        }
+
+    override fun serialize(encoder: Encoder, value: BigDecimal) {
+        when (encoder) {
+            is BsonEncoder -> encoder.encodeBsonValue(BsonDecimal128(Decimal128(value)))
+            else -> encoder.encodeString(value.toPlainString())
+        }
+    }
+}
+
+/**
+ * [Date] serializer (DateTime in BSON).
+ */
+public object DateSerializer : TemporalExtendedJsonSerializer<Date>() {
+
+    override fun epochMillis(temporal: Date): Long = temporal.time
+
+    override fun instantiate(date: Long): Date = Date(date)
+}
+/**
+ * Public [Id] serializer, to use explicitly when a contextual serializer is not supported by `bson-kotlinx`,
+ * typically for map keys:
+ *
+ * ```
+ * @Serializable
+ * data class Data(val map: Map<@Serializable(with = IdBsonSerializer::class) Id<Other>, String>)
+ * ```
+ */
+public class IdBsonSerializer<T : Id<*>> : KSerializer<T> by IdSerializer(false)
+
+/**
+ * Public [StringId] serializer - see [IdBsonSerializer].
+ */
+public class StringIdBsonSerializer<T : Id<*>> : KSerializer<T> by IdSerializer(true)

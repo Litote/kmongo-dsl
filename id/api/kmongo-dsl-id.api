@@ -1,0 +1,59 @@
+public abstract interface class org/litote/kmongo/Id {
+	public fun cast ()Lorg/litote/kmongo/Id;
+}
+
+public final class org/litote/kmongo/Id$DefaultImpls {
+	public static fun cast (Lorg/litote/kmongo/Id;)Lorg/litote/kmongo/Id;
+}
+
+public final class org/litote/kmongo/IdsKt {
+	public static final fun newId ()Lorg/litote/kmongo/Id;
+	public static final fun toId (Ljava/lang/String;)Lorg/litote/kmongo/Id;
+}
+
+public abstract interface class org/litote/kmongo/id/IdGenerator {
+	public static final field Companion Lorg/litote/kmongo/id/IdGenerator$Companion;
+	public fun create (Ljava/lang/String;)Lorg/litote/kmongo/Id;
+	public abstract fun generateNewId ()Lorg/litote/kmongo/Id;
+	public abstract fun getIdClass ()Lkotlin/reflect/KClass;
+	public abstract fun getWrappedIdClass ()Lkotlin/reflect/KClass;
+}
+
+public final class org/litote/kmongo/id/IdGenerator$Companion {
+	public final fun getDefaultGenerator ()Lorg/litote/kmongo/id/IdGenerator;
+	public final fun setDefaultGenerator (Lorg/litote/kmongo/id/IdGenerator;)V
+}
+
+public final class org/litote/kmongo/id/IdGenerator$DefaultImpls {
+	public static fun create (Lorg/litote/kmongo/id/IdGenerator;Ljava/lang/String;)Lorg/litote/kmongo/Id;
+}
+
+public abstract interface class org/litote/kmongo/id/IdGeneratorProvider {
+	public abstract fun getGenerator ()Lorg/litote/kmongo/id/IdGenerator;
+	public fun getPriority ()I
+}
+
+public final class org/litote/kmongo/id/IdGeneratorProvider$DefaultImpls {
+	public static fun getPriority (Lorg/litote/kmongo/id/IdGeneratorProvider;)I
+}
+
+public final class org/litote/kmongo/id/StringId : org/litote/kmongo/Id {
+	public fun <init> (Ljava/lang/String;)V
+	public fun cast ()Lorg/litote/kmongo/Id;
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lorg/litote/kmongo/id/StringId;
+	public static synthetic fun copy$default (Lorg/litote/kmongo/id/StringId;Ljava/lang/String;ILjava/lang/Object;)Lorg/litote/kmongo/id/StringId;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class org/litote/kmongo/id/UUIDStringIdGenerator : org/litote/kmongo/id/IdGenerator {
+	public static final field INSTANCE Lorg/litote/kmongo/id/UUIDStringIdGenerator;
+	public fun create (Ljava/lang/String;)Lorg/litote/kmongo/Id;
+	public fun generateNewId ()Lorg/litote/kmongo/Id;
+	public fun getIdClass ()Lkotlin/reflect/KClass;
+	public fun getWrappedIdClass ()Lkotlin/reflect/KClass;
+}
+
