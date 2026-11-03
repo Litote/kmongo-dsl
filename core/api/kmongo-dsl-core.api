@@ -1,0 +1,732 @@
+public final class org/litote/kmongo/AccumulatorsKt {
+	public static final fun addToSet (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lcom/mongodb/client/model/BsonField;
+	public static final fun avg (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lcom/mongodb/client/model/BsonField;
+	public static final fun first (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lcom/mongodb/client/model/BsonField;
+	public static final fun getCount (Lkotlin/reflect/KProperty;)Lcom/mongodb/client/model/BsonField;
+	public static final fun last (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lcom/mongodb/client/model/BsonField;
+	public static final fun max (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lcom/mongodb/client/model/BsonField;
+	public static final fun min (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lcom/mongodb/client/model/BsonField;
+	public static final fun push (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lcom/mongodb/client/model/BsonField;
+	public static final fun stdDevPop (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lcom/mongodb/client/model/BsonField;
+	public static final fun stdDevSamp (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lcom/mongodb/client/model/BsonField;
+	public static final fun sum (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lcom/mongodb/client/model/BsonField;
+}
+
+public final class org/litote/kmongo/AggregatesKt {
+	public static final fun addFields (Ljava/util/List;)Lorg/bson/conversions/Bson;
+	public static final fun addFields ([Lcom/mongodb/client/model/Field;)Lorg/bson/conversions/Bson;
+	public static final fun arrayElemAt (Ljava/lang/String;I)Lorg/bson/conversions/Bson;
+	public static final fun arrayElemAt (Lkotlin/reflect/KProperty;I)Lorg/bson/conversions/Bson;
+	public static synthetic fun arrayElemAt$default (Ljava/lang/String;IILjava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static synthetic fun arrayElemAt$default (Lkotlin/reflect/KProperty;IILjava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun bucket (Ljava/lang/Object;Ljava/util/List;Lcom/mongodb/client/model/BucketOptions;)Lorg/bson/conversions/Bson;
+	public static synthetic fun bucket$default (Ljava/lang/Object;Ljava/util/List;Lcom/mongodb/client/model/BucketOptions;ILjava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun bucketAuto (Ljava/lang/Object;ILcom/mongodb/client/model/BucketAutoOptions;)Lorg/bson/conversions/Bson;
+	public static synthetic fun bucketAuto$default (Ljava/lang/Object;ILcom/mongodb/client/model/BucketAutoOptions;ILjava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun cond (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun count (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun dateToString (Lkotlin/reflect/KProperty;Ljava/lang/String;Ljava/time/ZoneId;Ljava/lang/String;)Lorg/bson/conversions/Bson;
+	public static synthetic fun dateToString$default (Lkotlin/reflect/KProperty;Ljava/lang/String;Ljava/time/ZoneId;Ljava/lang/String;ILjava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun dayOfMonth (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun dayOfMonthObjectId (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun dayOfWeek (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun dayOfWeekObjectId (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun dayOfYear (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun dayOfYearObjectId (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun document (Ljava/util/Collection;)Lorg/bson/conversions/Bson;
+	public static final fun document ([Lorg/bson/conversions/Bson;)Lorg/bson/conversions/Bson;
+	public static final fun facet (Ljava/util/List;)Lorg/bson/conversions/Bson;
+	public static final fun facet ([Lcom/mongodb/client/model/Facet;)Lorg/bson/conversions/Bson;
+	public static final fun getVariable (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun getVariable (Lkotlin/reflect/KProperty;)Ljava/lang/String;
+	public static final fun graphLookup (Ljava/lang/String;Ljava/lang/Object;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/mongodb/client/model/GraphLookupOptions;)Lorg/bson/conversions/Bson;
+	public static synthetic fun graphLookup$default (Ljava/lang/String;Ljava/lang/Object;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/mongodb/client/model/GraphLookupOptions;ILjava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun group (Ljava/lang/Object;Ljava/util/List;)Lorg/bson/conversions/Bson;
+	public static final fun group (Ljava/lang/Object;[Lcom/mongodb/client/model/BsonField;)Lorg/bson/conversions/Bson;
+	public static final fun hour (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun hourObjectId (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun ifNull (Ljava/lang/Object;Ljava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun ifNull (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun limit (I)Lorg/bson/conversions/Bson;
+	public static final fun lookup (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lorg/bson/conversions/Bson;
+	public static final fun lookup (Ljava/lang/String;Ljava/util/List;Lkotlin/reflect/KProperty;[Lorg/bson/conversions/Bson;)Lorg/bson/conversions/Bson;
+	public static synthetic fun lookup$default (Ljava/lang/String;Ljava/util/List;Lkotlin/reflect/KProperty;[Lorg/bson/conversions/Bson;ILjava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun match (Lorg/bson/conversions/Bson;)Lorg/bson/conversions/Bson;
+	public static final fun match ([Lorg/bson/conversions/Bson;)Lorg/bson/conversions/Bson;
+	public static final fun millisecond (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun millisecondObjectId (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun minute (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun minuteObjectId (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun month (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun monthObjectId (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun out (Ljava/lang/String;)Lorg/bson/conversions/Bson;
+	public static final fun project (Ljava/util/Map;)Lorg/bson/conversions/Bson;
+	public static final fun project (Lorg/bson/conversions/Bson;)Lorg/bson/conversions/Bson;
+	public static final fun project ([Lkotlin/Pair;)Lorg/bson/conversions/Bson;
+	public static final fun project ([Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun project ([Lorg/bson/conversions/Bson;)Lorg/bson/conversions/Bson;
+	public static final fun replaceRoot (Ljava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun sample (I)Lorg/bson/conversions/Bson;
+	public static final fun second (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun secondObjectId (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun skip (I)Lorg/bson/conversions/Bson;
+	public static final fun sort (Lorg/bson/conversions/Bson;)Lorg/bson/conversions/Bson;
+	public static final fun sortByCount (Ljava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun unwind (Ljava/lang/String;Lcom/mongodb/client/model/UnwindOptions;)Lorg/bson/conversions/Bson;
+	public static final fun unwind (Lkotlin/reflect/KProperty;Lcom/mongodb/client/model/UnwindOptions;)Lorg/bson/conversions/Bson;
+	public static synthetic fun unwind$default (Ljava/lang/String;Lcom/mongodb/client/model/UnwindOptions;ILjava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static synthetic fun unwind$default (Lkotlin/reflect/KProperty;Lcom/mongodb/client/model/UnwindOptions;ILjava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun variableDefinition (Lkotlin/reflect/KProperty;Ljava/lang/String;)Lcom/mongodb/client/model/Variable;
+	public static synthetic fun variableDefinition$default (Lkotlin/reflect/KProperty;Ljava/lang/String;ILjava/lang/Object;)Lcom/mongodb/client/model/Variable;
+	public static final fun week (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun weekObjectId (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun year (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun yearObjectId (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+}
+
+public final class org/litote/kmongo/DocumentsKt {
+	public static final fun findValue (Lorg/bson/Document;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+}
+
+public final class org/litote/kmongo/FiltersKt {
+	public static final fun all (Lkotlin/reflect/KProperty;Ljava/lang/Iterable;)Lorg/bson/conversions/Bson;
+	public static final fun all (Lkotlin/reflect/KProperty;[Ljava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun and (Ljava/lang/Iterable;)Lorg/bson/conversions/Bson;
+	public static final fun and ([Lorg/bson/conversions/Bson;)Lorg/bson/conversions/Bson;
+	public static final fun bitsAllClear (Lkotlin/reflect/KProperty;J)Lorg/bson/conversions/Bson;
+	public static final fun bitsAllSet (Lkotlin/reflect/KProperty;J)Lorg/bson/conversions/Bson;
+	public static final fun bitsAnyClear (Lkotlin/reflect/KProperty;J)Lorg/bson/conversions/Bson;
+	public static final fun bitsAnySet (Lkotlin/reflect/KProperty;J)Lorg/bson/conversions/Bson;
+	public static final fun contains (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun elemMatch (Lkotlin/reflect/KProperty;Lorg/bson/conversions/Bson;)Lorg/bson/conversions/Bson;
+	public static final fun eq (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun exists (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun exists (Lkotlin/reflect/KProperty;Z)Lorg/bson/conversions/Bson;
+	public static final fun expr (Ljava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun geoIntersects (Lkotlin/reflect/KProperty;Lcom/mongodb/client/model/geojson/Geometry;)Lorg/bson/conversions/Bson;
+	public static final fun geoIntersects (Lkotlin/reflect/KProperty;Lorg/bson/conversions/Bson;)Lorg/bson/conversions/Bson;
+	public static final fun geoWithin (Lkotlin/reflect/KProperty;Lcom/mongodb/client/model/geojson/Geometry;)Lorg/bson/conversions/Bson;
+	public static final fun geoWithin (Lkotlin/reflect/KProperty;Lorg/bson/conversions/Bson;)Lorg/bson/conversions/Bson;
+	public static final fun geoWithinBox (Lkotlin/reflect/KProperty;DDDD)Lorg/bson/conversions/Bson;
+	public static final fun geoWithinCenter (Lkotlin/reflect/KProperty;DDD)Lorg/bson/conversions/Bson;
+	public static final fun geoWithinCenterSphere (Lkotlin/reflect/KProperty;DDD)Lorg/bson/conversions/Bson;
+	public static final fun geoWithinPolygon (Lkotlin/reflect/KProperty;Ljava/util/List;)Lorg/bson/conversions/Bson;
+	public static final fun gt (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun gte (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun in (Lkotlin/reflect/KProperty;Ljava/lang/Iterable;)Lorg/bson/conversions/Bson;
+	public static final fun in (Lkotlin/reflect/KProperty;Ljava/lang/String;)Lorg/bson/conversions/Bson;
+	public static final fun inArray (Lkotlin/reflect/KProperty;Ljava/lang/Iterable;)Lorg/bson/conversions/Bson;
+	public static final fun jsonSchema (Lorg/bson/conversions/Bson;)Lorg/bson/conversions/Bson;
+	public static final fun lt (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun lte (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun mod (Lkotlin/reflect/KProperty;JJ)Lorg/bson/conversions/Bson;
+	public static final fun ne (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun near (Lkotlin/reflect/KProperty;DDLjava/lang/Double;Ljava/lang/Double;)Lorg/bson/conversions/Bson;
+	public static final fun near (Lkotlin/reflect/KProperty;Lcom/mongodb/client/model/geojson/Point;Ljava/lang/Double;Ljava/lang/Double;)Lorg/bson/conversions/Bson;
+	public static final fun near (Lkotlin/reflect/KProperty;Lorg/bson/conversions/Bson;Ljava/lang/Double;Ljava/lang/Double;)Lorg/bson/conversions/Bson;
+	public static synthetic fun near$default (Lkotlin/reflect/KProperty;DDLjava/lang/Double;Ljava/lang/Double;ILjava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static synthetic fun near$default (Lkotlin/reflect/KProperty;Lcom/mongodb/client/model/geojson/Point;Ljava/lang/Double;Ljava/lang/Double;ILjava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static synthetic fun near$default (Lkotlin/reflect/KProperty;Lorg/bson/conversions/Bson;Ljava/lang/Double;Ljava/lang/Double;ILjava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun nearSphere (Lkotlin/reflect/KProperty;DDLjava/lang/Double;Ljava/lang/Double;)Lorg/bson/conversions/Bson;
+	public static final fun nearSphere (Lkotlin/reflect/KProperty;Lcom/mongodb/client/model/geojson/Point;Ljava/lang/Double;Ljava/lang/Double;)Lorg/bson/conversions/Bson;
+	public static final fun nearSphere (Lkotlin/reflect/KProperty;Lorg/bson/conversions/Bson;Ljava/lang/Double;Ljava/lang/Double;)Lorg/bson/conversions/Bson;
+	public static synthetic fun nearSphere$default (Lkotlin/reflect/KProperty;DDLjava/lang/Double;Ljava/lang/Double;ILjava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static synthetic fun nearSphere$default (Lkotlin/reflect/KProperty;Lcom/mongodb/client/model/geojson/Point;Ljava/lang/Double;Ljava/lang/Double;ILjava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static synthetic fun nearSphere$default (Lkotlin/reflect/KProperty;Lorg/bson/conversions/Bson;Ljava/lang/Double;Ljava/lang/Double;ILjava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun nin (Lkotlin/reflect/KProperty;Ljava/lang/Iterable;)Lorg/bson/conversions/Bson;
+	public static final fun ninArray (Lkotlin/reflect/KProperty;Ljava/lang/Iterable;)Lorg/bson/conversions/Bson;
+	public static final fun nor (Ljava/lang/Iterable;)Lorg/bson/conversions/Bson;
+	public static final fun nor ([Lorg/bson/conversions/Bson;)Lorg/bson/conversions/Bson;
+	public static final fun not (Lorg/bson/conversions/Bson;)Lorg/bson/conversions/Bson;
+	public static final fun or (Ljava/lang/Iterable;)Lorg/bson/conversions/Bson;
+	public static final fun or ([Lorg/bson/conversions/Bson;)Lorg/bson/conversions/Bson;
+	public static final fun regex (Lkotlin/reflect/KProperty;Ljava/lang/String;)Lorg/bson/conversions/Bson;
+	public static final fun regex (Lkotlin/reflect/KProperty;Ljava/lang/String;Ljava/lang/String;)Lorg/bson/conversions/Bson;
+	public static final fun regex (Lkotlin/reflect/KProperty;Ljava/util/regex/Pattern;)Lorg/bson/conversions/Bson;
+	public static final fun regex (Lkotlin/reflect/KProperty;Lkotlin/text/Regex;)Lorg/bson/conversions/Bson;
+	public static final fun regexIterable (Lkotlin/reflect/KProperty;Ljava/lang/String;)Lorg/bson/conversions/Bson;
+	public static final fun regexIterable (Lkotlin/reflect/KProperty;Ljava/lang/String;Ljava/lang/String;)Lorg/bson/conversions/Bson;
+	public static final fun regexIterable (Lkotlin/reflect/KProperty;Ljava/util/regex/Pattern;)Lorg/bson/conversions/Bson;
+	public static final fun regexIterable (Lkotlin/reflect/KProperty;Lkotlin/text/Regex;)Lorg/bson/conversions/Bson;
+	public static final fun size (Lkotlin/reflect/KProperty;I)Lorg/bson/conversions/Bson;
+	public static final fun text (Ljava/lang/String;Lcom/mongodb/client/model/TextSearchOptions;)Lorg/bson/conversions/Bson;
+	public static synthetic fun text$default (Ljava/lang/String;Lcom/mongodb/client/model/TextSearchOptions;ILjava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun type (Lkotlin/reflect/KProperty;Lorg/bson/BsonType;)Lorg/bson/conversions/Bson;
+	public static final fun where (Ljava/lang/String;)Lorg/bson/conversions/Bson;
+}
+
+public final class org/litote/kmongo/IndexesKt {
+	public static final fun ascendingIndex (Ljava/lang/Iterable;)Lorg/bson/conversions/Bson;
+	public static final fun ascendingIndex ([Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun descendingIndex (Ljava/lang/Iterable;)Lorg/bson/conversions/Bson;
+	public static final fun descendingIndex ([Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun geo2dsphere (Ljava/lang/Iterable;)Lorg/bson/conversions/Bson;
+	public static final fun geo2dsphere ([Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun hashedIndex (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun index (Ljava/util/Map;)Lorg/bson/conversions/Bson;
+	public static final fun index ([Lkotlin/Pair;)Lorg/bson/conversions/Bson;
+	public static final fun textIndex (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+}
+
+public final class org/litote/kmongo/MongoOperator : java/lang/Enum {
+	public static final field abs Lorg/litote/kmongo/MongoOperator;
+	public static final field add Lorg/litote/kmongo/MongoOperator;
+	public static final field addToSet Lorg/litote/kmongo/MongoOperator;
+	public static final field all Lorg/litote/kmongo/MongoOperator;
+	public static final field allElementsTrue Lorg/litote/kmongo/MongoOperator;
+	public static final field and Lorg/litote/kmongo/MongoOperator;
+	public static final field anyElementTrue Lorg/litote/kmongo/MongoOperator;
+	public static final field arrayElemAt Lorg/litote/kmongo/MongoOperator;
+	public static final field avg Lorg/litote/kmongo/MongoOperator;
+	public static final field binary Lorg/litote/kmongo/MongoOperator;
+	public static final field bit Lorg/litote/kmongo/MongoOperator;
+	public static final field bitsAllClear Lorg/litote/kmongo/MongoOperator;
+	public static final field bitsAllSet Lorg/litote/kmongo/MongoOperator;
+	public static final field bitsAnyClear Lorg/litote/kmongo/MongoOperator;
+	public static final field bitsAnySet Lorg/litote/kmongo/MongoOperator;
+	public static final field box Lorg/litote/kmongo/MongoOperator;
+	public static final field caseSensitive Lorg/litote/kmongo/MongoOperator;
+	public static final field ceil Lorg/litote/kmongo/MongoOperator;
+	public static final field center Lorg/litote/kmongo/MongoOperator;
+	public static final field centerSphere Lorg/litote/kmongo/MongoOperator;
+	public static final field changeStream Lorg/litote/kmongo/MongoOperator;
+	public static final field cmp Lorg/litote/kmongo/MongoOperator;
+	public static final field comment Lorg/litote/kmongo/MongoOperator;
+	public static final field concat Lorg/litote/kmongo/MongoOperator;
+	public static final field concatArrays Lorg/litote/kmongo/MongoOperator;
+	public static final field cond Lorg/litote/kmongo/MongoOperator;
+	public static final field currentDate Lorg/litote/kmongo/MongoOperator;
+	public static final field date Lorg/litote/kmongo/MongoOperator;
+	public static final field dateToString Lorg/litote/kmongo/MongoOperator;
+	public static final field dayOfMonth Lorg/litote/kmongo/MongoOperator;
+	public static final field dayOfWeek Lorg/litote/kmongo/MongoOperator;
+	public static final field dayOfYear Lorg/litote/kmongo/MongoOperator;
+	public static final field diacriticSensitive Lorg/litote/kmongo/MongoOperator;
+	public static final field divide Lorg/litote/kmongo/MongoOperator;
+	public static final field each Lorg/litote/kmongo/MongoOperator;
+	public static final field elemMatch Lorg/litote/kmongo/MongoOperator;
+	public static final field eq Lorg/litote/kmongo/MongoOperator;
+	public static final field exists Lorg/litote/kmongo/MongoOperator;
+	public static final field exp Lorg/litote/kmongo/MongoOperator;
+	public static final field explain Lorg/litote/kmongo/MongoOperator;
+	public static final field expr Lorg/litote/kmongo/MongoOperator;
+	public static final field filter Lorg/litote/kmongo/MongoOperator;
+	public static final field first Lorg/litote/kmongo/MongoOperator;
+	public static final field floor Lorg/litote/kmongo/MongoOperator;
+	public static final field geoIntersects Lorg/litote/kmongo/MongoOperator;
+	public static final field geoNear Lorg/litote/kmongo/MongoOperator;
+	public static final field geoWithin Lorg/litote/kmongo/MongoOperator;
+	public static final field geometry Lorg/litote/kmongo/MongoOperator;
+	public static final field group Lorg/litote/kmongo/MongoOperator;
+	public static final field gt Lorg/litote/kmongo/MongoOperator;
+	public static final field gte Lorg/litote/kmongo/MongoOperator;
+	public static final field hint Lorg/litote/kmongo/MongoOperator;
+	public static final field hour Lorg/litote/kmongo/MongoOperator;
+	public static final field id Lorg/litote/kmongo/MongoOperator;
+	public static final field ifNull Lorg/litote/kmongo/MongoOperator;
+	public static final field in Lorg/litote/kmongo/MongoOperator;
+	public static final field inc Lorg/litote/kmongo/MongoOperator;
+	public static final field indexStats Lorg/litote/kmongo/MongoOperator;
+	public static final field isArray Lorg/litote/kmongo/MongoOperator;
+	public static final field isolated Lorg/litote/kmongo/MongoOperator;
+	public static final field language Lorg/litote/kmongo/MongoOperator;
+	public static final field last Lorg/litote/kmongo/MongoOperator;
+	public static final field let Lorg/litote/kmongo/MongoOperator;
+	public static final field limit Lorg/litote/kmongo/MongoOperator;
+	public static final field literal Lorg/litote/kmongo/MongoOperator;
+	public static final field ln Lorg/litote/kmongo/MongoOperator;
+	public static final field log Lorg/litote/kmongo/MongoOperator;
+	public static final field log10 Lorg/litote/kmongo/MongoOperator;
+	public static final field lookup Lorg/litote/kmongo/MongoOperator;
+	public static final field lt Lorg/litote/kmongo/MongoOperator;
+	public static final field lte Lorg/litote/kmongo/MongoOperator;
+	public static final field map Lorg/litote/kmongo/MongoOperator;
+	public static final field match Lorg/litote/kmongo/MongoOperator;
+	public static final field max Lorg/litote/kmongo/MongoOperator;
+	public static final field maxKey Lorg/litote/kmongo/MongoOperator;
+	public static final field maxScan Lorg/litote/kmongo/MongoOperator;
+	public static final field maxTimeMS Lorg/litote/kmongo/MongoOperator;
+	public static final field meta Lorg/litote/kmongo/MongoOperator;
+	public static final field millisecond Lorg/litote/kmongo/MongoOperator;
+	public static final field min Lorg/litote/kmongo/MongoOperator;
+	public static final field minKey Lorg/litote/kmongo/MongoOperator;
+	public static final field minute Lorg/litote/kmongo/MongoOperator;
+	public static final field mod Lorg/litote/kmongo/MongoOperator;
+	public static final field month Lorg/litote/kmongo/MongoOperator;
+	public static final field mul Lorg/litote/kmongo/MongoOperator;
+	public static final field multiply Lorg/litote/kmongo/MongoOperator;
+	public static final field natural Lorg/litote/kmongo/MongoOperator;
+	public static final field ne Lorg/litote/kmongo/MongoOperator;
+	public static final field near Lorg/litote/kmongo/MongoOperator;
+	public static final field nearSphere Lorg/litote/kmongo/MongoOperator;
+	public static final field nin Lorg/litote/kmongo/MongoOperator;
+	public static final field nor Lorg/litote/kmongo/MongoOperator;
+	public static final field not Lorg/litote/kmongo/MongoOperator;
+	public static final field numberDecimal Lorg/litote/kmongo/MongoOperator;
+	public static final field numberDouble Lorg/litote/kmongo/MongoOperator;
+	public static final field numberLong Lorg/litote/kmongo/MongoOperator;
+	public static final field oid Lorg/litote/kmongo/MongoOperator;
+	public static final field options Lorg/litote/kmongo/MongoOperator;
+	public static final field or Lorg/litote/kmongo/MongoOperator;
+	public static final field orderby Lorg/litote/kmongo/MongoOperator;
+	public static final field out Lorg/litote/kmongo/MongoOperator;
+	public static final field polygon Lorg/litote/kmongo/MongoOperator;
+	public static final field pop Lorg/litote/kmongo/MongoOperator;
+	public static final field position Lorg/litote/kmongo/MongoOperator;
+	public static final field pow Lorg/litote/kmongo/MongoOperator;
+	public static final field project Lorg/litote/kmongo/MongoOperator;
+	public static final field pull Lorg/litote/kmongo/MongoOperator;
+	public static final field pullAll Lorg/litote/kmongo/MongoOperator;
+	public static final field push Lorg/litote/kmongo/MongoOperator;
+	public static final field pushAll Lorg/litote/kmongo/MongoOperator;
+	public static final field query Lorg/litote/kmongo/MongoOperator;
+	public static final field redact Lorg/litote/kmongo/MongoOperator;
+	public static final field ref Lorg/litote/kmongo/MongoOperator;
+	public static final field regex Lorg/litote/kmongo/MongoOperator;
+	public static final field rename Lorg/litote/kmongo/MongoOperator;
+	public static final field replaceRoot Lorg/litote/kmongo/MongoOperator;
+	public static final field returnKey Lorg/litote/kmongo/MongoOperator;
+	public static final field sample Lorg/litote/kmongo/MongoOperator;
+	public static final field search Lorg/litote/kmongo/MongoOperator;
+	public static final field second Lorg/litote/kmongo/MongoOperator;
+	public static final field set Lorg/litote/kmongo/MongoOperator;
+	public static final field setDifference Lorg/litote/kmongo/MongoOperator;
+	public static final field setEquals Lorg/litote/kmongo/MongoOperator;
+	public static final field setIntersection Lorg/litote/kmongo/MongoOperator;
+	public static final field setIsSubset Lorg/litote/kmongo/MongoOperator;
+	public static final field setOnInsert Lorg/litote/kmongo/MongoOperator;
+	public static final field setUnion Lorg/litote/kmongo/MongoOperator;
+	public static final field showDiskLoc Lorg/litote/kmongo/MongoOperator;
+	public static final field size Lorg/litote/kmongo/MongoOperator;
+	public static final field skip Lorg/litote/kmongo/MongoOperator;
+	public static final field slice Lorg/litote/kmongo/MongoOperator;
+	public static final field snapshot Lorg/litote/kmongo/MongoOperator;
+	public static final field sort Lorg/litote/kmongo/MongoOperator;
+	public static final field sqrt Lorg/litote/kmongo/MongoOperator;
+	public static final field stdDevPop Lorg/litote/kmongo/MongoOperator;
+	public static final field stdDevSamp Lorg/litote/kmongo/MongoOperator;
+	public static final field strcasecmp Lorg/litote/kmongo/MongoOperator;
+	public static final field substr Lorg/litote/kmongo/MongoOperator;
+	public static final field subtract Lorg/litote/kmongo/MongoOperator;
+	public static final field sum Lorg/litote/kmongo/MongoOperator;
+	public static final field text Lorg/litote/kmongo/MongoOperator;
+	public static final field timestamp Lorg/litote/kmongo/MongoOperator;
+	public static final field toLower Lorg/litote/kmongo/MongoOperator;
+	public static final field toUpper Lorg/litote/kmongo/MongoOperator;
+	public static final field trunc Lorg/litote/kmongo/MongoOperator;
+	public static final field type Lorg/litote/kmongo/MongoOperator;
+	public static final field undefined Lorg/litote/kmongo/MongoOperator;
+	public static final field unset Lorg/litote/kmongo/MongoOperator;
+	public static final field unwind Lorg/litote/kmongo/MongoOperator;
+	public static final field week Lorg/litote/kmongo/MongoOperator;
+	public static final field where Lorg/litote/kmongo/MongoOperator;
+	public static final field year Lorg/litote/kmongo/MongoOperator;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public fun toString ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lorg/litote/kmongo/MongoOperator;
+	public static fun values ()[Lorg/litote/kmongo/MongoOperator;
+}
+
+public final class org/litote/kmongo/MongoUtilKt {
+	public static final fun getEMPTY_BSON ()Lorg/bson/conversions/Bson;
+}
+
+public final class org/litote/kmongo/ProjectionsKt {
+	public static final fun elemMatchProj (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun elemMatchProj (Lkotlin/reflect/KProperty;Lorg/bson/conversions/Bson;)Lorg/bson/conversions/Bson;
+	public static final fun exclude (Ljava/lang/Iterable;)Lorg/bson/conversions/Bson;
+	public static final fun exclude ([Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun excludeId ()Lorg/bson/conversions/Bson;
+	public static final fun fields (Ljava/util/List;)Lorg/bson/conversions/Bson;
+	public static final fun fields ([Lorg/bson/conversions/Bson;)Lorg/bson/conversions/Bson;
+	public static final fun from (Ljava/lang/String;Ljava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun from (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun from (Lorg/litote/kmongo/MongoOperator;Ljava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun getProjection (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun getProjection (Lkotlin/reflect/KProperty;)Ljava/lang/String;
+	public static final fun include (Ljava/lang/Iterable;)Lorg/bson/conversions/Bson;
+	public static final fun include ([Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun metaTextScore (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun projectionWith (Lkotlin/reflect/KProperty1;Ljava/lang/String;)Ljava/lang/String;
+	public static final fun slice (Lkotlin/reflect/KProperty;I)Lorg/bson/conversions/Bson;
+	public static final fun slice (Lkotlin/reflect/KProperty;II)Lorg/bson/conversions/Bson;
+}
+
+public final class org/litote/kmongo/PropertiesKt {
+	public static final fun div (Lkotlin/reflect/KProperty1;Lkotlin/reflect/KProperty1;)Lkotlin/reflect/KProperty1;
+	public static final fun divCol (Lkotlin/reflect/KProperty1;Lkotlin/reflect/KProperty1;)Lkotlin/reflect/KProperty1;
+	public static final fun divMap (Lkotlin/reflect/KProperty1;Lkotlin/reflect/KProperty1;)Lkotlin/reflect/KProperty1;
+	public static final fun filteredPosOp (Lkotlin/reflect/KProperty1;Ljava/lang/String;)Lorg/litote/kmongo/property/KPropertyPath;
+	public static final fun getAllPosOp (Lkotlin/reflect/KProperty1;)Lorg/litote/kmongo/property/KPropertyPath;
+	public static final fun getColProperty (Lkotlin/reflect/KProperty1;)Lorg/litote/kmongo/property/KCollectionSimplePropertyPath;
+	public static final fun getMapProperty (Lkotlin/reflect/KProperty1;)Lorg/litote/kmongo/property/KMapSimplePropertyPath;
+	public static final fun getPosOp (Lkotlin/reflect/KProperty1;)Lorg/litote/kmongo/property/KPropertyPath;
+	public static final fun keyProjection (Lkotlin/reflect/KProperty1;Ljava/lang/Object;)Lorg/litote/kmongo/property/KPropertyPath;
+	public static final fun path (Lkotlin/reflect/KProperty;)Ljava/lang/String;
+	public static final fun pos (Lkotlin/reflect/KProperty1;I)Lorg/litote/kmongo/property/KPropertyPath;
+	public static final fun rem (Lkotlin/reflect/KProperty1;Lkotlin/reflect/KProperty1;)Lkotlin/reflect/KProperty1;
+}
+
+public final class org/litote/kmongo/SetTo {
+	public fun <init> (Lkotlin/reflect/KProperty;Ljava/lang/Object;)V
+	public final fun component1 ()Lkotlin/reflect/KProperty;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun copy (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lorg/litote/kmongo/SetTo;
+	public static synthetic fun copy$default (Lorg/litote/kmongo/SetTo;Lkotlin/reflect/KProperty;Ljava/lang/Object;ILjava/lang/Object;)Lorg/litote/kmongo/SetTo;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getProperty ()Lkotlin/reflect/KProperty;
+	public final fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class org/litote/kmongo/SharedExtensionsKt {
+	public static final fun IndexModel (Lcom/mongodb/client/model/IndexModel;Ljava/lang/String;Lcom/mongodb/client/model/IndexOptions;)Lcom/mongodb/client/model/IndexModel;
+	public static synthetic fun IndexModel$default (Lcom/mongodb/client/model/IndexModel;Ljava/lang/String;Lcom/mongodb/client/model/IndexOptions;ILjava/lang/Object;)Lcom/mongodb/client/model/IndexModel;
+	public static final fun findValue (Lorg/bson/Document;Ljava/lang/String;)Ljava/lang/Object;
+	public static final fun formatJson (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun getBson (Ljava/lang/String;)Lorg/bson/BsonDocument;
+	public static final fun getJson (Ljava/lang/Object;)Ljava/lang/String;
+}
+
+public final class org/litote/kmongo/SortsKt {
+	public static final fun ascending (Ljava/util/List;)Lorg/bson/conversions/Bson;
+	public static final fun ascending ([Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun descending (Ljava/util/List;)Lorg/bson/conversions/Bson;
+	public static final fun descending ([Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun orderBy (Ljava/util/List;Z)Lorg/bson/conversions/Bson;
+	public static final fun orderBy (Ljava/util/Map;)Lorg/bson/conversions/Bson;
+	public static final fun orderBy ([Lkotlin/reflect/KProperty;Z)Lorg/bson/conversions/Bson;
+	public static synthetic fun orderBy$default (Ljava/util/List;ZILjava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static synthetic fun orderBy$default ([Lkotlin/reflect/KProperty;ZILjava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun sortByMetaTextScore (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+}
+
+public final class org/litote/kmongo/UnsignedUpdatesKt {
+	public static final fun ubytebitwiseAnd (Lkotlin/reflect/KProperty;I)Lorg/bson/conversions/Bson;
+	public static final fun ubytebitwiseAnd (Lkotlin/reflect/KProperty;J)Lorg/bson/conversions/Bson;
+	public static final fun ubytebitwiseOr (Lkotlin/reflect/KProperty;I)Lorg/bson/conversions/Bson;
+	public static final fun ubytebitwiseOr (Lkotlin/reflect/KProperty;J)Lorg/bson/conversions/Bson;
+	public static final fun ubytebitwiseXor (Lkotlin/reflect/KProperty;I)Lorg/bson/conversions/Bson;
+	public static final fun ubytebitwiseXor (Lkotlin/reflect/KProperty;J)Lorg/bson/conversions/Bson;
+	public static final fun ubyteinc (Lkotlin/reflect/KProperty;Ljava/lang/Number;)Lorg/bson/conversions/Bson;
+	public static final fun ubytemul (Lkotlin/reflect/KProperty;Ljava/lang/Number;)Lorg/bson/conversions/Bson;
+	public static final fun uintbitwiseAnd (Lkotlin/reflect/KProperty;I)Lorg/bson/conversions/Bson;
+	public static final fun uintbitwiseAnd (Lkotlin/reflect/KProperty;J)Lorg/bson/conversions/Bson;
+	public static final fun uintbitwiseOr (Lkotlin/reflect/KProperty;I)Lorg/bson/conversions/Bson;
+	public static final fun uintbitwiseOr (Lkotlin/reflect/KProperty;J)Lorg/bson/conversions/Bson;
+	public static final fun uintbitwiseXor (Lkotlin/reflect/KProperty;I)Lorg/bson/conversions/Bson;
+	public static final fun uintbitwiseXor (Lkotlin/reflect/KProperty;J)Lorg/bson/conversions/Bson;
+	public static final fun uintinc (Lkotlin/reflect/KProperty;Ljava/lang/Number;)Lorg/bson/conversions/Bson;
+	public static final fun uintmul (Lkotlin/reflect/KProperty;Ljava/lang/Number;)Lorg/bson/conversions/Bson;
+	public static final fun ulongbitwiseAnd (Lkotlin/reflect/KProperty;I)Lorg/bson/conversions/Bson;
+	public static final fun ulongbitwiseAnd (Lkotlin/reflect/KProperty;J)Lorg/bson/conversions/Bson;
+	public static final fun ulongbitwiseOr (Lkotlin/reflect/KProperty;I)Lorg/bson/conversions/Bson;
+	public static final fun ulongbitwiseOr (Lkotlin/reflect/KProperty;J)Lorg/bson/conversions/Bson;
+	public static final fun ulongbitwiseXor (Lkotlin/reflect/KProperty;I)Lorg/bson/conversions/Bson;
+	public static final fun ulongbitwiseXor (Lkotlin/reflect/KProperty;J)Lorg/bson/conversions/Bson;
+	public static final fun ulonginc (Lkotlin/reflect/KProperty;Ljava/lang/Number;)Lorg/bson/conversions/Bson;
+	public static final fun ulongmul (Lkotlin/reflect/KProperty;Ljava/lang/Number;)Lorg/bson/conversions/Bson;
+	public static final fun ushortbitwiseAnd (Lkotlin/reflect/KProperty;I)Lorg/bson/conversions/Bson;
+	public static final fun ushortbitwiseAnd (Lkotlin/reflect/KProperty;J)Lorg/bson/conversions/Bson;
+	public static final fun ushortbitwiseOr (Lkotlin/reflect/KProperty;I)Lorg/bson/conversions/Bson;
+	public static final fun ushortbitwiseOr (Lkotlin/reflect/KProperty;J)Lorg/bson/conversions/Bson;
+	public static final fun ushortbitwiseXor (Lkotlin/reflect/KProperty;I)Lorg/bson/conversions/Bson;
+	public static final fun ushortbitwiseXor (Lkotlin/reflect/KProperty;J)Lorg/bson/conversions/Bson;
+	public static final fun ushortinc (Lkotlin/reflect/KProperty;Ljava/lang/Number;)Lorg/bson/conversions/Bson;
+	public static final fun ushortmul (Lkotlin/reflect/KProperty;Ljava/lang/Number;)Lorg/bson/conversions/Bson;
+}
+
+public final class org/litote/kmongo/UpdatesKt {
+	public static final fun addEachToSet (Lkotlin/reflect/KProperty;Ljava/util/List;)Lorg/bson/conversions/Bson;
+	public static final fun addToSet (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun bitwiseAnd (Lkotlin/reflect/KProperty;I)Lorg/bson/conversions/Bson;
+	public static final fun bitwiseAnd (Lkotlin/reflect/KProperty;J)Lorg/bson/conversions/Bson;
+	public static final fun bitwiseOr (Lkotlin/reflect/KProperty;I)Lorg/bson/conversions/Bson;
+	public static final fun bitwiseOr (Lkotlin/reflect/KProperty;J)Lorg/bson/conversions/Bson;
+	public static final fun bitwiseXor (Lkotlin/reflect/KProperty;I)Lorg/bson/conversions/Bson;
+	public static final fun bitwiseXor (Lkotlin/reflect/KProperty;J)Lorg/bson/conversions/Bson;
+	public static final fun combine (Ljava/util/List;)Lorg/bson/conversions/Bson;
+	public static final fun combine ([Lorg/bson/conversions/Bson;)Lorg/bson/conversions/Bson;
+	public static final fun currentDate (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun currentTimestamp (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun deleteMany (Lorg/bson/conversions/Bson;Lcom/mongodb/client/model/DeleteOptions;)Lcom/mongodb/client/model/DeleteManyModel;
+	public static synthetic fun deleteMany$default (Lorg/bson/conversions/Bson;Lcom/mongodb/client/model/DeleteOptions;ILjava/lang/Object;)Lcom/mongodb/client/model/DeleteManyModel;
+	public static final fun deleteOne (Lorg/bson/conversions/Bson;Lcom/mongodb/client/model/DeleteOptions;)Lcom/mongodb/client/model/DeleteOneModel;
+	public static synthetic fun deleteOne$default (Lorg/bson/conversions/Bson;Lcom/mongodb/client/model/DeleteOptions;ILjava/lang/Object;)Lcom/mongodb/client/model/DeleteOneModel;
+	public static final fun findOneAndUpdateUpsert ()Lcom/mongodb/client/model/FindOneAndUpdateOptions;
+	public static final fun inc (Lkotlin/reflect/KProperty;Ljava/lang/Number;)Lorg/bson/conversions/Bson;
+	public static final fun insertOne (Ljava/lang/Object;)Lcom/mongodb/client/model/InsertOneModel;
+	public static final fun max (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun min (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun mul (Lkotlin/reflect/KProperty;Ljava/lang/Number;)Lorg/bson/conversions/Bson;
+	public static final fun popFirst (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun popLast (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun pull (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun pullAll (Lkotlin/reflect/KProperty;Ljava/util/List;)Lorg/bson/conversions/Bson;
+	public static final fun pullByFilter (Lkotlin/reflect/KProperty;Lorg/bson/conversions/Bson;)Lorg/bson/conversions/Bson;
+	public static final fun pullByFilter (Lorg/bson/conversions/Bson;)Lorg/bson/conversions/Bson;
+	public static final fun push (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun pushEach (Lkotlin/reflect/KProperty;Ljava/util/List;Lcom/mongodb/client/model/PushOptions;)Lorg/bson/conversions/Bson;
+	public static synthetic fun pushEach$default (Lkotlin/reflect/KProperty;Ljava/util/List;Lcom/mongodb/client/model/PushOptions;ILjava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun rename (Lkotlin/reflect/KProperty;Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun replaceOne (Lorg/bson/conversions/Bson;Ljava/lang/Object;Lcom/mongodb/client/model/ReplaceOptions;)Lcom/mongodb/client/model/ReplaceOneModel;
+	public static synthetic fun replaceOne$default (Lorg/bson/conversions/Bson;Ljava/lang/Object;Lcom/mongodb/client/model/ReplaceOptions;ILjava/lang/Object;)Lcom/mongodb/client/model/ReplaceOneModel;
+	public static final fun replaceUpsert ()Lcom/mongodb/client/model/ReplaceOptions;
+	public static final fun set ([Lorg/litote/kmongo/SetTo;)Lorg/bson/conversions/Bson;
+	public static final fun setOnInsert (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun setTo (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lorg/litote/kmongo/SetTo;
+	public static final fun setValue (Lkotlin/reflect/KProperty;Ljava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun setValueOnInsert (Ljava/lang/Object;)Lorg/bson/conversions/Bson;
+	public static final fun unset (Lkotlin/reflect/KProperty;)Lorg/bson/conversions/Bson;
+	public static final fun updateMany (Lorg/bson/conversions/Bson;Lorg/bson/conversions/Bson;Lcom/mongodb/client/model/UpdateOptions;)Lcom/mongodb/client/model/UpdateManyModel;
+	public static synthetic fun updateMany$default (Lorg/bson/conversions/Bson;Lorg/bson/conversions/Bson;Lcom/mongodb/client/model/UpdateOptions;ILjava/lang/Object;)Lcom/mongodb/client/model/UpdateManyModel;
+	public static final fun updateOne (Lorg/bson/conversions/Bson;Lorg/bson/conversions/Bson;Lcom/mongodb/client/model/UpdateOptions;)Lcom/mongodb/client/model/UpdateOneModel;
+	public static synthetic fun updateOne$default (Lorg/bson/conversions/Bson;Lorg/bson/conversions/Bson;Lcom/mongodb/client/model/UpdateOptions;ILjava/lang/Object;)Lcom/mongodb/client/model/UpdateOneModel;
+	public static final fun upsert ()Lcom/mongodb/client/model/UpdateOptions;
+}
+
+public final class org/litote/kmongo/id/IdTransformer {
+	public static final field INSTANCE Lorg/litote/kmongo/id/IdTransformer;
+	public final fun unwrapId (Lorg/litote/kmongo/Id;)Ljava/lang/Object;
+	public final fun wrapId (Ljava/lang/Object;)Lorg/litote/kmongo/Id;
+}
+
+public final class org/litote/kmongo/id/IdsKt {
+	public static final fun toId (Lorg/bson/types/ObjectId;)Lorg/litote/kmongo/Id;
+}
+
+public abstract interface annotation class org/litote/kmongo/id/MongoId : java/lang/annotation/Annotation {
+}
+
+public abstract interface annotation class org/litote/kmongo/id/MongoProperty : java/lang/annotation/Annotation {
+	public abstract fun value ()Ljava/lang/String;
+}
+
+public final class org/litote/kmongo/id/ObjectIdGenerator : org/litote/kmongo/id/IdGenerator {
+	public static final field INSTANCE Lorg/litote/kmongo/id/ObjectIdGenerator;
+	public fun create (Ljava/lang/String;)Lorg/litote/kmongo/Id;
+	public synthetic fun generateNewId ()Lorg/litote/kmongo/Id;
+	public fun generateNewId ()Lorg/litote/kmongo/id/WrappedObjectId;
+	public fun getIdClass ()Lkotlin/reflect/KClass;
+	public fun getWrappedIdClass ()Lkotlin/reflect/KClass;
+	public final fun newObjectId ()Lorg/litote/kmongo/id/WrappedObjectId;
+}
+
+public final class org/litote/kmongo/id/ObjectIdToStringGenerator : org/litote/kmongo/id/IdGenerator {
+	public static final field INSTANCE Lorg/litote/kmongo/id/ObjectIdToStringGenerator;
+	public fun create (Ljava/lang/String;)Lorg/litote/kmongo/Id;
+	public synthetic fun generateNewId ()Lorg/litote/kmongo/Id;
+	public fun generateNewId ()Lorg/litote/kmongo/id/StringId;
+	public fun getIdClass ()Lkotlin/reflect/KClass;
+	public fun getWrappedIdClass ()Lkotlin/reflect/KClass;
+	public final fun newStringId ()Lorg/litote/kmongo/id/StringId;
+}
+
+public final class org/litote/kmongo/id/WrappedObjectId : org/litote/kmongo/Id {
+	public fun <init> (Ljava/lang/String;)V
+	public fun <init> (Lorg/bson/types/ObjectId;)V
+	public fun cast ()Lorg/litote/kmongo/Id;
+	public final fun component1 ()Lorg/bson/types/ObjectId;
+	public final fun copy (Lorg/bson/types/ObjectId;)Lorg/litote/kmongo/id/WrappedObjectId;
+	public static synthetic fun copy$default (Lorg/litote/kmongo/id/WrappedObjectId;Lorg/bson/types/ObjectId;ILjava/lang/Object;)Lorg/litote/kmongo/id/WrappedObjectId;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()Lorg/bson/types/ObjectId;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public class org/litote/kmongo/property/KCollectionPropertyPath : org/litote/kmongo/property/KPropertyPath {
+	public fun <init> (Lorg/litote/kmongo/property/KPropertyPath;Lkotlin/reflect/KProperty1;)V
+	public final fun filteredPosOp (Ljava/lang/String;)Lorg/litote/kmongo/property/KPropertyPath;
+	public final fun getAllPosOp ()Lorg/litote/kmongo/property/KPropertyPath;
+	public final fun getPosOp ()Lorg/litote/kmongo/property/KPropertyPath;
+	public fun memberWithAdditionalPath (Ljava/lang/String;)Lorg/litote/kmongo/property/KPropertyPath;
+	public final fun pos (I)Lorg/litote/kmongo/property/KPropertyPath;
+}
+
+public final class org/litote/kmongo/property/KCollectionSimplePropertyPath : org/litote/kmongo/property/KCollectionPropertyPath {
+	public fun <init> (Lorg/litote/kmongo/property/KPropertyPath;Lkotlin/reflect/KProperty1;)V
+}
+
+public class org/litote/kmongo/property/KMapPropertyPath : org/litote/kmongo/property/KPropertyPath {
+	public fun <init> (Lorg/litote/kmongo/property/KPropertyPath;Lkotlin/reflect/KProperty1;)V
+	public final fun keyProjection (Ljava/lang/Object;)Lorg/litote/kmongo/property/KPropertyPath;
+	public fun memberWithAdditionalPath (Ljava/lang/String;)Lorg/litote/kmongo/property/KPropertyPath;
+}
+
+public final class org/litote/kmongo/property/KMapSimplePropertyPath : org/litote/kmongo/property/KMapPropertyPath {
+	public fun <init> (Lorg/litote/kmongo/property/KPropertyPath;Lkotlin/reflect/KProperty1;)V
+}
+
+public class org/litote/kmongo/property/KPropertyPath : kotlin/reflect/KProperty1 {
+	public static final field Companion Lorg/litote/kmongo/property/KPropertyPath$Companion;
+	public fun <init> (Lorg/litote/kmongo/property/KPropertyPath;Lkotlin/reflect/KProperty1;)V
+	public fun call ([Ljava/lang/Object;)Ljava/lang/Object;
+	public fun callBy (Ljava/util/Map;)Ljava/lang/Object;
+	public fun get (Ljava/lang/Object;)Ljava/lang/Object;
+	public fun getAnnotations ()Ljava/util/List;
+	public fun getDelegate (Ljava/lang/Object;)Ljava/lang/Object;
+	public synthetic fun getGetter ()Lkotlin/reflect/KProperty$Getter;
+	public fun getGetter ()Lkotlin/reflect/KProperty1$Getter;
+	public fun getName ()Ljava/lang/String;
+	public fun getParameters ()Ljava/util/List;
+	public fun getReturnType ()Lkotlin/reflect/KType;
+	public fun getTypeParameters ()Ljava/util/List;
+	public fun getVisibility ()Lkotlin/reflect/KVisibility;
+	public fun invoke (Ljava/lang/Object;)Ljava/lang/Object;
+	public fun isAbstract ()Z
+	public fun isConst ()Z
+	public fun isFinal ()Z
+	public fun isLateinit ()Z
+	public fun isOpen ()Z
+	public fun isSuspend ()Z
+}
+
+public final class org/litote/kmongo/property/KPropertyPath$Companion {
+	public final fun customProperty (Lorg/litote/kmongo/property/KPropertyPath;Ljava/lang/String;)Lkotlin/reflect/KProperty1;
+}
+
+public final class org/litote/kmongo/service/ClassMappingType : org/litote/kmongo/service/ClassMappingTypeService {
+	public static final field INSTANCE Lorg/litote/kmongo/service/ClassMappingType;
+	public fun calculatePath (Lkotlin/reflect/KProperty;)Ljava/lang/String;
+	public fun codecRegistry (Lorg/bson/codecs/configuration/CodecRegistry;)Lorg/bson/codecs/configuration/CodecRegistry;
+	public fun codecRegistryWithCustomCodecs (Lorg/bson/codecs/configuration/CodecRegistry;Lorg/bson/codecs/configuration/CodecRegistry;)Lorg/bson/codecs/configuration/CodecRegistry;
+	public fun coreCodecRegistry (Lorg/bson/codecs/configuration/CodecRegistry;)Lorg/bson/codecs/configuration/CodecRegistry;
+	public fun filterBaseCodecRegistry (Lorg/bson/codecs/configuration/CodecRegistry;)Lorg/bson/codecs/configuration/CodecRegistry;
+	public fun filterIdToBson (Ljava/lang/Object;Z)Lorg/bson/BsonDocument;
+	public fun findIdProperty (Lkotlin/reflect/KClass;)Lkotlin/reflect/KProperty1;
+	public final fun forceService (Lorg/litote/kmongo/service/ClassMappingTypeService;)V
+	public fun getDefaultNullSerialization ()Z
+	public fun getIdValue (Lkotlin/reflect/KProperty1;Ljava/lang/Object;)Ljava/lang/Object;
+	public fun getPath (Lkotlin/reflect/KProperty;)Ljava/lang/String;
+	public fun priority ()I
+	public fun resetConfiguration ()V
+	public fun toExtendedJson (Ljava/lang/Object;)Ljava/lang/String;
+}
+
+public abstract interface class org/litote/kmongo/service/ClassMappingTypeService {
+	public abstract fun calculatePath (Lkotlin/reflect/KProperty;)Ljava/lang/String;
+	public fun codecRegistry (Lorg/bson/codecs/configuration/CodecRegistry;)Lorg/bson/codecs/configuration/CodecRegistry;
+	public fun codecRegistryWithCustomCodecs (Lorg/bson/codecs/configuration/CodecRegistry;Lorg/bson/codecs/configuration/CodecRegistry;)Lorg/bson/codecs/configuration/CodecRegistry;
+	public abstract fun coreCodecRegistry (Lorg/bson/codecs/configuration/CodecRegistry;)Lorg/bson/codecs/configuration/CodecRegistry;
+	public static synthetic fun coreCodecRegistry$default (Lorg/litote/kmongo/service/ClassMappingTypeService;Lorg/bson/codecs/configuration/CodecRegistry;ILjava/lang/Object;)Lorg/bson/codecs/configuration/CodecRegistry;
+	public fun filterBaseCodecRegistry (Lorg/bson/codecs/configuration/CodecRegistry;)Lorg/bson/codecs/configuration/CodecRegistry;
+	public abstract fun filterIdToBson (Ljava/lang/Object;Z)Lorg/bson/BsonDocument;
+	public static synthetic fun filterIdToBson$default (Lorg/litote/kmongo/service/ClassMappingTypeService;Ljava/lang/Object;ZILjava/lang/Object;)Lorg/bson/BsonDocument;
+	public abstract fun findIdProperty (Lkotlin/reflect/KClass;)Lkotlin/reflect/KProperty1;
+	public fun getDefaultNullSerialization ()Z
+	public abstract fun getIdValue (Lkotlin/reflect/KProperty1;Ljava/lang/Object;)Ljava/lang/Object;
+	public fun getPath (Lkotlin/reflect/KProperty;)Ljava/lang/String;
+	public abstract fun priority ()I
+	public fun resetConfiguration ()V
+	public abstract fun toExtendedJson (Ljava/lang/Object;)Ljava/lang/String;
+}
+
+public final class org/litote/kmongo/service/ClassMappingTypeService$DefaultImpls {
+	public static fun codecRegistry (Lorg/litote/kmongo/service/ClassMappingTypeService;Lorg/bson/codecs/configuration/CodecRegistry;)Lorg/bson/codecs/configuration/CodecRegistry;
+	public static fun codecRegistryWithCustomCodecs (Lorg/litote/kmongo/service/ClassMappingTypeService;Lorg/bson/codecs/configuration/CodecRegistry;Lorg/bson/codecs/configuration/CodecRegistry;)Lorg/bson/codecs/configuration/CodecRegistry;
+	public static synthetic fun coreCodecRegistry$default (Lorg/litote/kmongo/service/ClassMappingTypeService;Lorg/bson/codecs/configuration/CodecRegistry;ILjava/lang/Object;)Lorg/bson/codecs/configuration/CodecRegistry;
+	public static fun filterBaseCodecRegistry (Lorg/litote/kmongo/service/ClassMappingTypeService;Lorg/bson/codecs/configuration/CodecRegistry;)Lorg/bson/codecs/configuration/CodecRegistry;
+	public static synthetic fun filterIdToBson$default (Lorg/litote/kmongo/service/ClassMappingTypeService;Ljava/lang/Object;ZILjava/lang/Object;)Lorg/bson/BsonDocument;
+	public static fun getDefaultNullSerialization (Lorg/litote/kmongo/service/ClassMappingTypeService;)Z
+	public static fun getPath (Lorg/litote/kmongo/service/ClassMappingTypeService;Lkotlin/reflect/KProperty;)Ljava/lang/String;
+	public static fun resetConfiguration (Lorg/litote/kmongo/service/ClassMappingTypeService;)V
+}
+
+public final class org/litote/kmongo/util/CollectionNameFormatter {
+	public static final field INSTANCE Lorg/litote/kmongo/util/CollectionNameFormatter;
+	public static field defaultCollectionNameBuilder Lkotlin/jvm/functions/Function1;
+	public final fun getDefaultCollectionNameBuilder ()Lkotlin/jvm/functions/Function1;
+	public final fun setDefaultCollectionNameBuilder (Lkotlin/jvm/functions/Function1;)V
+	public final fun useCamelCaseCollectionNameBuilder (Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun useCamelCaseCollectionNameBuilder$default (Lorg/litote/kmongo/util/CollectionNameFormatter;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+	public final fun useLowerCaseCollectionNameBuilder (Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun useLowerCaseCollectionNameBuilder$default (Lorg/litote/kmongo/util/CollectionNameFormatter;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+	public final fun useSnakeCaseCollectionNameBuilder (Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun useSnakeCaseCollectionNameBuilder$default (Lorg/litote/kmongo/util/CollectionNameFormatter;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+}
+
+public final class org/litote/kmongo/util/KMongoClientSettings {
+	public static final field INSTANCE Lorg/litote/kmongo/util/KMongoClientSettings;
+	public final fun configureRegistry (Lorg/bson/codecs/configuration/CodecRegistry;)Lorg/bson/codecs/configuration/CodecRegistry;
+	public static synthetic fun configureRegistry$default (Lorg/litote/kmongo/util/KMongoClientSettings;Lorg/bson/codecs/configuration/CodecRegistry;ILjava/lang/Object;)Lorg/bson/codecs/configuration/CodecRegistry;
+	public final fun getDriverInformation ()Lcom/mongodb/MongoDriverInformation;
+	public final fun settings (Lcom/mongodb/ConnectionString;)Lcom/mongodb/MongoClientSettings;
+	public final fun settings (Lcom/mongodb/MongoClientSettings;)Lcom/mongodb/MongoClientSettings;
+}
+
+public final class org/litote/kmongo/util/KMongoUtil {
+	public static final field EMPTY_JSON Ljava/lang/String;
+	public static final field INSTANCE Lorg/litote/kmongo/util/KMongoUtil;
+	public final fun defaultCollectionName (Lkotlin/reflect/KClass;)Ljava/lang/String;
+	public final fun encodeValue (Lorg/bson/BsonDocumentWriter;Ljava/lang/Object;Lorg/bson/codecs/configuration/CodecRegistry;)V
+	public final fun extractId (Ljava/lang/Object;Lkotlin/reflect/KClass;)Ljava/lang/Object;
+	public final fun filterIdToBson (Ljava/lang/Object;Z)Lorg/bson/BsonDocument;
+	public static synthetic fun filterIdToBson$default (Lorg/litote/kmongo/util/KMongoUtil;Ljava/lang/Object;ZILjava/lang/Object;)Lorg/bson/BsonDocument;
+	public final fun formatJson (Ljava/lang/String;)Ljava/lang/String;
+	public final fun generateNewIdForIdClass (Lkotlin/reflect/KClass;)Ljava/lang/Object;
+	public final fun getDefaultCodecRegistry ()Lorg/bson/codecs/configuration/CodecRegistry;
+	public final fun getIdBsonValue (Ljava/lang/Object;)Lorg/bson/BsonValue;
+	public final fun getIdValue (Ljava/lang/Object;)Ljava/lang/Object;
+	public final fun idFilterQuery (Ljava/lang/Object;)Lorg/bson/conversions/Bson;
+	public final fun setModifier (Ljava/lang/Object;Z)Lorg/bson/conversions/Bson;
+	public static synthetic fun setModifier$default (Lorg/litote/kmongo/util/KMongoUtil;Ljava/lang/Object;ZILjava/lang/Object;)Lorg/bson/conversions/Bson;
+	public final fun toBson (Ljava/lang/String;)Lorg/bson/BsonDocument;
+	public final fun toBson (Ljava/lang/String;Lkotlin/reflect/KClass;)Lorg/bson/BsonDocument;
+	public final fun toBsonList ([Ljava/lang/String;Lorg/bson/codecs/configuration/CodecRegistry;)Ljava/util/List;
+	public final fun toBsonModifier (Ljava/lang/Object;Z)Lorg/bson/conversions/Bson;
+	public static synthetic fun toBsonModifier$default (Lorg/litote/kmongo/util/KMongoUtil;Ljava/lang/Object;ZILjava/lang/Object;)Lorg/bson/conversions/Bson;
+	public final fun toExtendedJson (Ljava/lang/Object;)Ljava/lang/String;
+	public final fun toWriteModel ([Ljava/lang/String;Lorg/bson/codecs/configuration/CodecRegistry;Lkotlin/reflect/KClass;)Ljava/util/List;
+}
+
+public final class org/litote/kmongo/util/KotlinxDatetimeLoader {
+	public static final field INSTANCE Lorg/litote/kmongo/util/KotlinxDatetimeLoader;
+	public final fun loadKotlinxDateTime (Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Ljava/lang/Object;
+}
+
+public final class org/litote/kmongo/util/ObjectMappingConfiguration {
+	public static final field INSTANCE Lorg/litote/kmongo/util/ObjectMappingConfiguration;
+	public final fun addCustomCodec (Lorg/bson/codecs/Codec;)V
+	public final fun generateIdsAsObjectIds ()V
+	public final fun generateIdsAsStrings ()V
+	public final fun getSerializeNull ()Z
+	public final fun setSerializeNull (Z)V
+}
+
+public final class org/litote/kmongo/util/PairProjection {
+	public fun <init> (Ljava/lang/Object;Ljava/lang/Object;)V
+	public final fun getField1 ()Ljava/lang/Object;
+	public final fun getField2 ()Ljava/lang/Object;
+}
+
+public final class org/litote/kmongo/util/PatternUtil {
+	public static final field INSTANCE Lorg/litote/kmongo/util/PatternUtil;
+	public final fun getOptionsAsString (Ljava/util/regex/Pattern;)Ljava/lang/String;
+}
+
+public final class org/litote/kmongo/util/SimpleProjectionsKt {
+	public static final fun pairProjectionCodecRegistry (Ljava/lang/String;Lkotlin/reflect/KClass;Ljava/lang/String;Lkotlin/reflect/KClass;Lorg/bson/codecs/configuration/CodecRegistry;)Lorg/bson/codecs/configuration/CodecRegistry;
+	public static final fun singleProjectionCodecRegistry (Ljava/lang/String;Lkotlin/reflect/KClass;Lorg/bson/codecs/configuration/CodecRegistry;)Lorg/bson/codecs/configuration/CodecRegistry;
+	public static final fun tripleProjectionCodecRegistry (Ljava/lang/String;Lkotlin/reflect/KClass;Ljava/lang/String;Lkotlin/reflect/KClass;Ljava/lang/String;Lkotlin/reflect/KClass;Lorg/bson/codecs/configuration/CodecRegistry;)Lorg/bson/codecs/configuration/CodecRegistry;
+}
+
+public final class org/litote/kmongo/util/SingleProjection {
+	public fun <init> (Ljava/lang/Object;)V
+	public final fun getField ()Ljava/lang/Object;
+}
+
+public final class org/litote/kmongo/util/TripleProjection {
+	public fun <init> (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V
+	public final fun getField1 ()Ljava/lang/Object;
+	public final fun getField2 ()Ljava/lang/Object;
+	public final fun getField3 ()Ljava/lang/Object;
+}
+
+public final class org/litote/kmongo/util/UpdateConfiguration {
+	public static final field INSTANCE Lorg/litote/kmongo/util/UpdateConfiguration;
+	public final fun getUpdateOnlyNotNullProperties ()Z
+	public final fun setUpdateOnlyNotNullProperties (Z)V
+}
+

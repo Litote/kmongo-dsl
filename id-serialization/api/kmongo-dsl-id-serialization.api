@@ -1,0 +1,4 @@
+public final class org/litote/kmongo/id/serialization/IdModuleKt {
+	public static final fun getIdKotlinXSerializationModule ()Lkotlinx/serialization/modules/SerializersModule;
+}
+

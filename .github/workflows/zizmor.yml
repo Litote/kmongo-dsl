@@ -1,0 +1,17 @@
+name: zizmor
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions: {}
+
+jobs:
+  zizmor:
+    permissions:
+      contents: read
+    uses: Litote/ci/.github/workflows/zizmor.yml@731f25b65744afb6ed50783472a6746193353272 # v0.6.0
+    with:
+      config: .github/zizmor.yml

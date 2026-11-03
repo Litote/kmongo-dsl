@@ -1,0 +1,11 @@
+public final class org/litote/kmongo/testcontainers/KMongoTestServer {
+	public static final field DEFAULT_IMAGE Ljava/lang/String;
+	public static final field IMAGE_PROPERTY Ljava/lang/String;
+	public static final field INSTANCE Lorg/litote/kmongo/testcontainers/KMongoTestServer;
+	public static final field URI_ENV Ljava/lang/String;
+	public static final field URI_PROPERTY Ljava/lang/String;
+	public final fun getConnectionString ()Ljava/lang/String;
+	public final fun newDatabaseName (Ljava/lang/String;)Ljava/lang/String;
+	public static synthetic fun newDatabaseName$default (Lorg/litote/kmongo/testcontainers/KMongoTestServer;Ljava/lang/String;ILjava/lang/Object;)Ljava/lang/String;
+}
+

@@ -1,0 +1,9 @@
+public abstract interface class org/litote/jackson/JacksonModuleServiceLoader {
+	public abstract fun module ()Ltools/jackson/databind/JacksonModule;
+}
+
+public final class org/litote/jackson/JacksonModuleServiceLoaderKt {
+	public static final fun getJacksonModulesFromServiceLoader ()Ljava/util/List;
+	public static final fun registerModulesFromServiceLoader (Ltools/jackson/databind/cfg/MapperBuilder;)Ltools/jackson/databind/cfg/MapperBuilder;
+}
+

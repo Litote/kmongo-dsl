@@ -1,0 +1,33 @@
+public final class org/litote/kmongo/id/jackson/IdJacksonModule : tools/jackson/databind/module/SimpleModule {
+	public fun <init> ()V
+	public fun <init> (Lorg/litote/kmongo/id/IdGenerator;)V
+	public synthetic fun <init> (Lorg/litote/kmongo/id/IdGenerator;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
+public final class org/litote/kmongo/id/jackson/IdKeyDeserializer : tools/jackson/databind/KeyDeserializer {
+	public fun <init> ()V
+	public fun <init> (Lorg/litote/kmongo/id/IdGenerator;)V
+	public synthetic fun <init> (Lorg/litote/kmongo/id/IdGenerator;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun deserializeKey (Ljava/lang/String;Ltools/jackson/databind/DeserializationContext;)Ljava/lang/Object;
+}
+
+public final class org/litote/kmongo/id/jackson/IdKeySerializer : tools/jackson/databind/ValueSerializer {
+	public fun <init> ()V
+	public synthetic fun serialize (Ljava/lang/Object;Ltools/jackson/core/JsonGenerator;Ltools/jackson/databind/SerializationContext;)V
+	public fun serialize (Lorg/litote/kmongo/Id;Ltools/jackson/core/JsonGenerator;Ltools/jackson/databind/SerializationContext;)V
+}
+
+public final class org/litote/kmongo/id/jackson/IdToStringSerializer : tools/jackson/databind/ValueSerializer {
+	public fun <init> ()V
+	public synthetic fun serialize (Ljava/lang/Object;Ltools/jackson/core/JsonGenerator;Ltools/jackson/databind/SerializationContext;)V
+	public fun serialize (Lorg/litote/kmongo/Id;Ltools/jackson/core/JsonGenerator;Ltools/jackson/databind/SerializationContext;)V
+}
+
+public final class org/litote/kmongo/id/jackson/StringToIdDeserializer : tools/jackson/databind/ValueDeserializer {
+	public fun <init> ()V
+	public fun <init> (Lorg/litote/kmongo/id/IdGenerator;)V
+	public synthetic fun <init> (Lorg/litote/kmongo/id/IdGenerator;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun deserialize (Ltools/jackson/core/JsonParser;Ltools/jackson/databind/DeserializationContext;)Ljava/lang/Object;
+	public fun deserialize (Ltools/jackson/core/JsonParser;Ltools/jackson/databind/DeserializationContext;)Lorg/litote/kmongo/Id;
+}
+

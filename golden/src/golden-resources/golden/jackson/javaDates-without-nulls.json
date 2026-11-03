@@ -1,0 +1,29 @@
+{
+  "_id": "javaDates",
+  "calendar": {
+    "$date": {
+      "$numberLong": "1600000000789"
+    }
+  },
+  "zonedDateTime": {
+    "$date": {
+      "$numberLong": "1600000000000"
+    }
+  },
+  "offsetDateTime": {
+    "$date": {
+      "$numberLong": "1600000001000"
+    }
+  },
+  "offsetTime": {
+    "$date": {
+      "$numberLong": "44802000"
+    }
+  },
+  "uuid": {
+    "$binary": {
+      "base64": "0xKb6GdFPhIAQBcUZkJWpA==",
+      "subType": "03"
+    }
+  }
+}

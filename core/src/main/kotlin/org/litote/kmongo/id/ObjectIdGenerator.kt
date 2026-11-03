@@ -1,0 +1,39 @@
+/*
+ * Copyright (C) 2016/2026 Litote
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.litote.kmongo.id
+
+import org.bson.types.ObjectId
+import org.litote.kmongo.Id
+import kotlin.reflect.KClass
+
+/**
+ * [ObjectId] generator.
+ */
+public object ObjectIdGenerator : IdGenerator {
+
+    /**
+     * Generates a new WrappedObjectId.
+     */
+    public fun <T> newObjectId(): WrappedObjectId<T> = ObjectIdGenerator.generateNewId()
+
+    override val idClass: KClass<out Id<*>> = WrappedObjectId::class
+
+    override val wrappedIdClass: KClass<out Any> = ObjectId::class
+
+    override fun <T> generateNewId(): WrappedObjectId<T> = WrappedObjectId(ObjectId())
+
+}

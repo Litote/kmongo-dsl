@@ -1,0 +1,78 @@
+/*
+ * Copyright (C) 2016/2026 Litote
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.litote.kmongo.serialization
+
+import kotlinx.serialization.SerialName
+import org.litote.kmongo.id.MongoId
+import org.litote.kmongo.util.KMongoUtil
+import kotlin.reflect.KClass
+import kotlin.reflect.KProperty1
+import kotlin.reflect.full.declaredMemberProperties
+import kotlin.reflect.full.findAnnotation
+import kotlin.reflect.full.hasAnnotation
+import kotlin.reflect.full.memberProperties
+import kotlin.reflect.jvm.isAccessible
+import kotlin.reflect.jvm.javaField
+
+@Volatile
+internal var idController: IdController = ReflectionIdController
+
+/**
+ * Set the current [IdController].
+ */
+public fun changeIdController(controller: IdController) {
+    idController = controller
+}
+
+/**
+ *  To manage ids.
+ */
+public interface IdController {
+
+    public fun findIdProperty(type: KClass<*>): KProperty1<*, *>? = null
+
+    public fun <T, R> getIdValue(idProperty: KProperty1<T, R>, instance: T): R? = null
+
+    public fun <T, R> setIdValue(idProperty: KProperty1<T, R>, instance: T) {
+        // no id property to set by default
+    }
+}
+
+/**
+ * Default IdController implementation.
+ */
+public object ReflectionIdController : IdController {
+
+    override fun findIdProperty(type: KClass<*>): KProperty1<*, *>? {
+
+        return type.declaredMemberProperties.find { it.name == "_id" || it.findAnnotation<SerialName>()?.value == "_id" || it.hasAnnotation<MongoId>() }
+                ?: type.memberProperties.find { it.name == "_id" || it.findAnnotation<SerialName>()?.value == "_id" || it.hasAnnotation<MongoId>() }
+    }
+
+    override fun <T, R> getIdValue(idProperty: KProperty1<T, R>, instance: T): R? {
+        return idProperty.run {
+            isAccessible = true
+            get(instance)
+        }
+    }
+
+    override fun <T, R> setIdValue(idProperty: KProperty1<T, R>, instance: T) {
+        val javaField = idProperty.javaField!!
+        javaField.isAccessible = true
+        javaField.set(instance, KMongoUtil.generateNewIdForIdClass(javaField.type.kotlin))
+    }
+}

@@ -1,0 +1,336 @@
+public final class org/litote/kmongo/ChangeStreamIterablesKt {
+	public static final fun listen (Lcom/mongodb/kotlin/client/ChangeStreamIterable;Ljava/util/concurrent/ScheduledExecutorService;JLjava/util/concurrent/TimeUnit;Lkotlin/jvm/functions/Function1;)Ljava/lang/AutoCloseable;
+	public static synthetic fun listen$default (Lcom/mongodb/kotlin/client/ChangeStreamIterable;Ljava/util/concurrent/ScheduledExecutorService;JLjava/util/concurrent/TimeUnit;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Ljava/lang/AutoCloseable;
+}
+
+public final class org/litote/kmongo/DistinctIterablesKt {
+	public static final fun filter (Lcom/mongodb/kotlin/client/DistinctIterable;Ljava/lang/String;)Lcom/mongodb/kotlin/client/DistinctIterable;
+}
+
+public final class org/litote/kmongo/FindIterablesKt {
+	public static final fun ascendingSort (Lcom/mongodb/kotlin/client/FindIterable;[Lkotlin/reflect/KProperty;)Lcom/mongodb/kotlin/client/FindIterable;
+	public static final fun descendingSort (Lcom/mongodb/kotlin/client/FindIterable;[Lkotlin/reflect/KProperty;)Lcom/mongodb/kotlin/client/FindIterable;
+	public static final fun filter (Lcom/mongodb/kotlin/client/FindIterable;Ljava/lang/String;)Lcom/mongodb/kotlin/client/FindIterable;
+	public static final fun projection (Lcom/mongodb/kotlin/client/FindIterable;Ljava/lang/String;)Lcom/mongodb/kotlin/client/FindIterable;
+	public static final fun projection (Lcom/mongodb/kotlin/client/FindIterable;[Lkotlin/reflect/KProperty;)Lcom/mongodb/kotlin/client/FindIterable;
+	public static final fun sort (Lcom/mongodb/kotlin/client/FindIterable;Ljava/lang/String;)Lcom/mongodb/kotlin/client/FindIterable;
+}
+
+public final class org/litote/kmongo/KMongo {
+	public static final field INSTANCE Lorg/litote/kmongo/KMongo;
+	public final fun createClient ()Lcom/mongodb/kotlin/client/MongoClient;
+	public final fun createClient (Lcom/mongodb/ConnectionString;)Lcom/mongodb/kotlin/client/MongoClient;
+	public final fun createClient (Lcom/mongodb/MongoClientSettings;)Lcom/mongodb/kotlin/client/MongoClient;
+	public final fun createClient (Lcom/mongodb/client/MongoClient;)Lcom/mongodb/kotlin/client/MongoClient;
+	public final fun createClient (Ljava/lang/String;)Lcom/mongodb/kotlin/client/MongoClient;
+	public final fun createJavaClient (Lcom/mongodb/MongoClientSettings;)Lcom/mongodb/client/MongoClient;
+	public final fun createJavaClient (Ljava/lang/String;)Lcom/mongodb/client/MongoClient;
+}
+
+public final class org/litote/kmongo/KMongo4CompatibilityKt {
+	public static final fun into (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/util/Collection;)Ljava/util/Collection;
+	public static final fun iterator (Lcom/mongodb/kotlin/client/MongoIterable;)Lcom/mongodb/kotlin/client/MongoCursor;
+}
+
+public final class org/litote/kmongo/MongoCollectionsKt {
+	public static final fun countDocuments (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;Lcom/mongodb/client/model/CountOptions;)J
+	public static synthetic fun countDocuments$default (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;Lcom/mongodb/client/model/CountOptions;ILjava/lang/Object;)J
+	public static final fun createIndex (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;Lcom/mongodb/client/model/IndexOptions;)Ljava/lang/String;
+	public static synthetic fun createIndex$default (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;Lcom/mongodb/client/model/IndexOptions;ILjava/lang/Object;)Ljava/lang/String;
+	public static final fun deleteMany (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;Lcom/mongodb/client/model/DeleteOptions;)Lcom/mongodb/client/result/DeleteResult;
+	public static final fun deleteMany (Lcom/mongodb/kotlin/client/MongoCollection;[Lorg/bson/conversions/Bson;Lcom/mongodb/client/model/DeleteOptions;)Lcom/mongodb/client/result/DeleteResult;
+	public static synthetic fun deleteMany$default (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;Lcom/mongodb/client/model/DeleteOptions;ILjava/lang/Object;)Lcom/mongodb/client/result/DeleteResult;
+	public static synthetic fun deleteMany$default (Lcom/mongodb/kotlin/client/MongoCollection;[Lorg/bson/conversions/Bson;Lcom/mongodb/client/model/DeleteOptions;ILjava/lang/Object;)Lcom/mongodb/client/result/DeleteResult;
+	public static final fun deleteOne (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;Lcom/mongodb/client/model/DeleteOptions;)Lcom/mongodb/client/result/DeleteResult;
+	public static final fun deleteOne (Lcom/mongodb/kotlin/client/MongoCollection;[Lorg/bson/conversions/Bson;Lcom/mongodb/client/model/DeleteOptions;)Lcom/mongodb/client/result/DeleteResult;
+	public static synthetic fun deleteOne$default (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;Lcom/mongodb/client/model/DeleteOptions;ILjava/lang/Object;)Lcom/mongodb/client/result/DeleteResult;
+	public static synthetic fun deleteOne$default (Lcom/mongodb/kotlin/client/MongoCollection;[Lorg/bson/conversions/Bson;Lcom/mongodb/client/model/DeleteOptions;ILjava/lang/Object;)Lcom/mongodb/client/result/DeleteResult;
+	public static final fun deleteOneById (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/Object;)Lcom/mongodb/client/result/DeleteResult;
+	public static final fun dropIndex (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;)V
+	public static final fun dropIndexOfKeys (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;)V
+	public static final fun ensureIndex (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;Lcom/mongodb/client/model/IndexOptions;)Ljava/lang/String;
+	public static final fun ensureIndex (Lcom/mongodb/kotlin/client/MongoCollection;Lorg/bson/conversions/Bson;Lcom/mongodb/client/model/IndexOptions;)Ljava/lang/String;
+	public static final fun ensureIndex (Lcom/mongodb/kotlin/client/MongoCollection;[Lkotlin/reflect/KProperty;Lcom/mongodb/client/model/IndexOptions;)Ljava/lang/String;
+	public static synthetic fun ensureIndex$default (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;Lcom/mongodb/client/model/IndexOptions;ILjava/lang/Object;)Ljava/lang/String;
+	public static synthetic fun ensureIndex$default (Lcom/mongodb/kotlin/client/MongoCollection;Lorg/bson/conversions/Bson;Lcom/mongodb/client/model/IndexOptions;ILjava/lang/Object;)Ljava/lang/String;
+	public static synthetic fun ensureIndex$default (Lcom/mongodb/kotlin/client/MongoCollection;[Lkotlin/reflect/KProperty;Lcom/mongodb/client/model/IndexOptions;ILjava/lang/Object;)Ljava/lang/String;
+	public static final fun ensureUniqueIndex (Lcom/mongodb/kotlin/client/MongoCollection;[Lkotlin/reflect/KProperty;Lcom/mongodb/client/model/IndexOptions;)Ljava/lang/String;
+	public static synthetic fun ensureUniqueIndex$default (Lcom/mongodb/kotlin/client/MongoCollection;[Lkotlin/reflect/KProperty;Lcom/mongodb/client/model/IndexOptions;ILjava/lang/Object;)Ljava/lang/String;
+	public static final fun find (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;)Lcom/mongodb/kotlin/client/FindIterable;
+	public static final fun find (Lcom/mongodb/kotlin/client/MongoCollection;[Lorg/bson/conversions/Bson;)Lcom/mongodb/kotlin/client/FindIterable;
+	public static synthetic fun find$default (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;ILjava/lang/Object;)Lcom/mongodb/kotlin/client/FindIterable;
+	public static final fun findOne (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;)Ljava/lang/Object;
+	public static final fun findOne (Lcom/mongodb/kotlin/client/MongoCollection;Lorg/bson/conversions/Bson;)Ljava/lang/Object;
+	public static final fun findOne (Lcom/mongodb/kotlin/client/MongoCollection;[Lorg/bson/conversions/Bson;)Ljava/lang/Object;
+	public static synthetic fun findOne$default (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;ILjava/lang/Object;)Ljava/lang/Object;
+	public static final fun findOneAndDelete (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;Lcom/mongodb/client/model/FindOneAndDeleteOptions;)Ljava/lang/Object;
+	public static synthetic fun findOneAndDelete$default (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;Lcom/mongodb/client/model/FindOneAndDeleteOptions;ILjava/lang/Object;)Ljava/lang/Object;
+	public static final fun findOneAndReplace (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;Ljava/lang/Object;Lcom/mongodb/client/model/FindOneAndReplaceOptions;)Ljava/lang/Object;
+	public static synthetic fun findOneAndReplace$default (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;Ljava/lang/Object;Lcom/mongodb/client/model/FindOneAndReplaceOptions;ILjava/lang/Object;)Ljava/lang/Object;
+	public static final fun findOneAndUpdate (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;Ljava/lang/String;Lcom/mongodb/client/model/FindOneAndUpdateOptions;)Ljava/lang/Object;
+	public static synthetic fun findOneAndUpdate$default (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;Ljava/lang/String;Lcom/mongodb/client/model/FindOneAndUpdateOptions;ILjava/lang/Object;)Ljava/lang/Object;
+	public static final fun findOneById (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/Object;)Ljava/lang/Object;
+	public static final fun replaceOne (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;Ljava/lang/Object;Lcom/mongodb/client/model/ReplaceOptions;)Lcom/mongodb/client/result/UpdateResult;
+	public static synthetic fun replaceOne$default (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;Ljava/lang/Object;Lcom/mongodb/client/model/ReplaceOptions;ILjava/lang/Object;)Lcom/mongodb/client/result/UpdateResult;
+	public static final fun replaceOneById (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/Object;Ljava/lang/Object;Lcom/mongodb/client/model/ReplaceOptions;)Lcom/mongodb/client/result/UpdateResult;
+	public static synthetic fun replaceOneById$default (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/Object;Ljava/lang/Object;Lcom/mongodb/client/model/ReplaceOptions;ILjava/lang/Object;)Lcom/mongodb/client/result/UpdateResult;
+	public static final fun replaceOneWithFilter (Lcom/mongodb/kotlin/client/MongoCollection;Lorg/bson/conversions/Bson;Ljava/lang/Object;Lcom/mongodb/client/model/ReplaceOptions;)Lcom/mongodb/client/result/UpdateResult;
+	public static synthetic fun replaceOneWithFilter$default (Lcom/mongodb/kotlin/client/MongoCollection;Lorg/bson/conversions/Bson;Ljava/lang/Object;Lcom/mongodb/client/model/ReplaceOptions;ILjava/lang/Object;)Lcom/mongodb/client/result/UpdateResult;
+	public static final fun save (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/Object;)Lcom/mongodb/client/result/UpdateResult;
+	public static final fun updateMany (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;Ljava/lang/String;Lcom/mongodb/client/model/UpdateOptions;)Lcom/mongodb/client/result/UpdateResult;
+	public static final fun updateMany (Lcom/mongodb/kotlin/client/MongoCollection;Lorg/bson/conversions/Bson;[Lorg/litote/kmongo/SetTo;Lcom/mongodb/client/model/UpdateOptions;)Lcom/mongodb/client/result/UpdateResult;
+	public static synthetic fun updateMany$default (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;Ljava/lang/String;Lcom/mongodb/client/model/UpdateOptions;ILjava/lang/Object;)Lcom/mongodb/client/result/UpdateResult;
+	public static synthetic fun updateMany$default (Lcom/mongodb/kotlin/client/MongoCollection;Lorg/bson/conversions/Bson;[Lorg/litote/kmongo/SetTo;Lcom/mongodb/client/model/UpdateOptions;ILjava/lang/Object;)Lcom/mongodb/client/result/UpdateResult;
+	public static final fun updateOne (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;Ljava/lang/Object;Lcom/mongodb/client/model/UpdateOptions;Z)Lcom/mongodb/client/result/UpdateResult;
+	public static final fun updateOne (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;Ljava/lang/String;Lcom/mongodb/client/model/UpdateOptions;)Lcom/mongodb/client/result/UpdateResult;
+	public static final fun updateOne (Lcom/mongodb/kotlin/client/MongoCollection;Lorg/bson/conversions/Bson;Ljava/lang/Object;Lcom/mongodb/client/model/UpdateOptions;Z)Lcom/mongodb/client/result/UpdateResult;
+	public static final fun updateOne (Lcom/mongodb/kotlin/client/MongoCollection;Lorg/bson/conversions/Bson;[Lorg/litote/kmongo/SetTo;Lcom/mongodb/client/model/UpdateOptions;)Lcom/mongodb/client/result/UpdateResult;
+	public static synthetic fun updateOne$default (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;Ljava/lang/Object;Lcom/mongodb/client/model/UpdateOptions;ZILjava/lang/Object;)Lcom/mongodb/client/result/UpdateResult;
+	public static synthetic fun updateOne$default (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;Ljava/lang/String;Lcom/mongodb/client/model/UpdateOptions;ILjava/lang/Object;)Lcom/mongodb/client/result/UpdateResult;
+	public static synthetic fun updateOne$default (Lcom/mongodb/kotlin/client/MongoCollection;Lorg/bson/conversions/Bson;Ljava/lang/Object;Lcom/mongodb/client/model/UpdateOptions;ZILjava/lang/Object;)Lcom/mongodb/client/result/UpdateResult;
+	public static synthetic fun updateOne$default (Lcom/mongodb/kotlin/client/MongoCollection;Lorg/bson/conversions/Bson;[Lorg/litote/kmongo/SetTo;Lcom/mongodb/client/model/UpdateOptions;ILjava/lang/Object;)Lcom/mongodb/client/result/UpdateResult;
+	public static final fun updateOneById (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/Object;Ljava/lang/Object;Lcom/mongodb/client/model/UpdateOptions;Z)Lcom/mongodb/client/result/UpdateResult;
+	public static final fun updateOneById (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/Object;[Lorg/litote/kmongo/SetTo;Lcom/mongodb/client/model/UpdateOptions;)Lcom/mongodb/client/result/UpdateResult;
+	public static synthetic fun updateOneById$default (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/Object;Ljava/lang/Object;Lcom/mongodb/client/model/UpdateOptions;ZILjava/lang/Object;)Lcom/mongodb/client/result/UpdateResult;
+	public static synthetic fun updateOneById$default (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/Object;[Lorg/litote/kmongo/SetTo;Lcom/mongodb/client/model/UpdateOptions;ILjava/lang/Object;)Lcom/mongodb/client/result/UpdateResult;
+	public static final fun withKMongo (Lcom/mongodb/kotlin/client/MongoCollection;)Lcom/mongodb/kotlin/client/MongoCollection;
+}
+
+public final class org/litote/kmongo/MongoCollectionsWithClientSessionKt {
+	public static final fun countDocuments (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;Lcom/mongodb/client/model/CountOptions;)J
+	public static synthetic fun countDocuments$default (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;Lcom/mongodb/client/model/CountOptions;ILjava/lang/Object;)J
+	public static final fun createIndex (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;Lcom/mongodb/client/model/IndexOptions;)Ljava/lang/String;
+	public static synthetic fun createIndex$default (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;Lcom/mongodb/client/model/IndexOptions;ILjava/lang/Object;)Ljava/lang/String;
+	public static final fun deleteMany (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;Lcom/mongodb/client/model/DeleteOptions;)Lcom/mongodb/client/result/DeleteResult;
+	public static final fun deleteMany (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;[Lorg/bson/conversions/Bson;Lcom/mongodb/client/model/DeleteOptions;)Lcom/mongodb/client/result/DeleteResult;
+	public static synthetic fun deleteMany$default (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;Lcom/mongodb/client/model/DeleteOptions;ILjava/lang/Object;)Lcom/mongodb/client/result/DeleteResult;
+	public static synthetic fun deleteMany$default (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;[Lorg/bson/conversions/Bson;Lcom/mongodb/client/model/DeleteOptions;ILjava/lang/Object;)Lcom/mongodb/client/result/DeleteResult;
+	public static final fun deleteOne (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;Lcom/mongodb/client/model/DeleteOptions;)Lcom/mongodb/client/result/DeleteResult;
+	public static final fun deleteOne (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;[Lorg/bson/conversions/Bson;Lcom/mongodb/client/model/DeleteOptions;)Lcom/mongodb/client/result/DeleteResult;
+	public static synthetic fun deleteOne$default (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;Lcom/mongodb/client/model/DeleteOptions;ILjava/lang/Object;)Lcom/mongodb/client/result/DeleteResult;
+	public static synthetic fun deleteOne$default (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;[Lorg/bson/conversions/Bson;Lcom/mongodb/client/model/DeleteOptions;ILjava/lang/Object;)Lcom/mongodb/client/result/DeleteResult;
+	public static final fun deleteOneById (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/Object;)Lcom/mongodb/client/result/DeleteResult;
+	public static final fun dropIndex (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;)V
+	public static final fun dropIndexOfKeys (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;)V
+	public static final fun ensureIndex (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;Lcom/mongodb/client/model/IndexOptions;)Ljava/lang/String;
+	public static final fun ensureIndex (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Lorg/bson/conversions/Bson;Lcom/mongodb/client/model/IndexOptions;)Ljava/lang/String;
+	public static final fun ensureIndex (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;[Lkotlin/reflect/KProperty;Lcom/mongodb/client/model/IndexOptions;)Ljava/lang/String;
+	public static synthetic fun ensureIndex$default (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;Lcom/mongodb/client/model/IndexOptions;ILjava/lang/Object;)Ljava/lang/String;
+	public static synthetic fun ensureIndex$default (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Lorg/bson/conversions/Bson;Lcom/mongodb/client/model/IndexOptions;ILjava/lang/Object;)Ljava/lang/String;
+	public static synthetic fun ensureIndex$default (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;[Lkotlin/reflect/KProperty;Lcom/mongodb/client/model/IndexOptions;ILjava/lang/Object;)Ljava/lang/String;
+	public static final fun ensureUniqueIndex (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;[Lkotlin/reflect/KProperty;Lcom/mongodb/client/model/IndexOptions;)Ljava/lang/String;
+	public static synthetic fun ensureUniqueIndex$default (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;[Lkotlin/reflect/KProperty;Lcom/mongodb/client/model/IndexOptions;ILjava/lang/Object;)Ljava/lang/String;
+	public static final fun find (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;)Lcom/mongodb/kotlin/client/FindIterable;
+	public static final fun find (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;[Lorg/bson/conversions/Bson;)Lcom/mongodb/kotlin/client/FindIterable;
+	public static synthetic fun find$default (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;ILjava/lang/Object;)Lcom/mongodb/kotlin/client/FindIterable;
+	public static final fun findOne (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;)Ljava/lang/Object;
+	public static final fun findOne (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Lorg/bson/conversions/Bson;)Ljava/lang/Object;
+	public static final fun findOne (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;[Lorg/bson/conversions/Bson;)Ljava/lang/Object;
+	public static synthetic fun findOne$default (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;ILjava/lang/Object;)Ljava/lang/Object;
+	public static final fun findOneAndDelete (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;Lcom/mongodb/client/model/FindOneAndDeleteOptions;)Ljava/lang/Object;
+	public static synthetic fun findOneAndDelete$default (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;Lcom/mongodb/client/model/FindOneAndDeleteOptions;ILjava/lang/Object;)Ljava/lang/Object;
+	public static final fun findOneAndReplace (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;Ljava/lang/Object;Lcom/mongodb/client/model/FindOneAndReplaceOptions;)Ljava/lang/Object;
+	public static synthetic fun findOneAndReplace$default (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;Ljava/lang/Object;Lcom/mongodb/client/model/FindOneAndReplaceOptions;ILjava/lang/Object;)Ljava/lang/Object;
+	public static final fun findOneAndUpdate (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;Ljava/lang/String;Lcom/mongodb/client/model/FindOneAndUpdateOptions;)Ljava/lang/Object;
+	public static synthetic fun findOneAndUpdate$default (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;Ljava/lang/String;Lcom/mongodb/client/model/FindOneAndUpdateOptions;ILjava/lang/Object;)Ljava/lang/Object;
+	public static final fun findOneById (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/Object;)Ljava/lang/Object;
+	public static final fun replaceOne (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;Ljava/lang/Object;Lcom/mongodb/client/model/ReplaceOptions;)Lcom/mongodb/client/result/UpdateResult;
+	public static synthetic fun replaceOne$default (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;Ljava/lang/Object;Lcom/mongodb/client/model/ReplaceOptions;ILjava/lang/Object;)Lcom/mongodb/client/result/UpdateResult;
+	public static final fun replaceOneById (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/Object;Ljava/lang/Object;Lcom/mongodb/client/model/ReplaceOptions;)Lcom/mongodb/client/result/UpdateResult;
+	public static synthetic fun replaceOneById$default (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/Object;Ljava/lang/Object;Lcom/mongodb/client/model/ReplaceOptions;ILjava/lang/Object;)Lcom/mongodb/client/result/UpdateResult;
+	public static final fun replaceOneWithFilter (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Lorg/bson/conversions/Bson;Ljava/lang/Object;Lcom/mongodb/client/model/ReplaceOptions;)Lcom/mongodb/client/result/UpdateResult;
+	public static synthetic fun replaceOneWithFilter$default (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Lorg/bson/conversions/Bson;Ljava/lang/Object;Lcom/mongodb/client/model/ReplaceOptions;ILjava/lang/Object;)Lcom/mongodb/client/result/UpdateResult;
+	public static final fun save (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/Object;)Lcom/mongodb/client/result/UpdateResult;
+	public static final fun updateMany (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;Ljava/lang/String;Lcom/mongodb/client/model/UpdateOptions;)Lcom/mongodb/client/result/UpdateResult;
+	public static final fun updateMany (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Lorg/bson/conversions/Bson;[Lorg/litote/kmongo/SetTo;Lcom/mongodb/client/model/UpdateOptions;)Lcom/mongodb/client/result/UpdateResult;
+	public static synthetic fun updateMany$default (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;Ljava/lang/String;Lcom/mongodb/client/model/UpdateOptions;ILjava/lang/Object;)Lcom/mongodb/client/result/UpdateResult;
+	public static synthetic fun updateMany$default (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Lorg/bson/conversions/Bson;[Lorg/litote/kmongo/SetTo;Lcom/mongodb/client/model/UpdateOptions;ILjava/lang/Object;)Lcom/mongodb/client/result/UpdateResult;
+	public static final fun updateOne (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;Ljava/lang/Object;Lcom/mongodb/client/model/UpdateOptions;Z)Lcom/mongodb/client/result/UpdateResult;
+	public static final fun updateOne (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;Ljava/lang/String;Lcom/mongodb/client/model/UpdateOptions;)Lcom/mongodb/client/result/UpdateResult;
+	public static final fun updateOne (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Lorg/bson/conversions/Bson;Ljava/lang/Object;Lcom/mongodb/client/model/UpdateOptions;Z)Lcom/mongodb/client/result/UpdateResult;
+	public static final fun updateOne (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Lorg/bson/conversions/Bson;[Lorg/litote/kmongo/SetTo;Lcom/mongodb/client/model/UpdateOptions;)Lcom/mongodb/client/result/UpdateResult;
+	public static synthetic fun updateOne$default (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;Ljava/lang/Object;Lcom/mongodb/client/model/UpdateOptions;ZILjava/lang/Object;)Lcom/mongodb/client/result/UpdateResult;
+	public static synthetic fun updateOne$default (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;Ljava/lang/String;Lcom/mongodb/client/model/UpdateOptions;ILjava/lang/Object;)Lcom/mongodb/client/result/UpdateResult;
+	public static synthetic fun updateOne$default (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Lorg/bson/conversions/Bson;Ljava/lang/Object;Lcom/mongodb/client/model/UpdateOptions;ZILjava/lang/Object;)Lcom/mongodb/client/result/UpdateResult;
+	public static synthetic fun updateOne$default (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Lorg/bson/conversions/Bson;[Lorg/litote/kmongo/SetTo;Lcom/mongodb/client/model/UpdateOptions;ILjava/lang/Object;)Lcom/mongodb/client/result/UpdateResult;
+	public static final fun updateOneById (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/Object;Ljava/lang/Object;Lcom/mongodb/client/model/UpdateOptions;Z)Lcom/mongodb/client/result/UpdateResult;
+	public static synthetic fun updateOneById$default (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/Object;Ljava/lang/Object;Lcom/mongodb/client/model/UpdateOptions;ZILjava/lang/Object;)Lcom/mongodb/client/result/UpdateResult;
+}
+
+public final class org/litote/kmongo/MongoDatabasesKt {
+	public static final fun withKMongo (Lcom/mongodb/kotlin/client/MongoDatabase;)Lcom/mongodb/kotlin/client/MongoDatabase;
+}
+
+public final class org/litote/kmongo/MongoIterableCollectionExtensionsKt {
+	public static final fun all (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Z
+	public static final fun any (Lcom/mongodb/kotlin/client/MongoIterable;)Z
+	public static final fun any (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Z
+	public static final fun asSequence (Lcom/mongodb/kotlin/client/MongoIterable;)Lkotlin/sequences/Sequence;
+	public static final fun associate (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Ljava/util/Map;
+	public static final fun associateBy (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Ljava/util/Map;
+	public static final fun associateBy (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;)Ljava/util/Map;
+	public static final fun associateByTo (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/util/Map;Lkotlin/jvm/functions/Function1;)Ljava/util/Map;
+	public static final fun associateByTo (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/util/Map;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;)Ljava/util/Map;
+	public static final fun associateTo (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/util/Map;Lkotlin/jvm/functions/Function1;)Ljava/util/Map;
+	public static final fun averageOfByte (Lcom/mongodb/kotlin/client/MongoIterable;)D
+	public static final fun averageOfDouble (Lcom/mongodb/kotlin/client/MongoIterable;)D
+	public static final fun averageOfFloat (Lcom/mongodb/kotlin/client/MongoIterable;)D
+	public static final fun averageOfInt (Lcom/mongodb/kotlin/client/MongoIterable;)D
+	public static final fun averageOfLong (Lcom/mongodb/kotlin/client/MongoIterable;)D
+	public static final fun averageOfShort (Lcom/mongodb/kotlin/client/MongoIterable;)D
+	public static final fun chunked (Lcom/mongodb/kotlin/client/MongoIterable;I)Ljava/util/List;
+	public static final fun chunked (Lcom/mongodb/kotlin/client/MongoIterable;ILkotlin/jvm/functions/Function1;)Ljava/util/List;
+	public static final fun contains (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/lang/Object;)Z
+	public static final fun count (Lcom/mongodb/kotlin/client/MongoIterable;)I
+	public static final fun count (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)I
+	public static final fun distinct (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/util/List;
+	public static final fun distinctBy (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Ljava/util/List;
+	public static final fun drop (Lcom/mongodb/kotlin/client/MongoIterable;I)Ljava/util/List;
+	public static final fun dropWhile (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Ljava/util/List;
+	public static final fun elementAt (Lcom/mongodb/kotlin/client/MongoIterable;I)Ljava/lang/Object;
+	public static final fun elementAtOrElse (Lcom/mongodb/kotlin/client/MongoIterable;ILkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public static final fun elementAtOrNull (Lcom/mongodb/kotlin/client/MongoIterable;I)Ljava/lang/Object;
+	public static final fun filter (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Ljava/util/List;
+	public static final fun filterIndexed (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function2;)Ljava/util/List;
+	public static final fun filterIndexedTo (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/util/Collection;Lkotlin/jvm/functions/Function2;)Ljava/util/Collection;
+	public static final fun filterIsInstance (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/lang/Class;)Ljava/util/List;
+	public static final fun filterIsInstanceTo (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/util/Collection;Ljava/lang/Class;)Ljava/util/Collection;
+	public static final fun filterNot (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Ljava/util/List;
+	public static final fun filterNotNull (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/util/List;
+	public static final fun filterNotNullTo (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/util/Collection;)Ljava/util/Collection;
+	public static final fun filterNotTo (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/util/Collection;Lkotlin/jvm/functions/Function1;)Ljava/util/Collection;
+	public static final fun filterTo (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/util/Collection;Lkotlin/jvm/functions/Function1;)Ljava/util/Collection;
+	public static final fun find (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public static final fun findLast (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public static final fun first (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public static final fun firstOrNull (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public static final fun flatMap (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Ljava/util/List;
+	public static final fun flatMapTo (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/util/Collection;Lkotlin/jvm/functions/Function1;)Ljava/util/Collection;
+	public static final fun flatten (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/util/List;
+	public static final fun fold (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/lang/Object;Lkotlin/jvm/functions/Function2;)Ljava/lang/Object;
+	public static final fun foldIndexed (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/lang/Object;Lkotlin/jvm/functions/Function3;)Ljava/lang/Object;
+	public static final fun forEachIndexed (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function2;)V
+	public static final fun groupBy (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Ljava/util/Map;
+	public static final fun groupBy (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;)Ljava/util/Map;
+	public static final fun groupByTo (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/util/Map;Lkotlin/jvm/functions/Function1;)Ljava/util/Map;
+	public static final fun groupByTo (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/util/Map;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;)Ljava/util/Map;
+	public static final fun groupingBy (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Lkotlin/collections/Grouping;
+	public static final fun indexOf (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/lang/Object;)I
+	public static final fun indexOfFirst (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)I
+	public static final fun indexOfLast (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)I
+	public static final fun intersect (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/lang/Iterable;)Ljava/util/Set;
+	public static final fun joinTo (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/lang/Appendable;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Ljava/lang/CharSequence;ILjava/lang/CharSequence;Lkotlin/jvm/functions/Function1;)Ljava/lang/Appendable;
+	public static synthetic fun joinTo$default (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/lang/Appendable;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Ljava/lang/CharSequence;ILjava/lang/CharSequence;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Ljava/lang/Appendable;
+	public static final fun joinToString (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Ljava/lang/CharSequence;ILjava/lang/CharSequence;Lkotlin/jvm/functions/Function1;)Ljava/lang/String;
+	public static synthetic fun joinToString$default (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Ljava/lang/CharSequence;ILjava/lang/CharSequence;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Ljava/lang/String;
+	public static final fun last (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/lang/Object;
+	public static final fun last (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public static final fun lastIndexOf (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/lang/Object;)I
+	public static final fun lastOrNull (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/lang/Object;
+	public static final fun lastOrNull (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public static final fun map (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Ljava/util/List;
+	public static final fun mapIndexed (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function2;)Ljava/util/List;
+	public static final fun mapIndexedNotNull (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function2;)Ljava/util/List;
+	public static final fun mapIndexedNotNullTo (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/util/Collection;Lkotlin/jvm/functions/Function2;)Ljava/util/Collection;
+	public static final fun mapIndexedTo (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/util/Collection;Lkotlin/jvm/functions/Function2;)Ljava/util/Collection;
+	public static final fun mapNotNull (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Ljava/util/List;
+	public static final fun mapNotNullTo (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/util/Collection;Lkotlin/jvm/functions/Function1;)Ljava/util/Collection;
+	public static final fun mapTo (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/util/Collection;Lkotlin/jvm/functions/Function1;)Ljava/util/Collection;
+	public static final fun max (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/lang/Comparable;
+	public static final fun max (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/lang/Double;
+	public static final fun max (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/lang/Float;
+	public static final fun maxBy (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public static final fun maxByOrNull (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public static final fun maxOrNull (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/lang/Comparable;
+	public static final fun maxOrNull (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/lang/Double;
+	public static final fun maxOrNull (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/lang/Float;
+	public static final fun maxWith (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/util/Comparator;)Ljava/lang/Object;
+	public static final fun maxWithOrNull (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/util/Comparator;)Ljava/lang/Object;
+	public static final fun min (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/lang/Comparable;
+	public static final fun min (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/lang/Double;
+	public static final fun min (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/lang/Float;
+	public static final fun minBy (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public static final fun minByOrNull (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public static final fun minOrNull (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/lang/Comparable;
+	public static final fun minOrNull (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/lang/Double;
+	public static final fun minOrNull (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/lang/Float;
+	public static final fun minWith (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/util/Comparator;)Ljava/lang/Object;
+	public static final fun minWithOrNull (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/util/Comparator;)Ljava/lang/Object;
+	public static final fun minus (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/lang/Iterable;)Ljava/util/List;
+	public static final fun minus (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/lang/Object;)Ljava/util/List;
+	public static final fun minus (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/sequences/Sequence;)Ljava/util/List;
+	public static final fun minus (Lcom/mongodb/kotlin/client/MongoIterable;[Ljava/lang/Object;)Ljava/util/List;
+	public static final fun minusElement (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/lang/Object;)Ljava/util/List;
+	public static final fun none (Lcom/mongodb/kotlin/client/MongoIterable;)Z
+	public static final fun none (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Z
+	public static final fun partition (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Lkotlin/Pair;
+	public static final fun plus (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/lang/Iterable;)Ljava/util/List;
+	public static final fun plus (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/lang/Object;)Ljava/util/List;
+	public static final fun plus (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/sequences/Sequence;)Ljava/util/List;
+	public static final fun plus (Lcom/mongodb/kotlin/client/MongoIterable;[Ljava/lang/Object;)Ljava/util/List;
+	public static final fun plusElement (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/lang/Object;)Ljava/util/List;
+	public static final fun reduce (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function2;)Ljava/lang/Object;
+	public static final fun reduceIndexed (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function3;)Ljava/lang/Object;
+	public static final fun requireNoNulls (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/lang/Iterable;
+	public static final fun reversed (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/util/List;
+	public static final fun shuffled (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/util/List;
+	public static final fun shuffled (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/util/Random;)Ljava/util/List;
+	public static final fun single (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/lang/Object;
+	public static final fun single (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public static final fun singleOrNull (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/lang/Object;
+	public static final fun singleOrNull (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public static final fun sorted (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/util/List;
+	public static final fun sortedBy (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Ljava/util/List;
+	public static final fun sortedByDescending (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Ljava/util/List;
+	public static final fun sortedDescending (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/util/List;
+	public static final fun sortedWith (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/util/Comparator;)Ljava/util/List;
+	public static final fun subtract (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/lang/Iterable;)Ljava/util/Set;
+	public static final fun sumBy (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)I
+	public static final fun sumByDouble (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)D
+	public static final fun sumOfByte (Lcom/mongodb/kotlin/client/MongoIterable;)I
+	public static final fun sumOfDouble (Lcom/mongodb/kotlin/client/MongoIterable;)D
+	public static final fun sumOfFloat (Lcom/mongodb/kotlin/client/MongoIterable;)F
+	public static final fun sumOfInt (Lcom/mongodb/kotlin/client/MongoIterable;)I
+	public static final fun sumOfLong (Lcom/mongodb/kotlin/client/MongoIterable;)J
+	public static final fun sumOfShort (Lcom/mongodb/kotlin/client/MongoIterable;)I
+	public static final fun take (Lcom/mongodb/kotlin/client/MongoIterable;I)Ljava/util/List;
+	public static final fun takeWhile (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Ljava/util/List;
+	public static final fun toCollection (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/util/Collection;)Ljava/util/Collection;
+	public static final fun toHashSet (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/util/HashSet;
+	public static final fun toList (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/util/List;
+	public static final fun toMap (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/util/Map;
+	public static final fun toMap (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/util/Map;)Ljava/util/Map;
+	public static final fun toMutableList (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/util/List;
+	public static final fun toMutableSet (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/util/Set;
+	public static final fun toSet (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/util/Set;
+	public static final fun toSortedSet (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/util/SortedSet;
+	public static final fun toSortedSet (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/util/Comparator;)Ljava/util/SortedSet;
+	public static final fun union (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/lang/Iterable;)Ljava/util/Set;
+	public static final fun unzip (Lcom/mongodb/kotlin/client/MongoIterable;)Lkotlin/Pair;
+	public static final fun useCursor (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public static final fun windowed (Lcom/mongodb/kotlin/client/MongoIterable;IIZ)Ljava/util/List;
+	public static final fun windowed (Lcom/mongodb/kotlin/client/MongoIterable;IIZLkotlin/jvm/functions/Function1;)Ljava/util/List;
+	public static synthetic fun windowed$default (Lcom/mongodb/kotlin/client/MongoIterable;IIZILjava/lang/Object;)Ljava/util/List;
+	public static synthetic fun windowed$default (Lcom/mongodb/kotlin/client/MongoIterable;IIZLkotlin/jvm/functions/Function1;ILjava/lang/Object;)Ljava/util/List;
+	public static final fun withIndex (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/util/List;
+	public static final fun zip (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/lang/Iterable;)Ljava/util/List;
+	public static final fun zip (Lcom/mongodb/kotlin/client/MongoIterable;Ljava/lang/Iterable;Lkotlin/jvm/functions/Function2;)Ljava/util/List;
+	public static final fun zip (Lcom/mongodb/kotlin/client/MongoIterable;[Ljava/lang/Object;)Ljava/util/List;
+	public static final fun zip (Lcom/mongodb/kotlin/client/MongoIterable;[Ljava/lang/Object;Lkotlin/jvm/functions/Function2;)Ljava/util/List;
+	public static final fun zipWithNext (Lcom/mongodb/kotlin/client/MongoIterable;)Ljava/util/List;
+	public static final fun zipWithNext (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function2;)Ljava/util/List;
+}
+
+public final class org/litote/kmongo/MongoIterablesKt {
+	public static final fun evaluate (Lcom/mongodb/kotlin/client/MongoIterable;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+}
+
+public final class org/litote/kmongo/ResumableChangeStreamsKt {
+	public static final fun listenIndefinitely-NxwtSZ4 (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/util/List;Lcom/mongodb/client/model/changestream/FullDocument;JJLkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;)Ljava/lang/AutoCloseable;
+	public static synthetic fun listenIndefinitely-NxwtSZ4$default (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/util/List;Lcom/mongodb/client/model/changestream/FullDocument;JJLkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Ljava/lang/AutoCloseable;
+}
+
+public final class org/litote/kmongo/SyncPropertiesKt {
+	public static final fun lookup (Lcom/mongodb/kotlin/client/MongoCollection;Lkotlin/reflect/KProperty1;Lkotlin/reflect/KProperty1;Lkotlin/reflect/KProperty1;)Lorg/bson/conversions/Bson;
+}
+

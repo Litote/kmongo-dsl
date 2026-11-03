@@ -1,0 +1,68 @@
+/*
+ * Copyright (C) 2016/2026 Litote
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.litote.kmongo.util
+
+import com.mongodb.MongoClientSettings.getDefaultCodecRegistry
+import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
+import kotlin.test.Test
+import org.litote.kmongo.KMongoRootTest
+
+/**
+ *
+ */
+class KMongoUtilTest : KMongoRootTest() {
+
+    @Test
+    fun `toWriteModel fails on an unknown write model`() {
+        assertFailsWith<IllegalArgumentException> {
+            KMongoUtil.toWriteModel(arrayOf("""{"unknown":{}}"""), getDefaultCodecRegistry(), Any::class)
+        }
+    }
+
+    @Test
+    fun formatJson() {
+        assertEquals("\$regexp", KMongoUtil.formatJson("$ regexp"))
+        assertEquals("\$regexp", KMongoUtil.formatJson("$  regexp"))
+        assertEquals("\$\$regexp", KMongoUtil.formatJson("$$ regexp"))
+
+        val dollar = "\$"
+        assertEquals("""
+           [
+              {
+                ${dollar}group : {
+                   _id : null,
+                   totalPrice: { ${dollar}sum: { ${dollar}multiply: [ "${dollar}price", "${dollar}quantity" ] } },
+                   averageQuantity: { ${dollar}avg: "${dollar}quantity" },
+                   count: { ${dollar}sum: 1 }
+                }
+              }
+           ]""", KMongoUtil.formatJson("""
+           [
+              {
+                $ group : {
+                   _id : null,
+                   totalPrice: { $ sum: { $ multiply: [ "$ price", "$ quantity" ] } },
+                   averageQuantity: { $ avg: "$ quantity" },
+                   count: { $ sum: 1 }
+                }
+              }
+           ]"""))
+    }
+
+
+}

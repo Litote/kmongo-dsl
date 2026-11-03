@@ -1,0 +1,86 @@
+name: Docs
+
+# Publishes the documentation site (MkDocs pages of docs/ + Dokka API documentation) on GitHub Pages:
+# https://litote.github.io/kmongo-dsl/
+# Requires GitHub Pages with the "GitHub Actions" source (Settings > Pages).
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "docs/**"
+      - "mkdocs.yml"
+      - "requirements-docs.txt"
+      - "tools/build-docs.sh"
+      - "**/src/main/**"
+      - ".github/workflows/docs.yml"
+  # the site is also built (mkdocs build --strict: broken links...) on the pull requests, without deployment
+  pull_request:
+    branches: [ main ]
+    paths:
+      - "docs/**"
+      - "mkdocs.yml"
+      - "requirements-docs.txt"
+      - "tools/build-docs.sh"
+      - "**/src/main/**"
+      - ".github/workflows/docs.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# only one publication at a time (the pull request builds are cancelled by a new push)
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('docs-{0}', github.ref) || 'pages' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    name: Build the documentation site
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: Litote/ci/.github/actions/setup-gradle@731f25b65744afb6ed50783472a6746193353272 # v0.6.0
+        with:
+          java-version: '17'
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.14'
+          cache: pip
+          cache-dependency-path: requirements-docs.txt
+
+      - name: Install MkDocs
+        run: pip install --only-binary ':all:' --require-hashes -r requirements-docs.txt
+
+      - name: Build the site
+        env:
+          NO_MKDOCS_2_WARNING: '1'
+        run: tools/build-docs.sh
+
+      - if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: build/site
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

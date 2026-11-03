@@ -1,0 +1,3 @@
+# Documentation site (MkDocs Material). The hashed requirements-docs.txt is generated from this file:
+#   uv pip compile requirements-docs.in --universal --generate-hashes -o requirements-docs.txt
+mkdocs-material==9.8.0
