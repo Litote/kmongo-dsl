@@ -19,7 +19,7 @@ vanniktech-publish = "0.37.0"
 dokka = "2.2.0"
 shadow = "9.6.1"
 sonarqube = "7.5.0.8588"
-spotless = "8.9.0"
+spotless = "8.10.4"
 
 [libraries]
 # MongoDB official Kotlin driver
