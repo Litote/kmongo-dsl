@@ -55,14 +55,6 @@ jobs:
           java-version: '17'
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
-      # not the shared set-release-version action: it writes VERSION_NAME, the version property here is `version`
-      - name: Extract release version
-        env:
-          TAG: ${{ needs.release-please.outputs.tag_name || inputs.tag }}
-        run: |
-          VERSION="${TAG#v}"
-          sed -i "s/^version=.*/version=${VERSION}/" gradle.properties
-
       - name: Build & test
         run: ./gradlew build dokkaGenerate
 
