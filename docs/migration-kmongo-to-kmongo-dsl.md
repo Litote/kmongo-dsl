@@ -293,6 +293,10 @@ The base codec registry (`KMongoUtil.defaultCodecRegistry`) is the official driv
 KMongo DSL uses **Jackson 3** (`tools.jackson` packages), with the Jackson 2 settings: the BSON documents do not change.
 The legacy `DBObject` support is removed.
 
+One exception: an `org.bson.types.Decimal128` property is now written as a BSON decimal, the deprecated KMongo wrote it
+as a string. The existing string values can still be read, but they stay strings in the database until the document is
+written again: the numeric queries and sorts do not match them.
+
 If your code does not use the Jackson API, there is nothing to do: the `com.fasterxml.jackson.annotation` annotations
 (`@JsonProperty`, `@JsonIgnore`...) are unchanged. Otherwise, migrate it to Jackson 3
 (see the [Jackson 3 migration guide](https://github.com/FasterXML/jackson/blob/main/jackson3/MIGRATING_TO_JACKSON_3.md)):
