@@ -28,6 +28,7 @@ import org.bson.json.JsonWriterSettings
 import org.litote.kmongo.id.MongoId
 import org.litote.kmongo.id.MongoProperty
 import org.litote.kmongo.service.ClassMappingTypeService
+import org.litote.kmongo.util.KMongoUtil
 import org.litote.kmongo.util.ObjectMappingConfiguration
 import java.io.StringWriter
 import kotlin.reflect.KClass
@@ -57,10 +58,20 @@ public class SerializationClassMappingTypeService : ClassMappingTypeService {
     @Volatile
     private lateinit var codecRegistryWithEncodeNull: CodecRegistry
 
+    /**
+     * The registries are set by [coreCodecRegistry] at the creation of a client: without client, the default ones are used.
+     */
+    private fun initCodecRegistries() {
+        if (!::codecRegistryWithNonEncodeNull.isInitialized || !::codecRegistryWithEncodeNull.isInitialized) {
+            coreCodecRegistry(KMongoUtil.defaultCodecRegistry)
+        }
+    }
+
     override fun filterIdToBson(obj: Any, filterNullProperties: Boolean): BsonDocument {
         val doc = BsonDocument()
         val writer = BsonDocumentWriter(doc)
 
+        initCodecRegistries()
         (if (filterNullProperties) codecRegistryWithNonEncodeNull else codecRegistryWithEncodeNull)
             .get(obj.javaClass).encode(writer, obj, EncoderContext.builder().build())
 
@@ -86,6 +97,7 @@ public class SerializationClassMappingTypeService : ClassMappingTypeService {
             //create a fake document to bypass bson writer built-in checks
             jsonWriter.writeStartDocument()
             jsonWriter.writeName("tmp")
+            initCodecRegistries()
             codecRegistryWithNonEncodeNull.get(obj.javaClass).encode(jsonWriter, obj, EncoderContext.builder().build())
             jsonWriter.writeEndDocument()
             writer.toString().run {

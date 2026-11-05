@@ -17,12 +17,14 @@
 package org.litote.kmongo.serialization
 
 import com.mongodb.MongoClientSettings.getDefaultCodecRegistry
+import kotlinx.serialization.Serializable
 import org.bson.BsonDocument
 import org.bson.BsonDocumentReader
 import org.bson.BsonDocumentWriter
 import org.bson.Document
 import org.bson.codecs.DecoderContext
 import org.bson.codecs.EncoderContext
+import org.litote.kmongo.util.KMongoUtil
 import org.litote.kmongo.util.ObjectMappingConfiguration
 import kotlin.test.assertEquals
 
@@ -30,6 +32,35 @@ import kotlin.test.assertEquals
  *
  */
 class SerializationClassMappingTypeServiceTest {
+
+    @Serializable
+    data class Value(val _id: String, val name: String, val nullable: String? = null)
+
+    @kotlin.test.Test
+    fun `an object is converted to extended json before the creation of a client`() {
+        val value = Value("id", "a")
+        val initialized = SerializationClassMappingTypeService()
+            .apply { coreCodecRegistry(KMongoUtil.defaultCodecRegistry) }
+
+        val json = SerializationClassMappingTypeService().toExtendedJson(value)
+
+        assertEquals(initialized.toExtendedJson(value), json)
+        assertEquals(BsonDocument.parse("""{"_id": "id", "name": "a"}"""), BsonDocument.parse(json))
+    }
+
+    @kotlin.test.Test
+    fun `an object is converted to bson before the creation of a client`() {
+        val value = Value("id", "a")
+
+        assertEquals(
+            BsonDocument.parse("""{"name": "a"}"""),
+            SerializationClassMappingTypeService().filterIdToBson(value, filterNullProperties = true),
+        )
+        assertEquals(
+            BsonDocument.parse("""{"name": "a", "nullable": null}"""),
+            SerializationClassMappingTypeService().filterIdToBson(value, filterNullProperties = false),
+        )
+    }
 
     @kotlin.test.Test
     fun `the core codec registry follows the null serialization configuration`() {
