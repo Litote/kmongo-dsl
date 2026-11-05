@@ -9,16 +9,15 @@ on:
 
 jobs:
   auto-merge:
-    # Stays manual: the MongoDB driver (its minor version sets the kmongo-dsl version, see CONTRIBUTING.md)
-    if: >-
-      github.event.pull_request.user.login == 'dependabot[bot]' &&
-      !contains(github.event.pull_request.title, 'mongodb')
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
     permissions:
       contents: read
       pull-requests: read
-    uses: Litote/ci/.github/workflows/dependabot-auto-merge.yml@731f25b65744afb6ed50783472a6746193353272 # v0.6.0
+    uses: Litote/ci/.github/workflows/dependabot-auto-merge.yml@3f4cc1e08fdf4fa3c66a8e2c6a1e46c5992a708c # v0.7.0
     with:
       ecosystems: gradle
+      # the minor version of the MongoDB driver sets the kmongo-dsl version, see CONTRIBUTING.md
+      exclude-dependencies: org.mongodb:*
     secrets:
       RELEASE_PLEASE_APP_ID: ${{ secrets.RELEASE_PLEASE_APP_ID }}
       RELEASE_PLEASE_APP_PRIVATE_KEY: ${{ secrets.RELEASE_PLEASE_APP_PRIVATE_KEY }}
