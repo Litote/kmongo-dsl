@@ -10,13 +10,13 @@
 
     <groupId>org.litote.kmongo</groupId>
     <artifactId>kmongo-dsl-maven-sample</artifactId>
-    <version>5.14.0-SNAPSHOT</version><!-- x-release-please-version -->
+    <version>5.14.0</version><!-- x-release-please-version -->
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.version>2.4.21</kotlin.version>
         <kotlin.compiler.jvmTarget>17</kotlin.compiler.jvmTarget>
-        <kmongo-dsl.version>5.14.0-SNAPSHOT</kmongo-dsl.version><!-- x-release-please-version -->
+        <kmongo-dsl.version>5.14.0</kmongo-dsl.version><!-- x-release-please-version -->
     </properties>
 
     <dependencyManagement>

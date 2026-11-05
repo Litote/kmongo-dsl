@@ -1,5 +1,19 @@
 # Changelog
 
+## 5.14.0 (2026-11-05)
+
+
+### Features
+
+* kmongo-dsl, Kotlin extensions and DSL for the official MongoDB driver ([a5a0df8](https://github.com/Litote/kmongo-dsl/commit/a5a0df8b280fc201266016e9cc2db43684f9ac2f))
+
+
+### Bug Fixes
+
+* allow the kotlinx.serialization conversions before the creation of a client ([5909614](https://github.com/Litote/kmongo-dsl/commit/590961489e979565303b382f732c6aea926abe5a))
+* repair the Gradle wrapper checksum, the verification metadata and the release-please bootstrap ([9bace4c](https://github.com/Litote/kmongo-dsl/commit/9bace4cc0d97dd381764d8a8d8d2b3f198cc8574))
+* write org.bson.types.Decimal128 as a BSON decimal in both mappings ([3e21d03](https://github.com/Litote/kmongo-dsl/commit/3e21d036dea4091fa880218a193ec187bae743a6))
+
 ## 5.14.0 (unreleased)
 
 First KMongo DSL version: KMongo on top of the official MongoDB Kotlin drivers.
