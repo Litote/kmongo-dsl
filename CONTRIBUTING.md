@@ -88,9 +88,8 @@ The sources, javadoc and `src.zip` artifacts are only downloaded by the IDEs: th
 The Dependabot pull requests are updated automatically by the `dependabot-gradle-verification` workflow.
 
 The minor and patch Gradle updates are then approved and merged by the `dependabot-auto-merge` workflow, once the
-required checks pass. These updates stay manual: major versions, `github-actions`, `pip` and `maven`, the MongoDB
-driver (see [Versions & releases](#versions--releases)), and any dependency with `kotlin` in its name (a minor update can
-raise the Kotlin version required by the published libraries).
+required checks pass. These updates stay manual: major versions, `github-actions`, `pip` and `maven`, and the MongoDB
+driver (see [Versions & releases](#versions--releases)).
 
 ## Conventional Commits
 
