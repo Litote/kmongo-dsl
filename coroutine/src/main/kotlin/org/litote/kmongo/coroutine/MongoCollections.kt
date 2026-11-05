@@ -712,19 +712,6 @@ public inline fun <reified TResult : Any> MongoCollection<*>.listIndexes(): List
 public inline fun <reified TResult : Any> MongoCollection<*>.listTypedIndexes(): ListIndexesFlow<TResult> =
     listIndexes(TResult::class.java)
 
-
-/**
- * Drops the index given the keys used to create it.
- *
- * @param keys the keys of the index to remove
- */
-@Deprecated(
-    "kmongo-dsl: shadowed by the driver dropIndex(indexName), which is the one called from Kotlin",
-    ReplaceWith("dropIndexOfKeys(keys)"),
-)
-@Suppress("EXTENSION_SHADOWED_BY_MEMBER")
-public suspend fun <T : Any> MongoCollection<T>.dropIndex(keys: String): Unit = dropIndexOfKeys(keys)
-
 /**
  * Drops the index given the keys used to create it.
  *

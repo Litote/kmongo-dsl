@@ -46,7 +46,6 @@ public final class org/litote/kmongo/MongoCollectionsKt {
 	public static synthetic fun deleteOne$default (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;Lcom/mongodb/client/model/DeleteOptions;ILjava/lang/Object;)Lcom/mongodb/client/result/DeleteResult;
 	public static synthetic fun deleteOne$default (Lcom/mongodb/kotlin/client/MongoCollection;[Lorg/bson/conversions/Bson;Lcom/mongodb/client/model/DeleteOptions;ILjava/lang/Object;)Lcom/mongodb/client/result/DeleteResult;
 	public static final fun deleteOneById (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/Object;)Lcom/mongodb/client/result/DeleteResult;
-	public static final fun dropIndex (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;)V
 	public static final fun dropIndexOfKeys (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;)V
 	public static final fun ensureIndex (Lcom/mongodb/kotlin/client/MongoCollection;Ljava/lang/String;Lcom/mongodb/client/model/IndexOptions;)Ljava/lang/String;
 	public static final fun ensureIndex (Lcom/mongodb/kotlin/client/MongoCollection;Lorg/bson/conversions/Bson;Lcom/mongodb/client/model/IndexOptions;)Ljava/lang/String;
@@ -110,7 +109,6 @@ public final class org/litote/kmongo/MongoCollectionsWithClientSessionKt {
 	public static synthetic fun deleteOne$default (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;Lcom/mongodb/client/model/DeleteOptions;ILjava/lang/Object;)Lcom/mongodb/client/result/DeleteResult;
 	public static synthetic fun deleteOne$default (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;[Lorg/bson/conversions/Bson;Lcom/mongodb/client/model/DeleteOptions;ILjava/lang/Object;)Lcom/mongodb/client/result/DeleteResult;
 	public static final fun deleteOneById (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/Object;)Lcom/mongodb/client/result/DeleteResult;
-	public static final fun dropIndex (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;)V
 	public static final fun dropIndexOfKeys (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;)V
 	public static final fun ensureIndex (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Ljava/lang/String;Lcom/mongodb/client/model/IndexOptions;)Ljava/lang/String;
 	public static final fun ensureIndex (Lcom/mongodb/kotlin/client/MongoCollection;Lcom/mongodb/kotlin/client/ClientSession;Lorg/bson/conversions/Bson;Lcom/mongodb/client/model/IndexOptions;)Ljava/lang/String;
