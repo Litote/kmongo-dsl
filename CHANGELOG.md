@@ -1,5 +1,12 @@
 # Changelog
 
+## 5.14.0 (2026-11-05)
+
+
+### Features
+
+* kmongo-dsl, Kotlin extensions and DSL for the official MongoDB driver ([4b99066](https://github.com/Litote/kmongo-dsl/commit/4b9906653639fc7e8899741c11fb0c6778586d6a))
+
 ## 5.14.0 (unreleased)
 
 First KMongo DSL version: KMongo on top of the official MongoDB Kotlin drivers.
