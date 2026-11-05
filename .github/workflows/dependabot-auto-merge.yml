@@ -9,12 +9,10 @@ on:
 
 jobs:
   auto-merge:
-    # Stay manual: the MongoDB driver (its minor version sets the kmongo-dsl version, see CONTRIBUTING.md) and
-    # Kotlin and kotlinx (a minor update can raise the Kotlin version required by the published libraries)
+    # Stays manual: the MongoDB driver (its minor version sets the kmongo-dsl version, see CONTRIBUTING.md)
     if: >-
       github.event.pull_request.user.login == 'dependabot[bot]' &&
-      !contains(github.event.pull_request.title, 'mongodb') &&
-      !contains(github.event.pull_request.title, 'kotlin')
+      !contains(github.event.pull_request.title, 'mongodb')
     permissions:
       contents: read
       pull-requests: read
