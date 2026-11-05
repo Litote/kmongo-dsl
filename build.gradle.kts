@@ -74,8 +74,9 @@ spotless {
 // Token: SONAR_TOKEN environment variable, or systemProp.sonar.token=<token> in ~/.gradle/gradle.properties
 
 // the benchmark (KMongo 5.12 vs kmongo-dsl) is neither analyzed nor in the coverage
+// kmongo-dsl-golden is a tool that generates the golden documents: it is not in the coverage
 fun Project.isBenchmark(): Boolean = path.startsWith(":kmongo-dsl-benchmark")
-val coveredProjects = subprojects.filterNot { it.isBenchmark() }
+val coveredProjects = subprojects.filterNot { it.isBenchmark() || it.path == ":kmongo-dsl-golden" }
 
 // the integration tests of a module are in other modules (kmongo-dsl-sync-tests...): the coverage is aggregated
 val jacocoAggregatedReport = tasks.register<JacocoReport>("jacocoAggregatedReport") {
@@ -141,27 +142,5 @@ subprojects {
                 property("sonar.coverage.jacoco.xmlReportPaths", aggregatedReportPath)
             }
         }
-    }
-}
-
-/**
- * Regenerates gradle/verification-metadata.xml after a dependency change, with the tasks run by the CI:
- *   ./gradlew updateVerificationMetadata
- */
-tasks.register("updateVerificationMetadata") {
-    group = "verification"
-    description = "Regenerates gradle/verification-metadata.xml after a dependency change."
-    notCompatibleWithConfigurationCache("Spawns a Gradle subprocess that writes verification-metadata.xml")
-    doLast {
-        val result = ProcessBuilder(
-            "$rootDir/gradlew",
-            "--write-verification-metadata", "sha256", "--no-configuration-cache",
-            "build", "dokkaGenerate", "jacocoAggregatedReport", "publishToMavenLocal",
-        )
-            .directory(rootDir)
-            .inheritIO()
-            .start()
-            .waitFor()
-        check(result == 0) { "updateVerificationMetadata failed with exit code $result" }
     }
 }

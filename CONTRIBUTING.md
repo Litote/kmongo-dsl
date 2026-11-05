@@ -79,8 +79,11 @@ The downloaded artifacts are verified (`gradle/verification-metadata.xml`). Afte
 checksums with the tasks run by the CI:
 
 ```bash
-./gradlew updateVerificationMetadata
+tools/update-verification-metadata.sh
 ```
+
+The script uses an empty Gradle user home: it downloads everything, and needs a few minutes. Do not run
+`--write-verification-metadata` with your Gradle cache, as the parent POMs and BOMs it holds would not be recorded.
 
 The sources, javadoc and `src.zip` artifacts are only downloaded by the IDEs: they are trusted without checksum
 (`trusted-artifacts`). The `.pom` and `.module` files take part in the dependency resolution and stay verified.
