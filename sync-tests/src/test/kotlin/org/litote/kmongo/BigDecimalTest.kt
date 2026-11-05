@@ -37,6 +37,9 @@ class BigDecimalTest : AllCategoriesKMongoBaseTest<Article>() {
     @Serializable
     data class Article(val title: String, @Contextual val big: BigDecimal)
 
+    @Serializable
+    data class Rating(val title: String, @Contextual val value: Decimal128)
+
     @Test
     fun bigDecimalShouldBePersistedAsDecimal128() {
         val a = Article("title", BigDecimal("1.0"))
@@ -44,6 +47,17 @@ class BigDecimalTest : AllCategoriesKMongoBaseTest<Article>() {
         val doc = col.withDocumentClass<Document>().findOne()!!
         assertTrue(doc["big"] is Decimal128)
         assertEquals(a, col.findOne())
+    }
+
+    @Test
+    fun decimal128ShouldBePersistedAsDecimal128() {
+        val col = getCollection<Rating>()
+        val rating = Rating("title", Decimal128(BigDecimal("1.5")))
+        col.save(rating)
+        val doc = col.withDocumentClass<Document>().findOne()!!
+        assertEquals(rating.value, doc["value"])
+        assertEquals(rating, col.findOne())
+        col.drop()
     }
 
     @Test

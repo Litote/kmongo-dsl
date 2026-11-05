@@ -229,6 +229,10 @@ check REVIEW "watch / change stream helpers: the driver resumes once only" \
   "use watchIndefinitely() (coroutine) or listenIndefinitely() (sync) to survive the errors and the invalidations" \
   kotlin_files '\.watch(<[^>]*>)?\('
 
+check REVIEW "dropIndex with JSON keys: the driver function takes the name of the index (NOT detected by the compiler)" \
+  "use dropIndexOfKeys(...)" \
+  kotlin_files '\.dropIndex\(([^"]*,\s*)?"\s*\{'
+
 check FIX "map-reduce (removed)" \
   "use an aggregation pipeline" \
   kotlin_files '\bmapReduce(With)?\b'

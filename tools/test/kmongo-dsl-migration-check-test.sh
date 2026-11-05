@@ -24,6 +24,9 @@ fun sorted(col: MongoCollection<Friend>) = col.find(and(Friend::name eq "a", Fri
 fun list(friends: List<Friend>) = friends.first()
 fun fromList(col: MongoCollection<Friend>) = col.find().toList().first()
 fun safe(col: MongoCollection<Friend>) = col.find().firstOrNull()
+fun keys(col: MongoCollection<Friend>) = col.dropIndex("{name:1}")
+fun sessionKeys(col: MongoCollection<Friend>) = col.dropIndex(session, "{name:1}")
+fun name(col: MongoCollection<Friend>) = col.dropIndex("name_1")
 EOF
 cat > "$work/check/JacksonConfig.kt" <<'EOF'
 import com.fasterxml.jackson.annotation.JsonProperty
@@ -48,6 +51,9 @@ assert_contains "$output" "Dao.kt:4: fun sorted" "first() on a multiline find().
 assert_not_contains "$output" "Dao.kt:7:" "List.first()"
 assert_not_contains "$output" "Dao.kt:8:" "toList().first()"
 assert_not_contains "$output" "Dao.kt:9:" "firstOrNull()"
+assert_contains "$output" "Dao.kt:10:fun keys" "dropIndex with JSON keys"
+assert_contains "$output" "Dao.kt:11:fun sessionKeys" "dropIndex with a session and JSON keys"
+assert_not_contains "$output" "Dao.kt:12:" "dropIndex with a name"
 assert_contains "$output" "JacksonConfig.kt:2:" "Jackson 2 databind import"
 assert_not_contains "$output" "JacksonConfig.kt:1:" "Jackson annotation import"
 assert_contains "$output" "<artifactId>kmongo-coroutine</artifactId>" "KMongo 4/5 Maven artifact"

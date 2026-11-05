@@ -45,6 +45,7 @@ import org.bson.BsonBinarySubType
 import org.bson.BsonTimestamp
 import org.bson.UuidRepresentation
 import org.bson.internal.UuidHelper
+import org.bson.types.Decimal128 as DriverDecimal128
 import org.bson.types.Binary
 import org.bson.types.MaxKey
 import org.bson.types.MinKey
@@ -63,6 +64,7 @@ import org.litote.kmongo.jackson.ExtendedJsonModule.InstantExtendedJsonSerialize
 import org.litote.kmongo.jackson.ExtendedJsonModule.LocalDateExtendedJsonSerializer
 import org.litote.kmongo.jackson.ExtendedJsonModule.LocalDateTimeExtendedJsonSerializer
 import org.litote.kmongo.jackson.ExtendedJsonModule.LocalTimeExtendedJsonSerializer
+import org.litote.kmongo.jackson.ExtendedJsonModule.DriverDecimal128ExtendedJsonSerializer
 import org.litote.kmongo.jackson.ExtendedJsonModule.MaxKeyExtendedJsonSerializer
 import org.litote.kmongo.jackson.ExtendedJsonModule.MinKeyExtendedJsonSerializer
 import org.litote.kmongo.jackson.ExtendedJsonModule.ObjectIdExtendedJsonSerializer
@@ -522,6 +524,30 @@ internal class BsonModule(uuidRepresentation: UuidRepresentation? = null) : Simp
         }
     }
 
+    private object DriverDecimal128BsonSerializer : ValueSerializer<DriverDecimal128>() {
+
+        override fun serialize(decimal: DriverDecimal128, generator: JsonGenerator, provider: SerializationContext) {
+            if (generator is KMongoBsonGenerator) {
+                generator.writeDecimal128(decimal)
+            } else {
+                DriverDecimal128ExtendedJsonSerializer.serialize(decimal, generator, provider)
+            }
+        }
+    }
+
+    private object DriverDecimal128BsonDeserializer : ValueDeserializer<DriverDecimal128>() {
+
+        override fun deserialize(jp: JsonParser, ctxt: DeserializationContext): DriverDecimal128 {
+            val embedded = if (jp.currentToken() == JsonToken.VALUE_EMBEDDED_OBJECT) jp.embeddedObject else null
+            return if (embedded is Decimal128) {
+                // keeps the exact value: NaN, the infinities and -0 have no BigDecimal representation
+                DriverDecimal128.fromIEEE754BIDEncoding(embedded.high, embedded.low)
+            } else {
+                DriverDecimal128(BigDecimalBsonDeserializer.deserialize(jp, ctxt))
+            }
+        }
+    }
+
     private object KPropertySerializer : ValueSerializer<KProperty<*>>() {
 
         override fun serialize(property: KProperty<*>, generator: JsonGenerator, provider: SerializationContext) {
@@ -607,6 +633,8 @@ internal class BsonModule(uuidRepresentation: UuidRepresentation? = null) : Simp
         addDeserializer(BigDecimal::class.java, BigDecimalBsonDeserializer)
         addSerializer(Decimal128::class.java, Decimal128BsonSerializer)
         addDeserializer(Decimal128::class.java, Decimal128BsonDeserializer)
+        addSerializer(DriverDecimal128::class.java, DriverDecimal128BsonSerializer)
+        addDeserializer(DriverDecimal128::class.java, DriverDecimal128BsonDeserializer)
 
         addSerializer(Id::class.java, IdBsonSerializer)
         addDeserializer(Id::class.java, IdBsonDeserializer)

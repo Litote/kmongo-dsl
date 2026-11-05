@@ -409,6 +409,39 @@ public object ObjectIdSerializer : KSerializer<ObjectId> {
     }
 }
 
+private fun BsonValue.toBigDecimal(): BigDecimal =
+    when (this) {
+        is BsonDecimal128 -> value.bigDecimalValue()
+        is BsonDouble -> BigDecimal.valueOf(value)
+        is BsonInt32 -> BigDecimal(value)
+        is BsonInt64 -> BigDecimal(value)
+        is BsonString -> BigDecimal(value)
+        else -> throw SerializationException("Unsupported $bsonType reading BigDecimal")
+    }
+
+/**
+ * [Decimal128] serializer.
+ */
+internal object Decimal128Serializer : KSerializer<Decimal128> {
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("Decimal128Serializer", PrimitiveKind.STRING)
+
+    override fun deserialize(decoder: Decoder): Decimal128 =
+        when (decoder) {
+            is BsonDecoder -> decoder.decodeBsonValue().let {
+                // keeps the exact value: NaN, the infinities and -0 have no BigDecimal representation
+                if (it is BsonDecimal128) it.value else Decimal128(it.toBigDecimal())
+            }
+            else -> Decimal128.parse(decoder.decodeString())
+        }
+
+    override fun serialize(encoder: Encoder, value: Decimal128) {
+        when (encoder) {
+            is BsonEncoder -> encoder.encodeBsonValue(BsonDecimal128(value))
+            else -> encoder.encodeString(value.toString())
+        }
+    }
+}
+
 /**
  * [BigDecimal] serializer (Decimal128 in BSON).
  */
@@ -419,16 +452,6 @@ public object BigDecimalSerializer : KSerializer<BigDecimal> {
         when (decoder) {
             is BsonDecoder -> decoder.decodeBsonValue().toBigDecimal()
             else -> BigDecimal(decoder.decodeString())
-        }
-
-    private fun BsonValue.toBigDecimal(): BigDecimal =
-        when (this) {
-            is BsonDecimal128 -> value.bigDecimalValue()
-            is BsonDouble -> BigDecimal.valueOf(value)
-            is BsonInt32 -> BigDecimal(value)
-            is BsonInt64 -> BigDecimal(value)
-            is BsonString -> BigDecimal(value)
-            else -> throw SerializationException("Unsupported $bsonType reading BigDecimal")
         }
 
     override fun serialize(encoder: Encoder, value: BigDecimal) {

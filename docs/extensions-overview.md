@@ -381,6 +381,9 @@ you can drop index, based on their keys:
 col.dropIndexOfKeys("{'id':1,'type':1}")
 ```
 
+Do not use `dropIndex` with these keys: `col.dropIndex("{'id':1,'type':1}")` calls the driver function, which takes the
+name of the index, and fails with an `IndexNotFound` error.
+
 ## MongoIterable
 
 The `MongoIterable` of the official Kotlin sync driver is not a Kotlin `Iterable`: its `cursor()` must be closed

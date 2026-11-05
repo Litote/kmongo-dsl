@@ -33,6 +33,7 @@ import kotlinx.serialization.modules.overwriteWith
 import kotlinx.serialization.serializer
 import kotlinx.serialization.serializerOrNull
 import org.bson.BsonTimestamp
+import org.bson.types.Decimal128
 import org.bson.types.Binary
 import org.bson.types.ObjectId
 import org.litote.kmongo.Id
@@ -111,6 +112,7 @@ internal object KMongoSerializationRepository {
     private val serializersMap: Map<KClass<*>, KSerializer<*>> = mapOf(
         ObjectId::class to ObjectIdSerializer,
         BigDecimal::class to BigDecimalSerializer,
+        Decimal128::class to Decimal128Serializer,
         ByteArray::class to ByteArrayAsBsonBinary,
         Date::class to DateSerializer,
         Calendar::class to CalendarSerializer,

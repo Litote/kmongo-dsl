@@ -28,6 +28,7 @@ import de.undercouch.bson4jackson.io.ByteOrderUtil
 import de.undercouch.bson4jackson.types.Timestamp
 import org.bson.BsonTimestamp
 import org.bson.types.Binary
+import org.bson.types.Decimal128 as DriverDecimal128
 import org.bson.types.ObjectId
 import org.litote.kmongo.jackson.BsonModule.KMongoObjectId
 import java.io.InputStream
@@ -95,6 +96,15 @@ internal class KMongoBsonFactory : BsonFactory() {
             _buffer.putByte(_typeMarker, BsonConstants.TYPE_TIMESTAMP)
             _buffer.putInt(timestamp.getInc())
             _buffer.putInt(timestamp.getTime())
+            flushBuffer()
+        }
+
+        fun writeDecimal128(decimal: DriverDecimal128) {
+            _writeArrayFieldNameIfNeeded()
+            _verifyValueWrite("write decimal128")
+            _buffer.putByte(_typeMarker, BsonConstants.TYPE_DECIMAL128)
+            _buffer.putLong(decimal.low)
+            _buffer.putLong(decimal.high)
             flushBuffer()
         }
 

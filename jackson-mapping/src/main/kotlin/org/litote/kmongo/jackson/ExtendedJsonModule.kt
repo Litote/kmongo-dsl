@@ -26,6 +26,7 @@ import kotlinx.datetime.atDate
 import kotlinx.datetime.atStartOfDayIn
 import kotlinx.datetime.toInstant
 import org.bson.BsonTimestamp
+import org.bson.types.Decimal128 as DriverDecimal128
 import org.bson.types.Binary
 import org.bson.types.MaxKey
 import org.bson.types.MinKey
@@ -236,6 +237,15 @@ internal class ExtendedJsonModule : SimpleModule() {
         context.appendAnnotationIntrospector(KMongoAnnotationIntrospector.INTROSPECTOR)
     }
 
+    object DriverDecimal128ExtendedJsonSerializer : ValueSerializer<DriverDecimal128>() {
+
+        override fun serialize(decimal: DriverDecimal128, generator: JsonGenerator, provider: SerializationContext) {
+            generator.writeStartObject()
+            generator.writeStringProperty("\$numberDecimal", decimal.toString())
+            generator.writeEndObject()
+        }
+    }
+
     init {
         addSerializer(ObjectId::class.java, ObjectIdExtendedJsonSerializer)
         addSerializer(Binary::class.java, BinaryExtendedJsonSerializer)
@@ -243,6 +253,7 @@ internal class ExtendedJsonModule : SimpleModule() {
         addSerializer(MaxKey::class.java, MaxKeyExtendedJsonSerializer)
         addSerializer(MinKey::class.java, MinKeyExtendedJsonSerializer)
         addSerializer(BigDecimal::class.java, BigDecimalSerializer)
+        addSerializer(DriverDecimal128::class.java, DriverDecimal128ExtendedJsonSerializer)
 
         addSerializer(Id::class.java, IdSerializer)
         addKeySerializer(Id::class.java, IdKeySerializer())
