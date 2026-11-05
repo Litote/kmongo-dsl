@@ -13,6 +13,10 @@ on:
       - "requirements-docs.txt"
       - "tools/build-docs.sh"
       - "**/src/main/**"
+      - "gradle/**"
+      - "build-logic/**"
+      - "build.gradle.kts"
+      - "settings.gradle.kts"
       - ".github/workflows/docs.yml"
   # the site is also built (mkdocs build --strict: broken links...) on the pull requests, without deployment
   pull_request:
@@ -23,6 +27,10 @@ on:
       - "requirements-docs.txt"
       - "tools/build-docs.sh"
       - "**/src/main/**"
+      - "gradle/**"
+      - "build-logic/**"
+      - "build.gradle.kts"
+      - "settings.gradle.kts"
       - ".github/workflows/docs.yml"
   workflow_dispatch:
 
