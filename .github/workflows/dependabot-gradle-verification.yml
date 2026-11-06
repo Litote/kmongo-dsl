@@ -12,8 +12,8 @@ jobs:
     # the author of the pull request, not github.actor (the last user who triggered the event: forgeable)
     if: github.event.pull_request.user.login == 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository
     permissions:
-      contents: write
-    uses: Litote/ci/.github/workflows/gradle-verification.yml@3f4cc1e08fdf4fa3c66a8e2c6a1e46c5992a708c # v0.7.0
+      contents: read
+    uses: Litote/ci/.github/workflows/gradle-verification.yml@5f7a96295fbcd88179faba3ac78685a78b7b6c84 # v0.8.1
     with:
       java-version: '17'
       # the tasks run by the CI (the same as the ones used to generate the file)

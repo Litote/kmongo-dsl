@@ -28,7 +28,7 @@ jobs:
       release_created: ${{ steps.release-please.outputs.release_created }}
       tag_name: ${{ steps.release-please.outputs.tag_name }}
     steps:
-      - uses: Litote/ci/.github/actions/release-please@3f4cc1e08fdf4fa3c66a8e2c6a1e46c5992a708c # v0.7.0
+      - uses: Litote/ci/.github/actions/release-please@5f7a96295fbcd88179faba3ac78685a78b7b6c84 # v0.8.1
         id: release-please
         if: github.event_name == 'push'
         with:
@@ -50,7 +50,7 @@ jobs:
           fetch-depth: 0
           ref: ${{ needs.release-please.outputs.tag_name || inputs.tag }}
 
-      - uses: Litote/ci/.github/actions/setup-gradle@3f4cc1e08fdf4fa3c66a8e2c6a1e46c5992a708c # v0.7.0
+      - uses: Litote/ci/.github/actions/setup-gradle@5f7a96295fbcd88179faba3ac78685a78b7b6c84 # v0.8.1
         with:
           java-version: '17'
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
@@ -59,11 +59,11 @@ jobs:
         run: ./gradlew build dokkaGenerate
 
       # Fails if the quality gate is not OK, so nothing is published
-      - uses: Litote/ci/.github/actions/sonar-gradle@3f4cc1e08fdf4fa3c66a8e2c6a1e46c5992a708c # v0.7.0
+      - uses: Litote/ci/.github/actions/sonar-gradle@5f7a96295fbcd88179faba3ac78685a78b7b6c84 # v0.8.1
         with:
           sonar-token: ${{ secrets.SONAR_TOKEN }}
 
-      - uses: Litote/ci/.github/actions/maven-central-publish@3f4cc1e08fdf4fa3c66a8e2c6a1e46c5992a708c # v0.7.0
+      - uses: Litote/ci/.github/actions/maven-central-publish@5f7a96295fbcd88179faba3ac78685a78b7b6c84 # v0.8.1
         with:
           maven-central-username: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
