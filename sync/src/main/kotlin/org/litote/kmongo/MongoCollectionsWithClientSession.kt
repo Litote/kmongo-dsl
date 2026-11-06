@@ -802,21 +802,6 @@ public inline fun <reified TResult : Any> MongoCollection<*>.listIndexes(clientS
 public inline fun <reified TResult : Any> MongoCollection<*>.listTypedIndexes(clientSession: ClientSession): ListIndexesIterable<TResult> =
     listIndexes(clientSession, TResult::class.java)
 
-
-/**
- * Drops the index given the keys used to create it.
- *
- * @param clientSession the client session with which to associate this operation
- * @param keys the keys of the index to remove
- */
-@Deprecated(
-    "kmongo-dsl: shadowed by the driver dropIndex(clientSession, indexName), which is the one called from Kotlin",
-    ReplaceWith("dropIndexOfKeys(clientSession, keys)"),
-)
-@Suppress("EXTENSION_SHADOWED_BY_MEMBER")
-public fun <T : Any> MongoCollection<T>.dropIndex(clientSession: ClientSession, keys: String): Unit =
-    dropIndexOfKeys(clientSession, keys)
-
 /**
  * Drops the index given the keys used to create it.
  *
