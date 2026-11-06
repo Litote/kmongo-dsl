@@ -24,7 +24,7 @@ It brings the [KMongo](https://litote.org/kmongo/) features that the official dr
 KMongo DSL does **not** wrap the driver: you use the official `MongoClient` / `MongoCollection` classes,
 KMongo DSL adds extension functions in the KMongo packages (`org.litote.kmongo`, `org.litote.kmongo.coroutine`).
 
-Documentation: **https://litote.github.io/kmongo-dsl/** (sources in [docs](docs), built with `tools/build-docs.sh`).
+Documentation: **https://kmongo-dsl.litote.org/** (sources in [docs](docs), built with `tools/build-docs.sh`).
 
 Migrating from KMongo? Read the [migration guide](docs/migration-kmongo-to-kmongo-dsl.md)
 and run [`tools/kmongo-dsl-migration-check.sh`](tools/kmongo-dsl-migration-check.sh) on your project. Changes: [CHANGELOG](CHANGELOG.md).

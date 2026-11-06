@@ -1,7 +1,7 @@
 site_name: 'KMongo DSL'
 site_description: 'KMongo DSL: the Kotlin toolkit for the official MongoDB drivers'
 site_author: 'litote.org'
-site_url: 'https://litote.github.io/kmongo-dsl/'
+site_url: 'https://kmongo-dsl.litote.org/'
 repo_name: 'Litote/kmongo-dsl'
 repo_url: 'https://github.com/Litote/kmongo-dsl'
 edit_uri: 'edit/main/docs/'

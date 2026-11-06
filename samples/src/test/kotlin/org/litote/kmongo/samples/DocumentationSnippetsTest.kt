@@ -60,7 +60,7 @@ data class DocFriendWithNameOnly(val name: String)
 
 /**
  * The (sync) code samples of the KMongo documentation (https://litote.org/kmongo/), compiled and run with kmongo-dsl:
- * they are the samples of the KMongo DSL documentation (docs directory, https://litote.github.io/kmongo-dsl/),
+ * they are the samples of the KMongo DSL documentation (docs directory, https://kmongo-dsl.litote.org/),
  * where the differences commented with "kmongo-dsl:" are fixed.
  */
 @Tag("jackson")
