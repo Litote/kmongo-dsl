@@ -15,7 +15,7 @@ jobs:
     if: github.event_name == 'pull_request'
     permissions:
       pull-requests: read
-    uses: Litote/ci/.github/workflows/pr-title.yml@3f4cc1e08fdf4fa3c66a8e2c6a1e46c5992a708c # v0.7.0
+    uses: Litote/ci/.github/workflows/pr-title.yml@5f7a96295fbcd88179faba3ac78685a78b7b6c84 # v0.8.1
 
   # Full check (build, Spotless, ABI, Dokka, Maven sample, migration tooling, SonarCloud, snapshot)
   # with the latest MongoDB server on JDK 17
@@ -35,12 +35,12 @@ jobs:
           fetch-depth: 0
 
       # the Gradle toolchain is JDK 17: no toolchain download
-      - uses: Litote/ci/.github/actions/setup-gradle@3f4cc1e08fdf4fa3c66a8e2c6a1e46c5992a708c # v0.7.0
+      - uses: Litote/ci/.github/actions/setup-gradle@5f7a96295fbcd88179faba3ac78685a78b7b6c84 # v0.8.1
         with:
           java-version: '17'
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
-      - uses: Litote/ci/.github/actions/detect-changes@3f4cc1e08fdf4fa3c66a8e2c6a1e46c5992a708c # v0.7.0
+      - uses: Litote/ci/.github/actions/detect-changes@5f7a96295fbcd88179faba3ac78685a78b7b6c84 # v0.8.1
         id: detect-changes
         with:
           pattern: '\.(kt|kts|gradle|yml|yaml|toml|xml|sh|properties|api)$'
@@ -79,7 +79,7 @@ jobs:
           tools/test/kmongo-dsl-migration-check-test.sh
 
       # SonarCloud (https://sonarcloud.io/organizations/litote/projects): skipped without the SONAR_TOKEN secret
-      - uses: Litote/ci/.github/actions/sonar-gradle@3f4cc1e08fdf4fa3c66a8e2c6a1e46c5992a708c # v0.7.0
+      - uses: Litote/ci/.github/actions/sonar-gradle@5f7a96295fbcd88179faba3ac78685a78b7b6c84 # v0.8.1
         if: steps.detect-changes.outputs.has-code-changes == 'true'
         with:
           sonar-token: ${{ secrets.SONAR_TOKEN }}
@@ -92,7 +92,7 @@ jobs:
 
       - name: Publish SNAPSHOT to Maven Central
         if: github.event_name == 'push' && steps.version.outputs.snapshot == 'true' && steps.detect-changes.outputs.has-code-changes == 'true'
-        uses: Litote/ci/.github/actions/maven-central-publish@3f4cc1e08fdf4fa3c66a8e2c6a1e46c5992a708c # v0.7.0
+        uses: Litote/ci/.github/actions/maven-central-publish@5f7a96295fbcd88179faba3ac78685a78b7b6c84 # v0.8.1
         with:
           gradle-args: publishToMavenCentral
           maven-central-username: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
@@ -133,7 +133,7 @@ jobs:
           persist-credentials: false
 
       # the test JDK, then JDK 17 (the last one is the JAVA_HOME running Gradle); the check job writes the Gradle cache
-      - uses: Litote/ci/.github/actions/setup-gradle@3f4cc1e08fdf4fa3c66a8e2c6a1e46c5992a708c # v0.7.0
+      - uses: Litote/ci/.github/actions/setup-gradle@5f7a96295fbcd88179faba3ac78685a78b7b6c84 # v0.8.1
         with:
           java-version: |
             ${{ matrix.java }}
