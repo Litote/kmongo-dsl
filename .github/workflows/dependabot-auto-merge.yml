@@ -16,8 +16,18 @@ jobs:
     uses: Litote/ci/.github/workflows/dependabot-auto-merge.yml@5f7a96295fbcd88179faba3ac78685a78b7b6c84 # v0.8.1
     with:
       ecosystems: gradle
-      # the minor version of the MongoDB driver sets the kmongo-dsl version, see CONTRIBUTING.md
-      exclude-dependencies: org.mongodb:*
+      # Gradle plugins and the build tools run in the build without being called: they stay manual.
+      exclude-dependencies: >-
+        org.mongodb:*,
+        org.jetbrains.kotlin.*,
+        com.diffplug.spotless*,
+        com.google.devtools.ksp*,
+        org.gradle.toolchains.foojay-resolver-convention*,
+        org.sonarqube*,
+        kotlin,
+        ksp,
+        sonarqube,
+        spotless
     secrets:
       RELEASE_PLEASE_APP_ID: ${{ secrets.RELEASE_PLEASE_APP_ID }}
       RELEASE_PLEASE_APP_PRIVATE_KEY: ${{ secrets.RELEASE_PLEASE_APP_PRIVATE_KEY }}
