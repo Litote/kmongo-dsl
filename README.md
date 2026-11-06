@@ -2,8 +2,15 @@
 
 [![CI](https://github.com/Litote/kmongo-dsl/actions/workflows/ci.yml/badge.svg)](https://github.com/Litote/kmongo-dsl/actions/workflows/ci.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/org.litote.kmongo/kmongo-dsl-core)](https://central.sonatype.com/artifact/org.litote.kmongo/kmongo-dsl-core)
+[![KDoc](https://img.shields.io/badge/KDoc-API_Reference-blue)](https://kmongo-dsl.litote.org/api/)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Litote_kmongo-dsl&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Litote_kmongo-dsl)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Litote_kmongo-dsl&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Litote_kmongo-dsl)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Litote_kmongo-dsl&metric=bugs)](https://sonarcloud.io/summary/new_code?id=Litote_kmongo-dsl)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=Litote_kmongo-dsl&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=Litote_kmongo-dsl)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=Litote_kmongo-dsl&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=Litote_kmongo-dsl)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Litote_kmongo-dsl&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Litote_kmongo-dsl)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=Litote_kmongo-dsl&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=Litote_kmongo-dsl)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Litote_kmongo-dsl&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=Litote_kmongo-dsl)
 [![Apache2 license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
 
 **KMongo DSL** is the Kotlin glue on top of the **official MongoDB Kotlin drivers**
