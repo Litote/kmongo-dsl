@@ -1,7 +1,7 @@
 name: Docs
 
 # Publishes the documentation site (MkDocs pages of docs/ + Dokka API documentation) on GitHub Pages:
-# https://litote.github.io/kmongo-dsl/
+# https://kmongo-dsl.litote.org/
 # Requires GitHub Pages with the "GitHub Actions" source (Settings > Pages).
 
 on:
