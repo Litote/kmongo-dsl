@@ -39,7 +39,7 @@ tools/build-docs.sh
 
 # SonarCloud (systemProp.sonar.token=<token> in ~/.gradle/gradle.properties)
 # `sonar` waits for the quality gate and fails if it is not OK
-./gradlew build jacocoAggregatedReport sonar
+./gradlew build jacocoAggregatedReport sonar -Dsonar.branch.name=$(git branch --show-current)
 ```
 
 ## What `./gradlew build` checks

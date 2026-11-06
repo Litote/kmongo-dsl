@@ -90,8 +90,9 @@ jobs:
         id: version
         run: echo "snapshot=$(grep -q '^version=.*-SNAPSHOT$' gradle.properties && echo true || echo false)" >> "$GITHUB_OUTPUT"
 
+      # Not on a Dependabot commit: a dependency merged without a review does not reach the publication credentials at once
       - name: Publish SNAPSHOT to Maven Central
-        if: github.event_name == 'push' && steps.version.outputs.snapshot == 'true' && steps.detect-changes.outputs.has-code-changes == 'true'
+        if: github.event_name == 'push' && steps.version.outputs.snapshot == 'true' && steps.detect-changes.outputs.has-code-changes == 'true' && github.event.head_commit.author.name != 'dependabot[bot]'
         uses: Litote/ci/.github/actions/maven-central-publish@5f7a96295fbcd88179faba3ac78685a78b7b6c84 # v0.8.1
         with:
           gradle-args: publishToMavenCentral
