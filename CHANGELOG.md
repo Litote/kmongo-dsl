@@ -1,5 +1,14 @@
 # Changelog
 
+## [5.14.1](https://github.com/Litote/kmongo-dsl/compare/v5.14.0...v5.14.1) (2026-11-13)
+
+
+### Documentation
+
+* add the KDoc and SonarCloud badges to the README ([#17](https://github.com/Litote/kmongo-dsl/issues/17)) ([d3ebd3d](https://github.com/Litote/kmongo-dsl/commit/d3ebd3dea5a42806161bfad318332477b6c9ed5c))
+* document the Decimal128 format change in the migration guide ([#11](https://github.com/Litote/kmongo-dsl/issues/11)) ([ebb0ac7](https://github.com/Litote/kmongo-dsl/commit/ebb0ac7a7dd471fca5fd82e314bc577c2a933703))
+* move the documentation site to kmongo-dsl.litote.org ([#16](https://github.com/Litote/kmongo-dsl/issues/16)) ([76a5f7c](https://github.com/Litote/kmongo-dsl/commit/76a5f7c484708d670b8667b6b71c8e4185493df6))
+
 ## 5.14.0 (2026-11-05)
 
 First KMongo DSL version: KMongo on top of the official MongoDB Kotlin drivers.
