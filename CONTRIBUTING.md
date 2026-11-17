@@ -111,8 +111,13 @@ Releases are made by [release-please](https://github.com/googleapis/release-plea
 
 Each release bumps the patch version (`"versioning": "always-bump-patch"`, whatever the commit types). After an
 upgrade of the MongoDB driver to a new minor version, set the next version with `"release-as": "<driver version>"`
-in `release-please-config.json` (and remove it after the release), and update the version in `docs/`:
-release-please does not manage these files, as the snapshot PR would write its `-SNAPSHOT` version in the documentation.
+in `release-please-config.json` (and remove it after the release).
+
+The documentation pages write the kmongo-dsl version as `{{ kmongo_dsl_version }}`: the MkDocs hook
+`tools/mkdocs_hooks.py` replaces it by the last released version, read from `.release-please-manifest.json`
+(updated by the release PR only), and the site is deployed again after each release. Never write a kmongo-dsl
+version by hand in `docs/`: release-please can not update these files, as the snapshot PR would write its
+`-SNAPSHOT` version in the documentation.
 
 The `main` snapshots are published on Maven Central by the CI. Never publish manually.
 

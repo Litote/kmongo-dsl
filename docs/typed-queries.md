@@ -314,11 +314,11 @@ plugins {
 }
 
 dependencies {
-    ksp("org.litote.kmongo:kmongo-dsl-ksp:5.14.0")
+    ksp("org.litote.kmongo:kmongo-dsl-ksp:{{ kmongo_dsl_version }}")
 }
 ```
 
-The `kotlin-kapt` Gradle plugin also works with `kapt("org.litote.kmongo:kmongo-dsl-annotation-processor:5.14.0")`.
+The `kotlin-kapt` Gradle plugin also works with `kapt("org.litote.kmongo:kmongo-dsl-annotation-processor:{{ kmongo_dsl_version }}")`.
 
 - for Maven (KAPT)
 

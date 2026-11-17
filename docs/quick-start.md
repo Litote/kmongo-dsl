@@ -26,7 +26,7 @@ If you don't know, start with the sync flavor and the Jackson mapping:
     <dependency>
       <groupId>org.litote.kmongo</groupId>
       <artifactId>kmongo-dsl-bom</artifactId>
-      <version>5.14.0</version>
+      <version>{{ kmongo_dsl_version }}</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -45,17 +45,17 @@ If you don't know, start with the sync flavor and the Jackson mapping:
 
 *(Kotlin)*
 ```kotlin
-implementation(platform("org.litote.kmongo:kmongo-dsl-bom:5.14.0"))
+implementation(platform("org.litote.kmongo:kmongo-dsl-bom:{{ kmongo_dsl_version }}"))
 implementation("org.litote.kmongo:kmongo-dsl-sync-jackson")
 ```
 *(Groovy)*
 ```groovy
-implementation platform('org.litote.kmongo:kmongo-dsl-bom:5.14.0')
+implementation platform('org.litote.kmongo:kmongo-dsl-bom:{{ kmongo_dsl_version }}')
 implementation 'org.litote.kmongo:kmongo-dsl-sync-jackson'
 ```
 
 The BOM (`kmongo-dsl-bom`) aligns the versions of the KMongo DSL artifacts and of the MongoDB driver.
-The KMongo DSL version follows the version of the MongoDB Kotlin driver it is built on (5.14.0: driver 5.14.0).
+The KMongo DSL version follows the version of the MongoDB Kotlin driver it is built on (5.14.x: driver 5.14).
 
 Latest version: [![Maven Central](https://img.shields.io/maven-central/v/org.litote.kmongo/kmongo-dsl-core)](https://central.sonatype.com/artifact/org.litote.kmongo/kmongo-dsl-core)
 
@@ -70,7 +70,7 @@ or `kmongo-dsl-coroutine-serialization` (kotlinx.serialization mapping).
 
 *(Kotlin)*
 ```kotlin
-implementation(platform("org.litote.kmongo:kmongo-dsl-bom:5.14.0"))
+implementation(platform("org.litote.kmongo:kmongo-dsl-bom:{{ kmongo_dsl_version }}"))
 implementation("org.litote.kmongo:kmongo-dsl-coroutine-serialization")
 ```
 
