@@ -36,7 +36,9 @@ KMongo DSL adds extension functions in the KMongo packages (`org.litote.kmongo`,
 ```kotlin
 import org.litote.kmongo.* // the KMongo DSL extensions
 
+@Serializable
 data class Address(val city: String)
+@Serializable
 data class Hero(val name: String, val age: Int, val address: Address)
 
 val client = KMongo.createClient() // the official com.mongodb.kotlin.client.MongoClient
@@ -59,11 +61,17 @@ col.updateOne(Filters.eq("name", "Batman"), Updates.set("age", 41))
 ## Install
 
 ```kotlin
-implementation(platform("org.litote.kmongo:kmongo-dsl-bom:<version>")) // latest: see the Maven Central badge
-implementation("org.litote.kmongo:kmongo-dsl-sync-jackson")
+plugins {
+    kotlin("plugin.serialization") version "<kotlin version>" // the kotlinx.serialization compiler plugin
+}
+
+dependencies {
+    implementation(platform("org.litote.kmongo:kmongo-dsl-bom:<version>")) // latest: see the Maven Central badge
+    implementation("org.litote.kmongo:kmongo-dsl-sync-serialization")
+}
 ```
 
-Coroutine flavor, kotlinx.serialization mapping, Maven: see the [Quick Start](https://kmongo-dsl.litote.org/quick-start/).
+Coroutine flavor, Jackson mapping (no compiler plugin, no annotation), Maven: see the [Quick Start](https://kmongo-dsl.litote.org/quick-start/).
 
 Requirements: JDK 17+, Kotlin 2.4+, MongoDB Kotlin driver 5.14+, MongoDB server 5.0+.
 
