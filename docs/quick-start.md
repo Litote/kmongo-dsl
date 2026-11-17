@@ -16,7 +16,7 @@ The `kmongo-dsl-<flavor>-<mapping>` artifacts bring both:
 | sync      | `kmongo-dsl-sync-jackson`      | `kmongo-dsl-sync-serialization`      |
 | coroutine | `kmongo-dsl-coroutine-jackson` | `kmongo-dsl-coroutine-serialization` |
 
-If you don't know, start with the sync flavor and the Jackson mapping:
+If you don't know, start with the coroutine flavor and the serialization mapping:
 
 - with Maven
 
@@ -36,7 +36,7 @@ If you don't know, start with the sync flavor and the Jackson mapping:
 <dependencies>
   <dependency>
     <groupId>org.litote.kmongo</groupId>
-    <artifactId>kmongo-dsl-sync-jackson</artifactId>
+    <artifactId>kmongo-dsl-coroutine-serialization</artifactId>
   </dependency>
 </dependencies>
 ```
@@ -46,12 +46,12 @@ If you don't know, start with the sync flavor and the Jackson mapping:
 *(Kotlin)*
 ```kotlin
 implementation(platform("org.litote.kmongo:kmongo-dsl-bom:{{ kmongo_dsl_version }}"))
-implementation("org.litote.kmongo:kmongo-dsl-sync-jackson")
+implementation("org.litote.kmongo:kmongo-dsl-coroutine-serialization")
 ```
 *(Groovy)*
 ```groovy
 implementation platform('org.litote.kmongo:kmongo-dsl-bom:{{ kmongo_dsl_version }}')
-implementation 'org.litote.kmongo:kmongo-dsl-sync-jackson'
+implementation 'org.litote.kmongo:kmongo-dsl-coroutine-serialization'
 ```
 
 The BOM (`kmongo-dsl-bom`) aligns the versions of the KMongo DSL artifacts and of the MongoDB driver.
@@ -61,17 +61,22 @@ Latest version: [![Maven Central](https://img.shields.io/maven-central/v/org.lit
 
 > Requirements: JDK 17+, Kotlin 2.4+, MongoDB server 5.0+.
 
-And [start coding](#lets-start-coding).
+The kotlinx.serialization mapping also needs the kotlinx.serialization compiler plugin
+and the `@Serializable` annotation on the persisted classes:
+see [With kotlinx.serialization](#with-kotlinxserialization). Then [start coding](#lets-start-coding).
 
-### Coroutine flavor
+### Other flavors and mappings
 
-Replace `kmongo-dsl-sync-jackson` by `kmongo-dsl-coroutine-jackson` (Jackson mapping)
-or `kmongo-dsl-coroutine-serialization` (kotlinx.serialization mapping).
+Replace `kmongo-dsl-coroutine-serialization` by the artifact of your choice in the table above:
+
+- `kmongo-dsl-sync-serialization` for the sync flavor
+- `kmongo-dsl-coroutine-jackson` for the Jackson mapping (no compiler plugin, no annotation needed)
+- `kmongo-dsl-sync-jackson` for both
 
 *(Kotlin)*
 ```kotlin
 implementation(platform("org.litote.kmongo:kmongo-dsl-bom:{{ kmongo_dsl_version }}"))
-implementation("org.litote.kmongo:kmongo-dsl-coroutine-serialization")
+implementation("org.litote.kmongo:kmongo-dsl-sync-jackson")
 ```
 
 ### Reactive streams, Reactor, RxJava
@@ -81,25 +86,8 @@ The official Kotlin drivers are sync and coroutine only: use the coroutine flavo
 
 ## Let's Start Coding
 
-### With the sync driver
-
-```kotlin
-import org.litote.kmongo.* // NEEDED! import KMongo DSL extensions
-
-data class Jedi(val name: String, val age: Int)
-
-val client = KMongo.createClient() // official com.mongodb.kotlin.client.MongoClient
-val database = client.getDatabase("test") // official driver usage
-val col = database.getCollection<Jedi>() // KMongo DSL extension method
-// here the name of the collection by convention is "jedi"
-// you can use getCollection<Jedi>("otherjedi") if the collection name is different
-
-col.insertOne(Jedi("Luke Skywalker", 19))
-
-val yoda: Jedi? = col.findOne(Jedi::name eq "Yoda")
-
-(...)
-```
+The first two samples use the Jackson mapping. With the kotlinx.serialization mapping,
+annotate the classes with `@Serializable`: see [With kotlinx.serialization](#with-kotlinxserialization).
 
 ### With coroutines
 
@@ -124,6 +112,26 @@ runBlocking {
 
 If both the sync and the coroutine flavors are in the classpath, import `KMongo` explicitly
 (`import org.litote.kmongo.coroutine.KMongo`).
+
+### With the sync driver
+
+```kotlin
+import org.litote.kmongo.* // NEEDED! import KMongo DSL extensions
+
+data class Jedi(val name: String, val age: Int)
+
+val client = KMongo.createClient() // official com.mongodb.kotlin.client.MongoClient
+val database = client.getDatabase("test") // official driver usage
+val col = database.getCollection<Jedi>() // KMongo DSL extension method
+// here the name of the collection by convention is "jedi"
+// you can use getCollection<Jedi>("otherjedi") if the collection name is different
+
+col.insertOne(Jedi("Luke Skywalker", 19))
+
+val yoda: Jedi? = col.findOne(Jedi::name eq "Yoda")
+
+(...)
+```
 
 ### With kotlinx.serialization
 
@@ -163,7 +171,8 @@ plugins {
 Then annotate your classes:
 
 ```kotlin
-import org.litote.kmongo.* // NEEDED! import KMongo DSL extensions
+import org.litote.kmongo.* // NEEDED! import the type-safe query DSL
+import org.litote.kmongo.coroutine.* // NEEDED! import KMongo DSL coroutine extensions
 
 @Serializable // you need to annotate each class you want to persist
 data class Jedi(val name: String, val age: Int, val firstAppearance: StarWarsFilm)
@@ -175,17 +184,17 @@ data class StarWarsFilm(
     @Contextual val date: LocalDate
 )
 
-val client = KMongo.createClient() // official com.mongodb.kotlin.client.MongoClient
+val client = KMongo.createClient() // official com.mongodb.kotlin.client.coroutine.MongoClient
 val database = client.getDatabase("test") // official driver usage
 val col = database.getCollection<Jedi>() // KMongo DSL extension method
-// here the name of the collection by convention is "jedi"
-// you can use getCollection<Jedi>("otherjedi") if the collection name is different
 
-col.insertOne(Jedi("Luke Skywalker", 19, StarWarsFilm("A New Hope", LocalDate.of(1977, Month.MAY, 25))))
+runBlocking {
+    col.insertOne(Jedi("Luke Skywalker", 19, StarWarsFilm("A New Hope", LocalDate.of(1977, Month.MAY, 25))))
 
-val yoda: Jedi? = col.findOne(Jedi::name eq "Yoda")
+    val yoda: Jedi? = col.findOne(Jedi::name eq "Yoda")
 
-(...)
+    (...)
+}
 ```
 
 ### Explicit imports
