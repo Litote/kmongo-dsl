@@ -58,6 +58,8 @@ data class DocResult(val _id: String, val count: Int = 0, val averageYear: Doubl
 
 data class DocFriendWithNameOnly(val name: String)
 
+data class DocJedi(val name: String, val age: Int)
+
 /**
  * The (sync) code samples of the KMongo documentation (https://litote.org/kmongo/), compiled and run with kmongo-dsl:
  * they are the samples of the KMongo DSL documentation (docs directory, https://kmongo-dsl.litote.org/),
@@ -229,6 +231,45 @@ class DocumentationSnippetsTest {
         assertNull(col.aggregate<DocFriend>("""[ {$match:{name:{$lt : ${yoda.name!!.json}}}}, {$sample:{size:1}} ]""").firstOrNull())
         assertEquals("{\"\$oid\":\"575b17284ce9b17526c26e46\"}", ObjectId("575b17284ce9b17526c26e46").json)
         assertEquals("[{\$group: {_id: \"\$cust_id\"}}]", "[{\$group: {_id: \"\$ cust_id\"}}]".formatJson())
+    }
+
+    @Test
+    fun `mongo shell queries - multi-dollar interpolation`() {
+        val jedis = database.getCollection<DocJedi>()
+        val orders = database.getCollection<Document>("orders")
+        try {
+            jedis.insertOne(DocJedi("Luke Skywalker", 19))
+            jedis.insertOne("{name:'Yoda',age:896}")
+
+            val yoda = jedis.findOne($$"{name: {$regex: 'Yo.*'}}")!!
+
+            val luke = jedis.aggregate<DocJedi>($$"""
+            [
+              { $match: { age: { $lt: $${yoda.age} } } },
+              { $sample: { size: 1 } }
+            ]
+            """).firstOrNull()
+            assertEquals("Luke Skywalker", luke?.name)
+
+            assertEquals(2, jedis.find($$"{name: {$in: ['Luke Skywalker', 'Yoda']}}").toList().size)
+            assertEquals("Yoda", jedis.findOne($$"{name: $${yoda.name.json}}")?.name)
+
+            orders.insertOne("{cust_id: 'A123', amount: 500, status: 'A'}")
+            orders.insertOne("{cust_id: 'A123', amount: 250, status: 'A'}")
+            orders.insertOne("{cust_id: 'B212', amount: 200, status: 'A'}")
+            orders.insertOne("{cust_id: 'A123', amount: 300, status: 'D'}")
+            val totals = orders.aggregate<Document>($$"""
+            [
+              { $match: { status: "A" } },
+              { $group: { _id: "$cust_id", total: { $sum: "$amount" } } },
+              { $sort: { total: -1 } }
+            ]
+            """).toList()
+            assertEquals(listOf("A123" to 750, "B212" to 200), totals.map { it.getString("_id") to it.getInteger("total") })
+        } finally {
+            jedis.drop()
+            orders.drop()
+        }
     }
 
     @Test
