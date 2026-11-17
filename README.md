@@ -19,13 +19,13 @@
 
 It brings features that the official drivers do not provide:
 
-- a type-safe query DSL: `col.findOne(Hero::address / Address::city eq "Gotham")`
+- a type-safe query DSL: `col.findOne(Jedi::name eq "Yoda")`
 - JSON queries: `col.find("{age: {\$lt: 40}}")`
 - collection helpers: `findOneById`, `save`, `updateOne(entity)`, typed `projection`, `ensureIndex`...
-- default collection names: `database.getCollection<Hero>()`
+- default collection names: `database.getCollection<Jedi>()`
 - `Id<T>` typed ids
 - Jackson and kotlinx.serialization object mappings
-- generated property paths (KSP or KAPT): `Hero_.Address.city`
+- generated property paths (KSP or KAPT): `Friend_.Coordinate.lat`
 - change streams that survive the errors: `col.watchIndefinitely()`
 
 KMongo DSL does **not** wrap the driver: you use the official `MongoClient` / `MongoCollection` classes,
@@ -37,25 +37,22 @@ KMongo DSL adds extension functions in the KMongo packages (`org.litote.kmongo`,
 import org.litote.kmongo.* // the KMongo DSL extensions
 
 @Serializable
-data class Address(val city: String)
-@Serializable
-data class Hero(val name: String, val age: Int, val address: Address)
+data class Jedi(val name: String, val age: Int)
 
 val client = KMongo.createClient() // the official com.mongodb.kotlin.client.MongoClient
-val col = client.getDatabase("test").getCollection<Hero>() // collection "hero"
+val col = client.getDatabase("test").getCollection<Jedi>() // collection "jedi"
 
-col.insertOne(Hero("Batman", 40, Address("Gotham")))
-val batman: Hero? = col.findOne(Hero::address / Address::city eq "Gotham")
-col.updateOne(Hero::name eq "Batman", setValue(Hero::age, 41))
-val heroes: List<Hero> = col.find(Hero::age gt 30).toList()
-```
+col.insertOne(Jedi("Luke Skywalker", 19)) // official driver method
+col.insertOne("{name:'Yoda',age:896}")    // KMongo DSL extension function
 
-With the driver alone, the field names are strings, checked neither by the compiler nor by the IDE refactorings:
+// object mapping & mongo shell query format are supported ->
+val yoda: Jedi? = col.findOne("{name: {\$regex: 'Yo.*'}}")
 
-```kotlin
-val col = client.getDatabase("test").getCollection<Hero>("hero")
-val batman: Hero? = col.find(Filters.eq("address.city", "Gotham")).firstOrNull()
-col.updateOne(Filters.eq("name", "Batman"), Updates.set("age", 41))
+// type-safe query style is recommended for complex apps ->
+val luke = col.aggregate<Jedi>(
+    match(Jedi::age lt yoda?.age),
+    sample(1)
+).firstOrNull()
 ```
 
 ## Install
