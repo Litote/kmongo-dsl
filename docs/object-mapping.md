@@ -129,14 +129,14 @@ You just have to add the `kmongo-dsl-id` dependency in the frontend to compile.
 <dependency>
   <groupId>org.litote.kmongo</groupId>
   <artifactId>kmongo-dsl-id</artifactId>
-  <version>5.14.0</version>
+  <version>{{ kmongo_dsl_version }}</version>
 </dependency>
 ```
 
 - or Gradle
 
 ```kotlin
-implementation("org.litote.kmongo:kmongo-dsl-id:5.14.0")
+implementation("org.litote.kmongo:kmongo-dsl-id:{{ kmongo_dsl_version }}")
 ```
 
 > `kmongo-dsl-id`, `kmongo-dsl-data`, `kmongo-dsl-id-jackson` and `kmongo-dsl-id-serialization` replace the KMongo

@@ -5,6 +5,11 @@
 Available on [GitHub](https://github.com/Litote/kmongo-dsl/releases)
 and in the [CHANGELOG](https://github.com/Litote/kmongo-dsl/blob/main/CHANGELOG.md).
 
+## Support
+
+- questions, ideas, feedback: [GitHub Discussions](https://github.com/Litote/kmongo-dsl/discussions)
+- bugs: [GitHub issues](https://github.com/Litote/kmongo-dsl/issues)
+
 ## Versioning scheme
 
 KMongo DSL follows the MongoDB Kotlin driver versioning.

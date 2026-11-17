@@ -8,3 +8,6 @@ maven-sample/target/
 
 # Dokka API documentation copied by tools/build-docs.sh
 docs/api/
+
+# Python bytecode (tools/mkdocs_hooks.py)
+__pycache__/

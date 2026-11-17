@@ -76,7 +76,7 @@ Use the BOM to align the versions:
 
 ```kotlin
 dependencies {
-    implementation(platform("org.litote.kmongo:kmongo-dsl-bom:5.14.0"))
+    implementation(platform("org.litote.kmongo:kmongo-dsl-bom:{{ kmongo_dsl_version }}"))
     // was org.litote.kmongo:kmongo
     implementation("org.litote.kmongo:kmongo-dsl-sync-jackson")
 }
@@ -90,7 +90,7 @@ Maven:
         <dependency>
             <groupId>org.litote.kmongo</groupId>
             <artifactId>kmongo-dsl-bom</artifactId>
-            <version>5.14.0</version>
+            <version>{{ kmongo_dsl_version }}</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>

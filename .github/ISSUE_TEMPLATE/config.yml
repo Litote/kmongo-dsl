@@ -1,0 +1,9 @@
+# the questions go to GitHub Discussions, the issues are for the bugs and the feature requests
+blank_issues_enabled: true
+contact_links:
+  - name: Question or feedback
+    url: https://github.com/Litote/kmongo-dsl/discussions
+    about: Ask and discuss in GitHub Discussions
+  - name: Documentation
+    url: https://kmongo-dsl.litote.org/
+    about: The KMongo DSL documentation and the KMongo migration guide
