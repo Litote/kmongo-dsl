@@ -25,6 +25,7 @@ import tools.jackson.databind.ser.std.SimpleBeanPropertyFilter
 import tools.jackson.databind.ser.std.SimpleBeanPropertyFilter.SerializeExceptFilter
 import org.bson.BsonDocument
 import org.bson.RawBsonDocument
+import org.bson.codecs.BsonDocumentCodec
 import org.bson.codecs.configuration.CodecRegistries
 import org.bson.codecs.configuration.CodecRegistry
 import org.litote.kmongo.service.ClassMappingTypeService
@@ -61,8 +62,19 @@ internal class JacksonClassMappingTypeService : ClassMappingTypeService {
                 )
                     .writeValueAsBytes(obj)
             }
-        )
+        ).withoutId()
     }
+
+    /**
+     * A custom serializer (a jackson-data generated one for example) writes the properties itself and ignores
+     * the property filter of [filterIdWriter]: the id has to be removed from the document.
+     */
+    private fun RawBsonDocument.withoutId(): BsonDocument =
+        if (containsKey("_id")) {
+            decode(BsonDocumentCodec()).apply { remove("_id") }
+        } else {
+            this
+        }
 
     override fun toExtendedJson(obj: Any?): String {
         return KMongoConfiguration.extendedJsonMapper.writeValueAsString(obj)
