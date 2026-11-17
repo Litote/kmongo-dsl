@@ -16,7 +16,7 @@ The `kmongo-dsl-<flavor>-<mapping>` artifacts bring both:
 | sync      | `kmongo-dsl-sync-jackson`      | `kmongo-dsl-sync-serialization`      |
 | coroutine | `kmongo-dsl-coroutine-jackson` | `kmongo-dsl-coroutine-serialization` |
 
-If you don't know, start with the sync flavor and the Jackson mapping:
+If you don't know, start with the coroutine flavor and the serialization mapping:
 
 - with Maven
 
@@ -36,7 +36,7 @@ If you don't know, start with the sync flavor and the Jackson mapping:
 <dependencies>
   <dependency>
     <groupId>org.litote.kmongo</groupId>
-    <artifactId>kmongo-dsl-sync-jackson</artifactId>
+    <artifactId>kmongo-dsl-coroutine-serialization</artifactId>
   </dependency>
 </dependencies>
 ```
@@ -46,12 +46,12 @@ If you don't know, start with the sync flavor and the Jackson mapping:
 *(Kotlin)*
 ```kotlin
 implementation(platform("org.litote.kmongo:kmongo-dsl-bom:{{ kmongo_dsl_version }}"))
-implementation("org.litote.kmongo:kmongo-dsl-sync-jackson")
+implementation("org.litote.kmongo:kmongo-dsl-coroutine-serialization")
 ```
 *(Groovy)*
 ```groovy
 implementation platform('org.litote.kmongo:kmongo-dsl-bom:{{ kmongo_dsl_version }}')
-implementation 'org.litote.kmongo:kmongo-dsl-sync-jackson'
+implementation 'org.litote.kmongo:kmongo-dsl-coroutine-serialization'
 ```
 
 The BOM (`kmongo-dsl-bom`) aligns the versions of the KMongo DSL artifacts and of the MongoDB driver.
@@ -63,15 +63,15 @@ Latest version: [![Maven Central](https://img.shields.io/maven-central/v/org.lit
 
 And [start coding](#lets-start-coding).
 
-### Coroutine flavor
+### Jackson flavor
 
-Replace `kmongo-dsl-sync-jackson` by `kmongo-dsl-coroutine-jackson` (Jackson mapping)
-or `kmongo-dsl-coroutine-serialization` (kotlinx.serialization mapping).
+Replace `kmongo-dsl-sync-serialization` by `kmongo-dsl-sync-jackson` (Jackson mapping)
+or `kmongo-dsl-coroutine-serialization` by `kmongo-dsl-coroutine-jackson` (Jackson mapping).
 
 *(Kotlin)*
 ```kotlin
 implementation(platform("org.litote.kmongo:kmongo-dsl-bom:{{ kmongo_dsl_version }}"))
-implementation("org.litote.kmongo:kmongo-dsl-coroutine-serialization")
+implementation("org.litote.kmongo:kmongo-dsl-coroutine-jackson")
 ```
 
 ### Reactive streams, Reactor, RxJava

@@ -1,4 +1,4 @@
-# ![KMongo logo](assets/images/kmongo.png) **KMongo DSL** - the Kotlin toolkit for the official MongoDB drivers
+# ![KMongo logo](assets/images/kmongo.png) **KMongo DSL** - a Kotlin toolkit for MongoDB
 
 ```kotlin
 data class Jedi(val name: String, val age: Int)
@@ -15,27 +15,6 @@ val luke = col.aggregate<Jedi>(
     sample(1)
 ).firstOrNull()
 ```
-
-## From KMongo to KMongo DSL
-
-[KMongo](https://litote.org/kmongo/) was created in *2016*, when there was no official MongoDB Kotlin driver.
-Since 2023, MongoDB provides [official Kotlin drivers](https://www.mongodb.com/docs/drivers/kotlin/coroutine/current/)
-(sync and coroutine), and KMongo is deprecated in favor of them.
-
-The official drivers do not provide everything KMongo did - in particular the type-safe query DSL,
-which is [less intuitive](https://www.mongodb.com/docs/drivers/kotlin/coroutine/current/migrate-kmongo/#construct-queries)
-with the driver builders. **KMongo DSL** brings these KMongo features **on top of the official drivers**:
-
-- the [type-safe query DSL](typed-queries.md): `col.findOne(Jedi::name eq "Yoda")`
-- the [mongo shell queries](mongo-shell-support.md): `col.find("{age: {\$lt: 40}}")`
-- the [collection extensions](extensions-overview.md): `findOneById`, `save`, `updateOne(entity)`, typed `projection`, `ensureIndex`...
-- the [object mappings](object-mapping.md): Jackson or kotlinx.serialization, `Id<T>` typed ids
-- the [generated property paths](typed-queries.md#generated-property-paths) (KSP or KAPT): `Friend_.Coordinate.lat`
-- [change streams that survive the errors](extensions-overview.md#change-streams)
-
-KMongo DSL does **not** wrap the driver: you use the official `MongoClient` / `MongoCollection` classes,
-KMongo DSL adds extension functions. The packages are the KMongo ones (`org.litote.kmongo`, `org.litote.kmongo.coroutine`...):
-migrating a KMongo project is mostly a dependency update - see the [migration guide](migration-kmongo-to-kmongo-dsl.md).
 
 ## Native and Lightweight
 
@@ -67,3 +46,24 @@ You can copy/paste your queries from the Mongo shell in your IDE. Write readable
 
 Read the [Quick Start](quick-start.md) (JDK 17+, Kotlin 2.4+, MongoDB server 5.0+),
 or the [migration guide](migration-kmongo-to-kmongo-dsl.md) if you already use KMongo.
+
+## From KMongo to KMongo DSL
+
+[KMongo](https://litote.org/kmongo/) was created in *2016*, when there was no official MongoDB Kotlin driver.
+Since 2023, MongoDB provides [official Kotlin drivers](https://www.mongodb.com/docs/drivers/kotlin/coroutine/current/)
+(sync and coroutine), and KMongo is deprecated in favor of them.
+
+The official drivers do not provide everything KMongo did - in particular the type-safe query DSL,
+which is [less intuitive](https://www.mongodb.com/docs/drivers/kotlin/coroutine/current/migrate-kmongo/#construct-queries)
+with the driver builders. **KMongo DSL** brings these KMongo features **on top of the official drivers**:
+
+- the [type-safe query DSL](typed-queries.md): `col.findOne(Jedi::name eq "Yoda")`
+- the [mongo shell queries](mongo-shell-support.md): `col.find("{age: {\$lt: 40}}")`
+- the [collection extensions](extensions-overview.md): `findOneById`, `save`, `updateOne(entity)`, typed `projection`, `ensureIndex`...
+- the [object mappings](object-mapping.md): Jackson or kotlinx.serialization, `Id<T>` typed ids
+- the [generated property paths](typed-queries.md#generated-property-paths) (KSP or KAPT): `Friend_.Coordinate.lat`
+- [change streams that survive the errors](extensions-overview.md#change-streams)
+
+KMongo DSL does **not** wrap the driver: you use the official `MongoClient` / `MongoCollection` classes,
+KMongo DSL adds extension functions. The packages are the KMongo ones (`org.litote.kmongo`, `org.litote.kmongo.coroutine`...):
+migrating a KMongo project is mostly a dependency update - see the [migration guide](migration-kmongo-to-kmongo-dsl.md).
