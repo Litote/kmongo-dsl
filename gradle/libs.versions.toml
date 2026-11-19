@@ -5,7 +5,7 @@ mongodb = "5.14.0"
 kotlinx-serialization = "1.13.0"
 kotlinx-datetime = "0.8.0-0.6.x-compat"
 kotlinx-coroutines = "1.11.0"
-jackson = "3.2.4"
+jackson = "3.3.0"
 bson4jackson = "3.2.0"
 kotlinpoet = "2.4.0"
 # KMongo 5.12: only used to generate the golden BSON documents (kmongo-dsl-golden) and by the benchmark
