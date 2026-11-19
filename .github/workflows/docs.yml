@@ -10,7 +10,6 @@ on:
     paths:
       - "docs/**"
       - "mkdocs.yml"
-      - "requirements-docs.txt"
       - "tools/build-docs.sh"
       - "tools/mkdocs_hooks.py"
       # updated by the release PR: the version shown in the documentation
@@ -27,7 +26,6 @@ on:
     paths:
       - "docs/**"
       - "mkdocs.yml"
-      - "requirements-docs.txt"
       - "tools/build-docs.sh"
       - "tools/mkdocs_hooks.py"
       # updated by the release PR: the version shown in the documentation
@@ -64,19 +62,10 @@ jobs:
           java-version: '17'
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
-      - name: Set up Python
-        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
-        with:
-          python-version: '3.14'
-          cache: pip
-          cache-dependency-path: requirements-docs.txt
-
-      - name: Install MkDocs
-        run: pip install --only-binary ':all:' --require-hashes -r requirements-docs.txt
+      # MkDocs Material, pinned with hashes in the action (tools/install-docs.sh installs the same versions locally)
+      - uses: Litote/ci/.github/actions/setup-mkdocs@15172a08495ba5ce96b92c224ede2d102174803f # v0.12.0
 
       - name: Build the site
-        env:
-          NO_MKDOCS_2_WARNING: '1'
         run: tools/build-docs.sh
 
       - if: github.event_name != 'pull_request'
