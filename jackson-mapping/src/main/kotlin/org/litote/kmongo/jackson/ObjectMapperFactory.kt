@@ -56,6 +56,14 @@ internal object ObjectMapperFactory {
         init {
             // Jackson 3 writes the language tag: fr-FR instead of fr_FR
             addSerializer(Locale::class.java, ToStringSerializer(Locale::class.java))
+            // since Jackson 3.3, the map keys too
+            addKeySerializer(Locale::class.java, LocaleKeySerializer)
+        }
+    }
+
+    private object LocaleKeySerializer : ValueSerializer<Locale>() {
+        override fun serialize(value: Locale, gen: JsonGenerator, ctxt: SerializationContext) {
+            gen.writeName(value.toString())
         }
     }
 
