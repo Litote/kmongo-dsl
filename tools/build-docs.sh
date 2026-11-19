@@ -3,7 +3,7 @@
 # Builds the documentation site (build/site): the MkDocs pages of docs/ + the Dokka API documentation (api/).
 #
 # Usage: tools/build-docs.sh [--skip-dokka]
-#   requires MkDocs Material: pip install -r requirements-docs.txt
+#   requires MkDocs Material: tools/install-docs.sh
 #   preview: mkdocs serve (after a first build, for the API documentation)
 
 set -euo pipefail

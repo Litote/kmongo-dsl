@@ -5,7 +5,7 @@
 - JDK 17+ (the Gradle toolchain is JDK 17)
 - Docker: the integration tests start a MongoDB server with Testcontainers
 - Maven 3.9+ (optional): the Maven + KAPT sample (`maven-sample`)
-- Python 3 + `pip install -r requirements-docs.txt` (optional): the documentation site
+- Python 3.11+ and `tools/install-docs.sh` (optional): the documentation site
 
 ## Quick reference
 
@@ -34,7 +34,7 @@ mvn -f maven-sample/pom.xml verify
 tools/update-migration-symbols.sh --check
 tools/test/kmongo-dsl-migration-check-test.sh
 
-# the documentation site (build/site)
+# the documentation site (build/site), after tools/install-docs.sh
 tools/build-docs.sh
 
 # SonarCloud (systemProp.sonar.token=<token> in ~/.gradle/gradle.properties)
