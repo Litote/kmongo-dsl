@@ -88,7 +88,10 @@ The script uses an empty Gradle user home: it downloads everything, and needs a 
 The sources, javadoc and `src.zip` artifacts are only downloaded by the IDEs: they are trusted without checksum
 (`trusted-artifacts`). The `.pom` and `.module` files take part in the dependency resolution and stay verified.
 
-The Dependabot pull requests are updated automatically by the `dependabot-gradle-verification` workflow.
+The Dependabot pull requests are updated automatically by the `dependabot-gradle-verification` workflow. It also
+commits the `api/*.api` dumps whose changes only add non abstract members (a new default method of an implemented
+interface, for instance). A removed or changed declaration, or an abstract member, is left to a review: the ABI check
+of the CI fails.
 
 The minor and patch Gradle updates are then approved and merged by the `dependabot-auto-merge` workflow, once the
 required checks pass. These updates stay manual: major versions, `github-actions`, `pip` and `maven`, and the MongoDB
@@ -155,6 +158,6 @@ pinned by SHA and updated by Dependabot.
 | `ci.yml` | pull request, push on `main` | PR title, full check (MongoDB 8.2, JDK 17), Maven sample, migration tooling, SonarCloud, snapshot publication; tests with MongoDB 5.0/6.0/7.0 and JDK 21/25 |
 | `docs.yml` | pull request, push on `main` (docs & sources) | builds the documentation site (`mkdocs build --strict`), deploys it from `main` |
 | `release-please.yml` | push on `main`, manual | release PR, then release & Maven Central publication |
-| `dependabot-gradle-verification.yml` | Dependabot pull requests | regenerates `gradle/verification-metadata.xml` |
+| `dependabot-gradle-verification.yml` | Dependabot pull requests | regenerates `gradle/verification-metadata.xml` and the backward compatible ABI dumps |
 | `dependabot-auto-merge.yml` | Dependabot pull request opened or reopened | approves the minor and patch Gradle updates and enables squash auto-merge |
 | `zizmor.yml` | pull request, push on `main` | GitHub Actions security analysis |
