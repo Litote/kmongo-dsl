@@ -57,13 +57,13 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: Litote/ci/.github/actions/setup-gradle@63a67e7add1b9fde6396c84399f90c9252f7b8e6 # v0.15.0
+      - uses: Litote/ci/.github/actions/setup-gradle@de40fbf39509c6fa5816a9f2a5991af658aacc66 # v0.16.0
         with:
           java-version: '17'
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
       # MkDocs Material, pinned with hashes in the action (tools/install-docs.sh installs the same versions locally)
-      - uses: Litote/ci/.github/actions/setup-mkdocs@63a67e7add1b9fde6396c84399f90c9252f7b8e6 # v0.15.0
+      - uses: Litote/ci/.github/actions/setup-mkdocs@de40fbf39509c6fa5816a9f2a5991af658aacc66 # v0.16.0
 
       - name: Build the site
         run: tools/build-docs.sh
